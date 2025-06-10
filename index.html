@@ -116,7 +116,7 @@
         }
         
         .gallery-item:hover img {
-            transform: scale(1.05);
+            transform: scale(1.10);
         }
         
         .gallery-caption {
@@ -126,7 +126,7 @@
             width: 100%;
             background: rgba(5, 5, 5, 0.8);
             padding: 10px;
-            transition: all 0.3s ease;
+            transition: all 0.5s ease;
             z-index: 2;
         }
         
@@ -468,7 +468,7 @@
         .profile-header {
             position: relative;
             width: 100%;
-            height: 400px;
+            height: 450px;
             overflow: hidden;
             border-radius: 0 0 20px 20px;
         }
@@ -482,14 +482,14 @@
         
         .profile-content {
             position: relative;
-            margin-top: -80px;
+            margin-top: -125px;
             z-index: 10;
             padding: 0 20px;
         }
         
         .profile-avatar {
-            width: 160px;
-            height: 160px;
+            width: 180px;
+            height: 180px;
             border-radius: 50%;
             border: 5px solid #0a0a0a;
             box-shadow: 0 0 20px rgba(0,0,0,0.5);
@@ -663,13 +663,13 @@
     <!-- Hero Section - Redesigned as Social Profile -->
     <section id="home" class="relative overflow-hidden">
         <div class="profile-header">
-            <img src="https://i.pinimg.com/736x/26/94/85/269485338d3d3e68e88535023f6106d4.jpg" alt="Profile Banner" class="profile-banner">
+            <img src="https://image.cdn2.seaart.me/2025-03-31/cvletale878c73f1ais0/2fb4366a711af8e6c074dcf7df06682c_high.webp" alt="Profile Banner" class="profile-banner">
         </div>
-        
+
         <div class="profile-content container mx-auto px-4">
             <div class="flex flex-col md:flex-row items-start md:items-end gap-6">
                 <div class="flex-shrink-0">
-                    <img src="https://portoliogreyenm.carrd.co/assets/images/image01.jpg?v=49a96c13" alt="Profile Picture" class="profile-avatar">
+                    <img src="https://cdna.artstation.com/p/users/avatars/009/515/158/large/a97d9deeb9003e96e147ff4e667bd369.jpg?1749470529" alt="Profile Picture" class="profile-avatar">
                 </div>
                 
                 <div class="flex-grow">
@@ -717,7 +717,7 @@
     </section>
 
     <!-- Gallery Section -->
-    <section id="gallery" class="py-20 bg-darker/50 backdrop-blur-sm">
+    <section id="gallery" class="py-10 sm:py-16 bg-darker/50 backdrop-blur-sm px-2 sm:px-4">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
                 <h2 class="text-3xl font-bold mb-4 neon-text animate__animated animate__fadeIn">Gallery</h2>
@@ -740,10 +740,10 @@
             </div>
             
             <!-- Gallery Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="gallery-grid">
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4" id="gallery-grid">
                 <!-- Fanarts 1-->
-                <div class="gallery-item fanarts" data-src="https://media.discordapp.net/attachments/1029143960968495136/1381278905758912653/IMG-20250606-WA0195.jpg?ex=6846efba&is=68459e3a&hm=a6d5abd54efb7de19988fc77e2aaa2217c5ff8fa33344aca09bc266229b0bcf5&=&format=webp&width=627&height=627">
-                    <img src="https://media.discordapp.net/attachments/1029143960968495136/1381278905758912653/IMG-20250606-WA0195.jpg?ex=6846efba&is=68459e3a&hm=a6d5abd54efb7de19988fc77e2aaa2217c5ff8fa33344aca09bc266229b0bcf5&=&format=webp&width=627&height=627" alt="Fanart 1" class="w-full h-auto rounded-lg cursor-pointer">
+                <div class="gallery-item fanarts" data-src="">
+                    <img src="https://image.cdn2.seaart.me/2025-06-10/d13utdle878c73ekrlt0/7f4f7bd5cea150a07e624d4a91d87ad9_high.webp" alt="Fanart 1" class="w-full h-auto rounded-lg cursor-pointer">
                     <div class="gallery-caption">
                         <p class="text-white font-medium">Fanart</p>
                         <p class="text-gray-300 text-sm">Title</p>
@@ -770,7 +770,7 @@
 
                 <!-- Concept Art 1 -->
                 <div class="gallery-item concept" data-src="">
-                    <img src="" alt="Concept 1" class="w-full h-auto rounded-lg cursor-pointer">
+                    <img src="https://image.cdn2.seaart.me/2025-06-09/d13b7g5e878c73cv6j80/a768d519429e9300771528cdf48d9e1d_high.webp" alt="Concept 1" class="w-full h-auto rounded-lg cursor-pointer">
                     <div class="gallery-caption">
                         <p class="text-white font-medium">Concept Art</p>
                         <p class="text-gray-300 text-sm">Project</p>
@@ -789,7 +789,7 @@
                 <!-- NSFW 1 -->
                 <div class="gallery-item nsfw" data-src="">
                     <div class="nsfw-badge">NSFW</div>
-                    <img src="" alt="NSFW 1" class="w-full h-auto rounded-lg cursor-pointer">
+                    <img src="https://raw.githubusercontent.com/GREYNPORTFOLIO/teste-de-novo-1/refs/heads/main/026101ef21fccad2191f4425582d7faa_high.png" alt="NSFW 1" class="w-full h-auto rounded-lg cursor-pointer">
                     <div class="gallery-caption">
                         <p class="text-white font-medium">NSFW Art</p>
                         <p class="text-gray-300 text-sm">Description</p>
@@ -851,9 +851,9 @@
                 </div>
                 
                 <!-- NSFW 2 -->
-                <div class="gallery-item nsfw" data-src="https://media.discordapp.net/attachments/1029143960968495136/1381278905427824752/IMG-20250606-WA0162.jpg?ex=6846efb9&is=68459e39&hm=d50319cdfa421e0b7105cc202c45bb7291257368dfed434825b27d3d41d25dab&=&format=webp&width=338&height=626">
+                <div class="gallery-item nsfw" data-src="">
                     <div class="nsfw-badge">NSFW</div>
-                    <img src="https://media.discordapp.net/attachments/1029143960968495136/1381278905427824752/IMG-20250606-WA0162.jpg?ex=6846efb9&is=68459e39&hm=d50319cdfa421e0b7105cc202c45bb7291257368dfed434825b27d3d41d25dab&=&format=webp&width=338&height=626" alt="NSFW 2" class="w-full h-auto rounded-lg cursor-pointer">
+                    <img src="" alt="NSFW 2" class="w-full h-auto rounded-lg cursor-pointer">
                     <div class="gallery-caption">
                         <p class="text-white font-medium">NSFW Art</p>
                         <p class="text-gray-300 text-sm">Description</p>
@@ -933,9 +933,9 @@
                 </div>
 
                <!-- NSFW 3 -->
-                <div class="gallery-item nsfw" data-src="https://media.discordapp.net/attachments/1029143960968495136/1381278905427824752/IMG-20250606-WA0162.jpg?ex=6846efb9&is=68459e39&hm=d50319cdfa421e0b7105cc202c45bb7291257368dfed434825b27d3d41d25dab&=&format=webp&width=338&height=626">
+                <div class="gallery-item nsfw" data-src="">
                     <div class="nsfw-badge">NSFW</div>
-                    <img src="https://media.discordapp.net/attachments/1029143960968495136/1381278905427824752/IMG-20250606-WA0162.jpg?ex=6846efb9&is=68459e39&hm=d50319cdfa421e0b7105cc202c45bb7291257368dfed434825b27d3d41d25dab&=&format=webp&width=338&height=626" alt="NSFW 3" class="w-full h-auto rounded-lg cursor-pointer">
+                    <img src="" alt="NSFW 3" class="w-full h-auto rounded-lg cursor-pointer">
                     <div class="gallery-caption">
                         <p class="text-white font-medium">NSFW Art</p>
                         <p class="text-gray-300 text-sm">Description</p>
@@ -988,8 +988,8 @@
                 </div>
 
                 <!-- Commissions 3 -->
-                <div class="gallery-item commissions" data-src="https://i.pinimg.com/736x/d4/da/b3/d4dab3351a7f1a2c77e9ec979f9de04e.jpg">
-                    <img src="https://i.pinimg.com/736x/d4/da/b3/d4dab3351a7f1a2c77e9ec979f9de04e.jpg" alt="Commission 3" class="w-full h-auto rounded-lg cursor-pointer">
+                <div class="gallery-item commissions" data-src="">
+                    <img src="" alt="Commission 3" class="w-full h-auto rounded-lg cursor-pointer">
                     <div class="gallery-caption">
                         <p class="text-white font-medium">Commission</p>
                         <p class="text-gray-300 text-sm">Client Name</p>
@@ -997,8 +997,8 @@
                 </div>
 
                <!-- Concept Art 4 -->
-                <div class="gallery-item concept" data-src="https://i.pinimg.com/736x/f2/43/f2/f243f2b19b5baadc7b12df175b16b605.jpg">
-                    <img src="https://i.pinimg.com/736x/f2/43/f2/f243f2b19b5baadc7b12df175b16b605.jpg" alt="Concept 4" class="w-full h-auto rounded-lg cursor-pointer">
+                <div class="gallery-item concept" data-src="">
+                    <img src="" alt="Concept 4" class="w-full h-auto rounded-lg cursor-pointer">
                     <div class="gallery-caption">
                         <p class="text-white font-medium">Concept Art</p>
                         <p class="text-gray-300 text-sm">Project</p>
@@ -1006,8 +1006,8 @@
                 </div>
 
                <!-- Experimental 3 -->
-                <div class="gallery-item experimental" data-src="https://i.pinimg.com/736x/15/38/17/1538170b95feabd7f0691c7b5fabad96.jpg">
-                    <img src="https://i.pinimg.com/736x/15/38/17/1538170b95feabd7f0691c7b5fabad96.jpg" alt="Experimental 3" class="w-full h-auto rounded-lg cursor-pointer">
+                <div class="gallery-item experimental" data-src="">
+                    <img src="" alt="Experimental 3" class="w-full h-auto rounded-lg cursor-pointer">
                     <div class="gallery-caption">
                         <p class="text-white font-medium">Experimental</p>
                         <p class="text-gray-300 text-sm">Technique</p>
@@ -1063,7 +1063,7 @@
                         <h3 class="text-xl font-bold mb-2 text-neonpink">Sketch</h3>
                         <p class="text-gray-300">Definition of composition and basic shapes of the drawing with loose and gestural lines.</p>
                         <div class="mt-4">
-                            <img src="https://i.pinimg.com/736x/09/0d/72/090d725ae4fa47c4cfeb91e7b5c7da42.jpg" alt="Sketch" class="w-full h-auto rounded-lg">
+                            <img src="'' alt="Sketch" class="w-full h-auto rounded-lg">
                         </div>
                     </div>
                     
@@ -1073,7 +1073,7 @@
                         <h3 class="text-xl font-bold mb-2 text-neonblue">Lineart</h3>
                         <p class="text-gray-300">Refinement of lines, definition of contours and details with precise strokes.</p>
                         <div class="mt-4">
-                            <img src="https://i.pinimg.com/736x/ce/82/17/ce8217f13fcf5e68e5767ef796e18e05.jpg" alt="Lineart" class="w-full h-auto rounded-lg">
+                            <img src="" alt="Lineart" class="w-full h-auto rounded-lg">
                         </div>
                     </div>
                     
@@ -1083,7 +1083,7 @@
                         <h3 class="text-xl font-bold mb-2 text-neonpurple">Base Colors</h3>
                         <p class="text-gray-300">Application of base colors, palette definition and layer separation by elements.</p>
                         <div class="mt-4">
-                            <img src="https://i.pinimg.com/736x/21/13/58/211358a19e46a7722d97b6a85d2fb4b9.jpg" alt="Base Colors" class="w-full h-auto rounded-lg">
+                            <img src="" alt="Base Colors" class="w-full h-auto rounded-lg">
                         </div>
                     </div>
                     
@@ -1093,7 +1093,7 @@
         <h3 class="text-xl font-bold mb-2 text-neonred">Final Render</h3>
         <p class="text-gray-300">Application of shadows, lights, textures and special effects to finalize the artwork.</p>
         <div class="mt-4">
-            <img src="https://i.pinimg.com/736x/26/b2/e2/26b2e2330f115cbb91f70c93943fd7fd.jpg" alt="Final Render" class="w-full h-auto rounded-lg">
+            <img src="https://media.discordapp.net/attachments/1029143960968495136/1381505247368843344/4cd00ba168d5e7eb93794283e9d60b68_high.png?ex=6847c286&is=68467106&hm=8a9ece3ef5d8678dec77c5950eab0dcd24b362f557a82c3f967f3e520e2ecad3&=&format=webp&quality=lossless&width=824&height=471" alt="Final Render" class="w-full h-auto rounded-lg">
         </div>
     </div>
 </div>
@@ -1137,7 +1137,7 @@
             <div class="flex flex-col lg:flex-row items-center gap-12">
                 <div class="lg:w-1/3 flex justify-center animate__animated animate__fadeInLeft">
                     <div class="relative">
-                        <img src="https://i.pinimg.com/736x/21/14/48/2114489cb5ddb729d4a6722075f48713.jpg" alt="Greyn" class="rounded-lg max-h-[500px] border-2 border-gray-800 hover:border-neonblue transition-all duration-300">
+                        <img src="https://i.pinimg.com/736x/e0/b7/d2/e0b7d29406e8c94b54ac4d6d29266703.jpg" alt="Greyn" class="rounded-lg max-h-[500px] border-2 border-gray-800 hover:border-neonblue transition-all duration-300">
                         <div class="absolute -inset-2 rounded-lg bg-neonblue/20 blur-lg z-[-1] animate-pulse-slow"></div>
                     </div>
                 </div>
