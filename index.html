@@ -1561,16 +1561,32 @@
     const nsfwContinue = document.getElementById('nsfwContinue');
     const nsfwCancel = document.getElementById('nsfwCancel');
     
-    // Zoom da imagem no Lightbox
-lightboxImg.addEventListener('click', function(e) {
-    e.stopPropagation();
-    this.classList.toggle('zoomed');
-});
+    // =========================================================
+// GALERIA — ZOOM + ARRASTAR IMAGEM
+// =========================================================
 
-       // Zoom com o scroll do mouse
 let zoomLevel = 1;
+let posX = 0;
+let posY = 0;
 
+let isDragging = false;
+let startX = 0;
+let startY = 0;
+
+
+// Atualiza a posição da imagem
+function updateZoom() {
+    lightboxImg.style.transform =
+        `translate(${posX}px, ${posY}px) scale(${zoomLevel})`;
+
+    lightboxImg.style.cursor =
+        zoomLevel > 1 ? 'grab' : 'zoom-in';
+}
+
+
+// Scroll = Zoom
 lightboxImg.addEventListener('wheel', function(e) {
+
     e.preventDefault();
     e.stopPropagation();
 
@@ -1580,11 +1596,74 @@ lightboxImg.addEventListener('wheel', function(e) {
         zoomLevel -= 0.2;
     }
 
-    // Limites do zoom
     zoomLevel = Math.max(1, Math.min(4, zoomLevel));
 
-    this.style.transform = `scale(${zoomLevel})`;
-    this.style.cursor = zoomLevel > 1 ? 'zoom-out' : 'zoom-in';
+    // Se voltar ao tamanho normal, centraliza
+    if (zoomLevel === 1) {
+        posX = 0;
+        posY = 0;
+    }
+
+    updateZoom();
+
+});
+
+
+// Clique e arraste
+lightboxImg.addEventListener('mousedown', function(e) {
+
+    if (zoomLevel <= 1) return;
+
+    e.preventDefault();
+
+    isDragging = true;
+
+    startX = e.clientX - posX;
+    startY = e.clientY - posY;
+
+    lightboxImg.style.cursor = 'grabbing';
+
+});
+
+
+// Movimento do mouse
+document.addEventListener('mousemove', function(e) {
+
+    if (!isDragging) return;
+
+    posX = e.clientX - startX;
+    posY = e.clientY - startY;
+
+    updateZoom();
+
+});
+
+
+// Soltar o mouse
+document.addEventListener('mouseup', function() {
+
+    if (!isDragging) return;
+
+    isDragging = false;
+
+    lightboxImg.style.cursor =
+        zoomLevel > 1 ? 'grab' : 'zoom-in';
+
+});
+
+
+// Duplo clique = resetar zoom
+lightboxImg.addEventListener('dblclick', function(e) {
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    zoomLevel = 1;
+    posX = 0;
+    posY = 0;
+
+    updateZoom();
+
 });
 
     function showLightbox(src, items, index) {
