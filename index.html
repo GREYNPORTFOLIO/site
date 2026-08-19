@@ -1604,85 +1604,175 @@ body.lightbox-open nav {
     const nsfwContinue = document.getElementById('nsfwContinue');
     const nsfwCancel = document.getElementById('nsfwCancel');
     
-    // Zoom + drag
-    let zoomLevel = 1;
-    let posX = 0;
-    let posY = 0;
-    let isDragging = false;
-    let startX = 0;
-    let startY = 0;
+    // ========== ZOOM MELHORADO (clique + segue o mouse) ==========
+let zoomLevel = 1;
+let posX = 0;
+let posY = 0;
+let isDragging = false;
+let startX = 0;
+let startY = 0;
+let isZoomed = false;
 
-    function clampPosition() {
-        if (zoomLevel <= 1) {
-            posX = 0;
-            posY = 0;
-            return;
-        }
-        const lightboxWidth = lightbox.clientWidth;
-        const lightboxHeight = lightbox.clientHeight;
-        const imageWidth = lightboxImg.offsetWidth * zoomLevel;
-        const imageHeight = lightboxImg.offsetHeight * zoomLevel;
-        const maxX = Math.max(0, (imageWidth - lightboxWidth) / 2);
-        const maxY = Math.max(0, (imageHeight - lightboxHeight) / 2);
-        posX = Math.max(-maxX, Math.min(maxX, posX));
-        posY = Math.max(-maxY, Math.min(maxY, posY));
-    }
-
-    function resetZoom() {
-        zoomLevel = 1;
+function clampPosition() {
+    if (zoomLevel <= 1) {
         posX = 0;
         posY = 0;
-        lightboxImg.style.transform = 'translate(0px, 0px) scale(1)';
-        lightboxImg.style.cursor = 'zoom-in';
+        return;
     }
 
-    function updateZoom() {
-        clampPosition();
-        lightboxImg.style.transform = `translate(${posX}px, ${posY}px) scale(${zoomLevel})`;
-        lightboxImg.style.cursor = zoomLevel > 1 ? 'grab' : 'zoom-in';
+    const lightboxWidth = lightbox.clientWidth;
+    const lightboxHeight = lightbox.clientHeight;
+    const imageWidth = lightboxImg.offsetWidth * zoomLevel;
+    const imageHeight = lightboxImg.offsetHeight * zoomLevel;
+
+    const maxX = Math.max(0, (imageWidth - lightboxWidth) / 2);
+    const maxY = Math.max(0, (imageHeight - lightboxHeight) / 2);
+
+    posX = Math.max(-maxX, Math.min(maxX, posX));
+    posY = Math.max(-maxY, Math.min(maxY, posY));
+}
+
+function resetZoom() {
+    zoomLevel = 1;
+    posX = 0;
+    posY = 0;
+    isZoomed = false;
+    lightboxImg.style.transform = 'translate(0px, 0px) scale(1)';
+    lightboxImg.style.cursor = 'zoom-in';
+    lightboxImg.style.transition = 'transform 0.25s ease';
+}
+
+function updateZoom(smooth = false) {
+    clampPosition();
+    lightboxImg.style.transition = smooth ? 'transform 0.25s ease' : 'none';
+    lightboxImg.style.transform = `translate(${posX}px, ${posY}px) scale(${zoomLevel})`;
+    lightboxImg.style.cursor = zoomLevel > 1 ? 'zoom-out' : 'zoom-in';
+}
+
+// Clique simples → zoom no ponto do mouse
+lightboxImg.addEventListener('click', function(e) {
+    // Evita conflito com botões de navegação
+    if (e.target.closest('#prevButton') || e.target.closest('#nextButton') || e.target.closest('.lightbox-close')) {
+        return;
     }
 
-    lightboxImg.addEventListener('wheel', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        if (e.deltaY < 0) zoomLevel += 0.2;
-        else zoomLevel -= 0.2;
-        zoomLevel = Math.max(1, Math.min(4, zoomLevel));
-        if (zoomLevel === 1) {
-            posX = 0;
-            posY = 0;
-        }
-        updateZoom();
-    });
+    e.stopPropagation();
 
-    lightboxImg.addEventListener('mousedown', function(e) {
-        if (zoomLevel <= 1) return;
-        e.preventDefault();
-        isDragging = true;
-        startX = e.clientX - posX;
-        startY = e.clientY - posY;
-        lightboxImg.style.cursor = 'grabbing';
-    });
+    if (!isZoomed) {
+        // Calcula a posição do clique relativa à imagem
+        const rect = lightboxImg.getBoundingClientRect();
+        const offsetX = e.clientX - rect.left;
+        const offsetY = e.clientY - rect.top;
 
-    document.addEventListener('mousemove', function(e) {
-        if (!isDragging) return;
-        posX = e.clientX - startX;
-        posY = e.clientY - startY;
-        clampPosition();
-        updateZoom();
-    });
+        // Centro da imagem
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
 
-    document.addEventListener('mouseup', function() {
-        if (!isDragging) return;
-        isDragging = false;
-        lightboxImg.style.cursor = zoomLevel > 1 ? 'grab' : 'zoom-in';
-    });
+        // Distância do centro até o clique
+        const dx = offsetX - centerX;
+        const dy = offsetY - centerY;
 
-    lightboxImg.addEventListener('dblclick', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
+        zoomLevel = 2.5; // nível de zoom (pode mudar para 2 ou 3 se quiser)
+        isZoomed = true;
+
+        // Move a imagem para que o ponto clicado fique no centro
+        posX = -dx * (zoomLevel - 1);
+        posY = -dy * (zoomLevel - 1);
+
+        updateZoom(true);
+    } else {
+        // Clique de novo → volta ao normal
         resetZoom();
-    });
+    }
+});
+
+// Zoom seguindo o mouse (enquanto ampliado)
+lightboxImg.addEventListener('mousemove', function(e) {
+    if (!isZoomed || zoomLevel <= 1) return;
+
+    const rect = lightboxImg.getBoundingClientRect();
+    const offsetX = e.clientX - rect.left;
+    const offsetY = e.clientY - rect.top;
+
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    // Quanto mais longe do centro, mais a imagem se move
+    const moveFactor = 0.6; // sensibilidade (0.4 ~ 0.8 fica bom)
+
+    posX = -(offsetX - centerX) * (zoomLevel - 1) * moveFactor;
+    posY = -(offsetY - centerY) * (zoomLevel - 1) * moveFactor;
+
+    updateZoom(false);
+});
+
+// Scroll do mouse ainda funciona (opcional, mas útil)
+lightboxImg.addEventListener('wheel', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const oldZoom = zoomLevel;
+
+    if (e.deltaY < 0) {
+        zoomLevel = Math.min(4, zoomLevel + 0.3);
+    } else {
+        zoomLevel = Math.max(1, zoomLevel - 0.3);
+    }
+
+    if (zoomLevel === 1) {
+        resetZoom();
+        return;
+    }
+
+    isZoomed = true;
+
+    // Mantém o ponto sob o mouse
+    const rect = lightboxImg.getBoundingClientRect();
+    const offsetX = e.clientX - rect.left;
+    const offsetY = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const dx = offsetX - centerX;
+    const dy = offsetY - centerY;
+
+    posX = posX - dx * (zoomLevel - oldZoom);
+    posY = posY - dy * (zoomLevel - oldZoom);
+
+    updateZoom(false);
+});
+
+// Arrastar com o mouse (quando ampliado)
+lightboxImg.addEventListener('mousedown', function(e) {
+    if (zoomLevel <= 1) return;
+    e.preventDefault();
+    isDragging = true;
+    startX = e.clientX - posX;
+    startY = e.clientY - posY;
+    lightboxImg.style.cursor = 'grabbing';
+    lightboxImg.style.transition = 'none';
+});
+
+document.addEventListener('mousemove', function(e) {
+    if (!isDragging) return;
+    posX = e.clientX - startX;
+    posY = e.clientY - startY;
+    clampPosition();
+    updateZoom(false);
+});
+
+document.addEventListener('mouseup', function() {
+    if (!isDragging) return;
+    isDragging = false;
+    lightboxImg.style.cursor = zoomLevel > 1 ? 'zoom-out' : 'zoom-in';
+});
+
+// Duplo clique também reseta (segurança)
+lightboxImg.addEventListener('dblclick', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    resetZoom();
+});
 
     function showLightbox(src, items, index) {
         if (!src) return;
