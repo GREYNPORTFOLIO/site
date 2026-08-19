@@ -1574,8 +1574,29 @@ let startX = 0;
 let startY = 0;
 
 
-// Atualiza a posição da imagem
+// =========================================================
+// RESETAR ZOOM
+// =========================================================
+
+function resetZoom() {
+
+    zoomLevel = 1;
+    posX = 0;
+    posY = 0;
+
+    lightboxImg.style.transform =
+        'translate(0px, 0px) scale(1)';
+
+    lightboxImg.style.cursor = 'zoom-in';
+}
+
+
+// =========================================================
+// ATUALIZAR ZOOM E POSIÇÃO
+// =========================================================
+
 function updateZoom() {
+
     lightboxImg.style.transform =
         `translate(${posX}px, ${posY}px) scale(${zoomLevel})`;
 
@@ -1584,24 +1605,34 @@ function updateZoom() {
 }
 
 
-// Scroll = Zoom
+// =========================================================
+// SCROLL = ZOOM
+// =========================================================
+
 lightboxImg.addEventListener('wheel', function(e) {
 
     e.preventDefault();
     e.stopPropagation();
 
     if (e.deltaY < 0) {
+
         zoomLevel += 0.2;
+
     } else {
+
         zoomLevel -= 0.2;
+
     }
 
+    // Limite: 1x até 4x
     zoomLevel = Math.max(1, Math.min(4, zoomLevel));
 
-    // Se voltar ao tamanho normal, centraliza
+    // Voltou para 100%
     if (zoomLevel === 1) {
+
         posX = 0;
         posY = 0;
+
     }
 
     updateZoom();
@@ -1609,9 +1640,13 @@ lightboxImg.addEventListener('wheel', function(e) {
 });
 
 
-// Clique e arraste
+// =========================================================
+// CLIQUE + ARRASTAR
+// =========================================================
+
 lightboxImg.addEventListener('mousedown', function(e) {
 
+    // Só permite arrastar quando estiver ampliado
     if (zoomLevel <= 1) return;
 
     e.preventDefault();
@@ -1626,7 +1661,10 @@ lightboxImg.addEventListener('mousedown', function(e) {
 });
 
 
-// Movimento do mouse
+// =========================================================
+// MOVIMENTO DO MOUSE
+// =========================================================
+
 document.addEventListener('mousemove', function(e) {
 
     if (!isDragging) return;
@@ -1639,7 +1677,10 @@ document.addEventListener('mousemove', function(e) {
 });
 
 
-// Soltar o mouse
+// =========================================================
+// SOLTAR O MOUSE
+// =========================================================
+
 document.addEventListener('mouseup', function() {
 
     if (!isDragging) return;
@@ -1652,24 +1693,26 @@ document.addEventListener('mouseup', function() {
 });
 
 
-// Duplo clique = resetar zoom
+// =========================================================
+// DUPLO CLIQUE = RESETAR
+// =========================================================
+
 lightboxImg.addEventListener('dblclick', function(e) {
 
     e.preventDefault();
     e.stopPropagation();
 
-    zoomLevel = 1;
-    posX = 0;
-    posY = 0;
-
-    updateZoom();
+    resetZoom();
 
 });
 
     function showLightbox(src, items, index) {
-        currentGalleryItems = items;
-        currentIndex = index;
-        lightboxImg.src = src;
+    currentGalleryItems = items;
+    currentIndex = index;
+
+    resetZoom();
+
+    lightboxImg.src = src;
         lightbox.style.display = 'flex';
         setTimeout(() => {
             lightbox.classList.add('show');
@@ -1705,7 +1748,9 @@ lightboxImg.addEventListener('dblclick', function(e) {
                 };
             }, 300);
         } else {
-            lightboxImg.src = src;
+    resetZoom();
+    lightboxImg.src = src;
+}
         }
     }
 
