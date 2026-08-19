@@ -1550,39 +1550,31 @@ body.lightbox-open nav {
     
     filterButtons.forEach(button => {
         button.addEventListener('click', function() {
+            // Reset all buttons
             filterButtons.forEach(btn => {
-                btn.classList.remove('bg-neonred', 'bg-neonblue', 'bg-neonpurple', 'bg-yellow-400', 'bg-red-500', 'text-white');
+                btn.classList.remove(
+                    'bg-neonred', 'bg-neonblue', 'bg-neonpurple', 'bg-yellow-400',
+                    'bg-red-500', 'bg-orange-400', 'bg-green-400', 'bg-pink-400',
+                    'bg-indigo-400', 'bg-amber-400', 'text-white'
+                );
                 btn.classList.add('bg-transparent', 'border');
-                
-                if(btn.classList.contains('border-neonred')) {
-                    btn.classList.add('text-neonred', 'hover:bg-neonred');
-                } else if(btn.classList.contains('border-neonblue')) {
-                    btn.classList.add('text-neonblue', 'hover:bg-neonblue');
-                } else if(btn.classList.contains('border-neonpurple')) {
-                    btn.classList.add('text-neonpurple', 'hover:bg-neonpurple');
-                } else if(btn.classList.contains('border-yellow-400')) {
-                    btn.classList.add('text-yellow-400', 'hover:bg-yellow-400');
-                } else if(btn.classList.contains('border-red-500')) {
-                    btn.classList.add('text-red-500', 'hover:bg-red-500');
-                }
             });
             
-            if(this.classList.contains('border-neonred')) {
-                this.classList.remove('bg-transparent', 'text-neonred', 'hover:bg-neonred');
-                this.classList.add('bg-neonred', 'text-white');
-            } else if(this.classList.contains('border-neonblue')) {
-                this.classList.remove('bg-transparent', 'text-neonblue', 'hover:bg-neonblue');
-                this.classList.add('bg-neonblue', 'text-white');
-            } else if(this.classList.contains('border-neonpurple')) {
-                this.classList.remove('bg-transparent', 'text-neonpurple', 'hover:bg-neonpurple');
-                this.classList.add('bg-neonpurple', 'text-white');
-            } else if(this.classList.contains('border-yellow-400')) {
-                this.classList.remove('bg-transparent', 'text-yellow-400', 'hover:bg-yellow-400');
-                this.classList.add('bg-yellow-400', 'text-white');
-            } else if(this.classList.contains('border-red-500')) {
-                this.classList.remove('bg-transparent', 'text-red-500', 'hover:bg-red-500');
-                this.classList.add('bg-red-500', 'text-white');
-            }
+            // Activate clicked button
+            this.classList.remove('bg-transparent');
+            this.classList.add('text-white');
+            
+            if (this.classList.contains('border-neonred')) this.classList.add('bg-neonred');
+            else if (this.classList.contains('border-neonblue')) this.classList.add('bg-neonblue');
+            else if (this.classList.contains('border-neonpurple')) this.classList.add('bg-neonpurple');
+            else if (this.classList.contains('border-yellow-400')) this.classList.add('bg-yellow-400');
+            else if (this.classList.contains('border-red-500')) this.classList.add('bg-red-500');
+            else if (this.classList.contains('border-orange-400')) this.classList.add('bg-orange-400');
+            else if (this.classList.contains('border-green-400')) this.classList.add('bg-green-400');
+            else if (this.classList.contains('border-pink-400')) this.classList.add('bg-pink-400');
+            else if (this.classList.contains('border-indigo-400')) this.classList.add('bg-indigo-400');
+            else if (this.classList.contains('border-amber-400')) this.classList.add('bg-amber-400');
+            else this.classList.add('bg-neonred'); // All button
 
             // Filter items
             const category = this.dataset.category;
@@ -1597,11 +1589,11 @@ body.lightbox-open nav {
         });
     });
 
-    // Lightbox
+    // ========== LIGHTBOX + NSFW ==========
     let nsfwAccepted = false;
-
     let currentGalleryItems = [];
     let currentIndex = 0;
+    let pendingNsfwItem = null; // item que o usuário tentou abrir
        
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
@@ -1612,307 +1604,218 @@ body.lightbox-open nav {
     const nsfwContinue = document.getElementById('nsfwContinue');
     const nsfwCancel = document.getElementById('nsfwCancel');
     
-    // =========================================================
-// GALERIA — ZOOM + ARRASTAR COM LIMITES
-// =========================================================
+    // Zoom + drag
+    let zoomLevel = 1;
+    let posX = 0;
+    let posY = 0;
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
 
-let zoomLevel = 1;
-let posX = 0;
-let posY = 0;
+    function clampPosition() {
+        if (zoomLevel <= 1) {
+            posX = 0;
+            posY = 0;
+            return;
+        }
+        const lightboxWidth = lightbox.clientWidth;
+        const lightboxHeight = lightbox.clientHeight;
+        const imageWidth = lightboxImg.offsetWidth * zoomLevel;
+        const imageHeight = lightboxImg.offsetHeight * zoomLevel;
+        const maxX = Math.max(0, (imageWidth - lightboxWidth) / 2);
+        const maxY = Math.max(0, (imageHeight - lightboxHeight) / 2);
+        posX = Math.max(-maxX, Math.min(maxX, posX));
+        posY = Math.max(-maxY, Math.min(maxY, posY));
+    }
 
-let isDragging = false;
-let startX = 0;
-let startY = 0;
-
-
-// =========================================================
-// LIMITAR MOVIMENTO DA IMAGEM
-// =========================================================
-
-function clampPosition() {
-
-    if (zoomLevel <= 1) {
+    function resetZoom() {
+        zoomLevel = 1;
         posX = 0;
         posY = 0;
-        return;
+        lightboxImg.style.transform = 'translate(0px, 0px) scale(1)';
+        lightboxImg.style.cursor = 'zoom-in';
     }
 
-    const lightboxWidth = lightbox.clientWidth;
-    const lightboxHeight = lightbox.clientHeight;
-
-    const imageWidth = lightboxImg.offsetWidth * zoomLevel;
-    const imageHeight = lightboxImg.offsetHeight * zoomLevel;
-
-    // Quanto a imagem pode sair do centro
-    const maxX = Math.max(0, (imageWidth - lightboxWidth) / 2);
-    const maxY = Math.max(0, (imageHeight - lightboxHeight) / 2);
-
-    // Impede de arrastar além dos limites
-    posX = Math.max(-maxX, Math.min(maxX, posX));
-    posY = Math.max(-maxY, Math.min(maxY, posY));
-}
-
-
-// =========================================================
-// RESETAR ZOOM
-// =========================================================
-
-function resetZoom() {
-
-    zoomLevel = 1;
-    posX = 0;
-    posY = 0;
-
-    lightboxImg.style.transform =
-        'translate(0px, 0px) scale(1)';
-
-    lightboxImg.style.cursor = 'zoom-in';
-}
-
-
-// =========================================================
-// ATUALIZAR ZOOM E POSIÇÃO
-// =========================================================
-
-function updateZoom() {
-
-    clampPosition();
-
-    lightboxImg.style.transform =
-        `translate(${posX}px, ${posY}px) scale(${zoomLevel})`;
-
-    lightboxImg.style.cursor =
-        zoomLevel > 1 ? 'grab' : 'zoom-in';
-}
-
-
-// =========================================================
-// SCROLL = ZOOM
-// =========================================================
-
-lightboxImg.addEventListener('wheel', function(e) {
-
-    e.preventDefault();
-    e.stopPropagation();
-
-    if (e.deltaY < 0) {
-
-        zoomLevel += 0.2;
-
-    } else {
-
-        zoomLevel -= 0.2;
-
+    function updateZoom() {
+        clampPosition();
+        lightboxImg.style.transform = `translate(${posX}px, ${posY}px) scale(${zoomLevel})`;
+        lightboxImg.style.cursor = zoomLevel > 1 ? 'grab' : 'zoom-in';
     }
 
-    // Limite de 1x até 4x
-    zoomLevel = Math.max(1, Math.min(4, zoomLevel));
+    lightboxImg.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (e.deltaY < 0) zoomLevel += 0.2;
+        else zoomLevel -= 0.2;
+        zoomLevel = Math.max(1, Math.min(4, zoomLevel));
+        if (zoomLevel === 1) {
+            posX = 0;
+            posY = 0;
+        }
+        updateZoom();
+    });
 
-    // Se voltar para 100%, centraliza
-    if (zoomLevel === 1) {
+    lightboxImg.addEventListener('mousedown', function(e) {
+        if (zoomLevel <= 1) return;
+        e.preventDefault();
+        isDragging = true;
+        startX = e.clientX - posX;
+        startY = e.clientY - posY;
+        lightboxImg.style.cursor = 'grabbing';
+    });
 
-        posX = 0;
-        posY = 0;
+    document.addEventListener('mousemove', function(e) {
+        if (!isDragging) return;
+        posX = e.clientX - startX;
+        posY = e.clientY - startY;
+        clampPosition();
+        updateZoom();
+    });
 
-    }
+    document.addEventListener('mouseup', function() {
+        if (!isDragging) return;
+        isDragging = false;
+        lightboxImg.style.cursor = zoomLevel > 1 ? 'grab' : 'zoom-in';
+    });
 
-    updateZoom();
-
-});
-
-
-// =========================================================
-// CLIQUE + ARRASTAR
-// =========================================================
-
-lightboxImg.addEventListener('mousedown', function(e) {
-
-    if (zoomLevel <= 1) return;
-
-    e.preventDefault();
-
-    isDragging = true;
-
-    startX = e.clientX - posX;
-    startY = e.clientY - posY;
-
-    lightboxImg.style.cursor = 'grabbing';
-
-});
-
-
-// =========================================================
-// MOVIMENTO DO MOUSE
-// =========================================================
-
-document.addEventListener('mousemove', function(e) {
-
-    if (!isDragging) return;
-
-    posX = e.clientX - startX;
-    posY = e.clientY - startY;
-
-    // Aplica os limites
-    clampPosition();
-
-    updateZoom();
-
-});
-
-
-// =========================================================
-// SOLTAR O MOUSE
-// =========================================================
-
-document.addEventListener('mouseup', function() {
-
-    if (!isDragging) return;
-
-    isDragging = false;
-
-    lightboxImg.style.cursor =
-        zoomLevel > 1 ? 'grab' : 'zoom-in';
-
-});
-
-
-// =========================================================
-// DUPLO CLIQUE = RESETAR
-// =========================================================
-
-lightboxImg.addEventListener('dblclick', function(e) {
-
-    e.preventDefault();
-    e.stopPropagation();
-
-    resetZoom();
-
-});
+    lightboxImg.addEventListener('dblclick', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        resetZoom();
+    });
 
     function showLightbox(src, items, index) {
-    currentGalleryItems = items;
-    currentIndex = index;
-
-    resetZoom();
-
-    lightboxImg.src = src;
+        if (!src) return;
+        currentGalleryItems = items;
+        currentIndex = index;
+        resetZoom();
+        lightboxImg.src = src;
         lightbox.style.display = 'flex';
-
         document.body.classList.add('lightbox-open');
-        
         setTimeout(() => {
             lightbox.classList.add('show');
         }, 10);
         document.body.style.overflow = 'hidden';
     }
 
+    function closeLightbox() {
+        lightbox.classList.remove('show');
+        setTimeout(() => {
+            lightbox.style.display = 'none';
+        }, 300);
+        document.body.classList.remove('lightbox-open');
+        document.body.style.overflow = 'auto';
+        resetZoom();
+    }
+
     function navigateGallery(direction) {
+        if (currentGalleryItems.length === 0) return;
+        
         currentIndex = (currentIndex + direction + currentGalleryItems.length) % currentGalleryItems.length;
         const item = currentGalleryItems[currentIndex];
-        const src = item.querySelector('img').src;
+        const img = item.querySelector('img');
+        const src = img ? img.src : '';
+        
+        if (!src) {
+            navigateGallery(direction); // pula itens sem imagem
+            return;
+        }
         
         if (item.classList.contains('nsfw') && !nsfwAccepted) {
-            // Show warning when navigating to NSFW item
-            lightbox.classList.remove('show');
-            setTimeout(() => {
-                lightbox.style.display = 'none';
-                nsfwWarning.style.display = 'flex';
-                setTimeout(() => {
-                    nsfwWarning.classList.add('show');
-                }, 10);
-                
-                // Set continue to reopen lightbox
-                const tempContinue = nsfwContinue.onclick;
-                nsfwContinue.onclick = function() {
-                    nsfwAccepted = true;
-                    nsfwWarning.classList.remove('show');
-                    setTimeout(() => {
-                        nsfwWarning.style.display = 'none';
-                        showLightbox(src, currentGalleryItems, currentIndex);
-                        nsfwContinue.onclick = tempContinue;
-                    }, 300);
-                };
-            }, 300);
-        } else {
-          resetZoom();
-           lightboxImg.src = src;
+            pendingNsfwItem = { src, items: currentGalleryItems, index: currentIndex };
+            closeLightbox();
+            nsfwWarning.style.display = 'flex';
+            setTimeout(() => nsfwWarning.classList.add('show'), 10);
+            return;
         }
+        
+        resetZoom();
+        lightboxImg.src = src;
     }
 
-    // Handle gallery item clicks with NSFW protection
+    // Clique nas artes
     document.querySelectorAll('.gallery-item').forEach(item => {
         const img = item.querySelector('img');
-        const isNsfw = item.classList.contains('nsfw');
+        if (!img) return;
         
-        if (isNsfw) {
-            // Add click handler for blurred NSFW items
-            img.addEventListener('click', function(e) {
-                e.preventDefault();
-                // Show warning modal
-                nsfwWarning.style.display = 'flex';
-                setTimeout(() => {
-                    nsfwWarning.classList.add('show');
-                }, 10);
-            });
-
-            // Add mouseover effect to make NSFW slightly visible on hover
-            item.addEventListener('mouseenter', function() {
-                img.style.filter = 'blur(2px)';
-            });
+        item.addEventListener('click', function() {
+            const src = img.src || item.dataset.src;
             
-            item.addEventListener('mouseleave', function() {
-                img.style.filter = 'blur(7px)';
+            if (!src) {
+                console.warn('Esta arte não possui imagem:', this);
+                return;
+            }
+
+            // Pega só os itens visíveis que têm imagem
+            const visibleItems = Array.from(
+                document.querySelectorAll('.gallery-item:not([style*="none"])')
+            ).filter(el => {
+                const i = el.querySelector('img');
+                return i && (i.src || el.dataset.src);
             });
-        } else {
-            // Normal gallery item click
-            item.addEventListener('click', function() {
 
-    const src = img.src;
+            const index = visibleItems.indexOf(this);
+            if (index === -1) return;
 
-    if (!src) {
-        console.warn('Esta arte não possui uma imagem:', this);
-        return;
-    }
+            // NSFW ainda não aceito
+            if (item.classList.contains('nsfw') && !nsfwAccepted) {
+                pendingNsfwItem = { src, items: visibleItems, index };
+                nsfwWarning.style.display = 'flex';
+                setTimeout(() => nsfwWarning.classList.add('show'), 10);
+                return;
+            }
 
-    const items = Array.from(
-        document.querySelectorAll('.gallery-item:not([style*="none"])')
-    ).filter(item => {
-        const image = item.querySelector('img');
-        return image && image.src;
-    });
+            showLightbox(src, visibleItems, index);
+        });
 
-    const index = items.indexOf(this);
-
-    if (index === -1) {
-        return;
-    }
-
-    showLightbox(src, items, index);
-});
+        // Hover leve no NSFW
+        if (item.classList.contains('nsfw')) {
+            item.addEventListener('mouseenter', () => {
+                if (!nsfwAccepted) img.style.filter = 'blur(3px)';
+            });
+            item.addEventListener('mouseleave', () => {
+                if (!nsfwAccepted) img.style.filter = 'blur(7px)';
+            });
         }
     });
     
-    // NSFW warning modal controls
+    // NSFW Continue
     nsfwContinue.addEventListener('click', function() {
         nsfwAccepted = true;
         nsfwWarning.classList.remove('show');
+        
         setTimeout(() => {
             nsfwWarning.style.display = 'none';
-            // Reveal all NSFW images
+            
+            // Remove blur de todas as NSFW
             document.querySelectorAll('.gallery-item.nsfw img').forEach(img => {
-                img.classList.add('nsfw-revealed');
+                img.style.filter = 'none';
             });
+            
+            // Abre a arte que o usuário tentou ver
+            if (pendingNsfwItem) {
+                showLightbox(pendingNsfwItem.src, pendingNsfwItem.items, pendingNsfwItem.index);
+                pendingNsfwItem = null;
+            }
         }, 300);
     });
 
+    // NSFW Cancel
     nsfwCancel.addEventListener('click', function() {
         nsfwWarning.classList.remove('show');
         setTimeout(() => {
             nsfwWarning.style.display = 'none';
         }, 300);
+        pendingNsfwItem = null;
     });
 
-    // Navigation buttons
+    nsfwWarning.addEventListener('click', function(e) {
+        if (e.target === nsfwWarning) {
+            nsfwCancel.click();
+        }
+    });
+
+    // Botões de navegação
     prevButton.addEventListener('click', (e) => {
         e.stopPropagation();
         navigateGallery(-1);
@@ -1923,69 +1826,23 @@ lightboxImg.addEventListener('dblclick', function(e) {
         navigateGallery(1);
     });
 
-    lightboxClose.addEventListener('click', function () {
-    lightbox.classList.remove('show');
+    lightboxClose.addEventListener('click', closeLightbox);
 
-    setTimeout(() => {
-        lightbox.style.display = 'none';
-    }, 300);
-
-    document.body.classList.remove('lightbox-open');
-    document.body.style.overflow = 'auto';
-});
-
-    lightbox.addEventListener('click', function (e) {
-    if (e.target === lightbox) {
-        lightbox.classList.remove('show');
-
-        setTimeout(() => {
-            lightbox.style.display = 'none';
-        }, 300);
-
-        document.body.classList.remove('lightbox-open');
-        document.body.style.overflow = 'auto';
-    }
-});
-       
-    // NSFW warning modal controls
-    nsfwCancel.addEventListener('click', function () {
-        nsfwWarning.classList.remove('show');
-        setTimeout(() => {
-            nsfwWarning.style.display = 'none';
-        }, 300);
+    lightbox.addEventListener('click', function(e) {
+        if (e.target === lightbox) closeLightbox();
     });
 
-    nsfwWarning.addEventListener('click', function (e) {
-        if (e.target === nsfwWarning) {
-            nsfwWarning.classList.remove('show');
-            setTimeout(() => {
-                nsfwWarning.style.display = 'none';
-            }, 300);
-        }
-    });
-
-    // Keyboard navigation
-    document.addEventListener('keydown', function (e) {
+    // Teclado
+    document.addEventListener('keydown', function(e) {
         if (!lightbox.classList.contains('show')) return;
-        if (e.key === 'ArrowRight') {
-            navigateGallery(1);
-        }
-        if (e.key === 'ArrowLeft') {
-            navigateGallery(-1);
-        }
-        if (e.key === 'Escape') {
-    lightbox.classList.remove('show');
-
-    setTimeout(() => {
-        lightbox.style.display = 'none';
-    }, 300);
-
-    document.body.classList.remove('lightbox-open');
-    document.body.style.overflow = 'auto';
-}
+        
+        if (e.key === 'ArrowRight') navigateGallery(1);
+        if (e.key === 'ArrowLeft') navigateGallery(-1);
+        if (e.key === 'Escape') closeLightbox();
+    });
 
     // Form submission
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
+    document.getElementById('contactForm').addEventListener('submit', function() {
         const submitText = document.getElementById('submitText');
         const submitIcon = document.getElementById('submitIcon');
         const submitSpinner = document.getElementById('submitSpinner');
@@ -1995,7 +1852,7 @@ lightboxImg.addEventListener('dblclick', function(e) {
         submitSpinner.classList.remove('hidden');
     });
 
-    // Scroll progress bar
+    // Scroll progress bar + back to top
     window.addEventListener('scroll', function() {
         const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
         const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -2011,17 +1868,13 @@ lightboxImg.addEventListener('dblclick', function(e) {
     });
     
     document.getElementById('backToTop').addEventListener('click', function() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // Smooth scrolling for anchor links
+    // Smooth scrolling
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
-            
             const targetId = this.getAttribute('href');
             const targetElement = document.querySelector(targetId);
             
@@ -2033,29 +1886,9 @@ lightboxImg.addEventListener('dblclick', function(e) {
                 
                 if (!mobileMenu.classList.contains('translate-x-full')) {
                     mobileMenu.classList.add('translate-x-full');
-                    setTimeout(() => {
-                        mobileMenu.classList.add('hidden');
-                    }, 300);
+                    setTimeout(() => mobileMenu.classList.add('hidden'), 300);
                 }
             }
         });
     });
-    
-    // Animation on scroll
-    const animateOnScroll = function() {
-        const elements = document.querySelectorAll('.animate__animated');
-        
-        elements.forEach(element => {
-            const elementPosition = element.getBoundingClientRect().top;
-            const windowHeight = window.innerHeight;
-            
-            if (elementPosition < windowHeight - 100) {
-                const animationClass = element.classList.item(1);
-                element.classList.add(animationClass);
-            }
-        });
-    };
-    
-    window.addEventListener('scroll', animateOnScroll);
-    window.addEventListener('load', animateOnScroll);
 </script>
