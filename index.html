@@ -1599,6 +1599,10 @@ body.lightbox-open nav {
 
     // Lightbox
     let nsfwAccepted = false;
+
+    let currentGalleryItems = [];
+    let currentIndex = 0;
+       
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const lightboxClose = document.querySelector('.lightbox-close');
