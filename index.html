@@ -1917,23 +1917,29 @@ lightboxImg.addEventListener('dblclick', function(e) {
     });
 
     lightboxClose.addEventListener('click', function () {
+    lightbox.classList.remove('show');
+
+    setTimeout(() => {
+        lightbox.style.display = 'none';
+    }, 300);
+
+    document.body.classList.remove('lightbox-open');
+    document.body.style.overflow = 'auto';
+});
+
+    lightbox.addEventListener('click', function (e) {
+    if (e.target === lightbox) {
         lightbox.classList.remove('show');
+
         setTimeout(() => {
             lightbox.style.display = 'none';
         }, 300);
+
+        document.body.classList.remove('lightbox-open');
         document.body.style.overflow = 'auto';
-    });
-
-    lightbox.addEventListener('click', function (e) {
-        if (e.target === lightbox) {
-            lightbox.classList.remove('show');
-            setTimeout(() => {
-                lightbox.style.display = 'none';
-            }, 300);
-            document.body.style.overflow = 'auto';
-        }
-    });
-
+    }
+});
+       
     // NSFW warning modal controls
     nsfwCancel.addEventListener('click', function () {
         nsfwWarning.classList.remove('show');
@@ -1961,13 +1967,15 @@ lightboxImg.addEventListener('dblclick', function(e) {
             navigateGallery(-1);
         }
         if (e.key === 'Escape') {
-            lightbox.classList.remove('show');
-            setTimeout(() => {
-                lightbox.style.display = 'none';
-            }, 300);
-            document.body.style.overflow = 'auto';
-        }
-    });
+    lightbox.classList.remove('show');
+
+    setTimeout(() => {
+        lightbox.style.display = 'none';
+    }, 300);
+
+    document.body.classList.remove('lightbox-open');
+    document.body.style.overflow = 'auto';
+}
 
     // Form submission
     document.getElementById('contactForm').addEventListener('submit', function(e) {
