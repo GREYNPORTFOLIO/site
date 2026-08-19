@@ -1560,6 +1560,12 @@
     const nsfwWarning = document.getElementById('nsfwWarning');
     const nsfwContinue = document.getElementById('nsfwContinue');
     const nsfwCancel = document.getElementById('nsfwCancel');
+    
+    // Zoom da imagem no Lightbox
+lightboxImg.addEventListener('click', function(e) {
+    e.stopPropagation();
+    this.classList.toggle('zoomed');
+});
 
     function showLightbox(src, items, index) {
         currentGalleryItems = items;
