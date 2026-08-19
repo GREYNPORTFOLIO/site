@@ -1877,10 +1877,14 @@ lightboxImg.addEventListener('dblclick', function(e) {
             const src = this.dataset.src;
             lightboxImg.src = src;
             lightbox.style.display = 'flex';
-            setTimeout(() => {
-                lightbox.classList.add('show');
-            }, 10);
-            document.body.style.overflow = 'hidden';
+
+document.body.classList.add('lightbox-open');
+
+setTimeout(() => {
+    lightbox.classList.add('show');
+}, 10);
+
+document.body.style.overflow = 'hidden';
             currentIndex = index; // Armazena índice atual
         });
     });
