@@ -1869,25 +1869,6 @@ lightboxImg.addEventListener('dblclick', function(e) {
             });
         }
     });
-    const galleryArray = Array.from(document.querySelectorAll('.gallery-item'));
-    let currentIndex = -1;
-
-    document.querySelectorAll('.gallery-item').forEach((item, index) => {
-        item.addEventListener('click', function() {
-            const src = this.dataset.src;
-            lightboxImg.src = src;
-            lightbox.style.display = 'flex';
-
-document.body.classList.add('lightbox-open');
-
-setTimeout(() => {
-    lightbox.classList.add('show');
-}, 10);
-
-document.body.style.overflow = 'hidden';
-            currentIndex = index; // Armazena índice atual
-        });
-    });
     
     // NSFW warning modal controls
     nsfwContinue.addEventListener('click', function() {
