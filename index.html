@@ -1562,7 +1562,7 @@
     const nsfwCancel = document.getElementById('nsfwCancel');
     
     // =========================================================
-// GALERIA — ZOOM + ARRASTAR IMAGEM
+// GALERIA — ZOOM + ARRASTAR COM LIMITES
 // =========================================================
 
 let zoomLevel = 1;
@@ -1572,6 +1572,34 @@ let posY = 0;
 let isDragging = false;
 let startX = 0;
 let startY = 0;
+
+
+// =========================================================
+// LIMITAR MOVIMENTO DA IMAGEM
+// =========================================================
+
+function clampPosition() {
+
+    if (zoomLevel <= 1) {
+        posX = 0;
+        posY = 0;
+        return;
+    }
+
+    const lightboxWidth = lightbox.clientWidth;
+    const lightboxHeight = lightbox.clientHeight;
+
+    const imageWidth = lightboxImg.offsetWidth * zoomLevel;
+    const imageHeight = lightboxImg.offsetHeight * zoomLevel;
+
+    // Quanto a imagem pode sair do centro
+    const maxX = Math.max(0, (imageWidth - lightboxWidth) / 2);
+    const maxY = Math.max(0, (imageHeight - lightboxHeight) / 2);
+
+    // Impede de arrastar além dos limites
+    posX = Math.max(-maxX, Math.min(maxX, posX));
+    posY = Math.max(-maxY, Math.min(maxY, posY));
+}
 
 
 // =========================================================
@@ -1596,6 +1624,8 @@ function resetZoom() {
 // =========================================================
 
 function updateZoom() {
+
+    clampPosition();
 
     lightboxImg.style.transform =
         `translate(${posX}px, ${posY}px) scale(${zoomLevel})`;
@@ -1624,10 +1654,10 @@ lightboxImg.addEventListener('wheel', function(e) {
 
     }
 
-    // Limite: 1x até 4x
+    // Limite de 1x até 4x
     zoomLevel = Math.max(1, Math.min(4, zoomLevel));
 
-    // Voltou para 100%
+    // Se voltar para 100%, centraliza
     if (zoomLevel === 1) {
 
         posX = 0;
@@ -1646,7 +1676,6 @@ lightboxImg.addEventListener('wheel', function(e) {
 
 lightboxImg.addEventListener('mousedown', function(e) {
 
-    // Só permite arrastar quando estiver ampliado
     if (zoomLevel <= 1) return;
 
     e.preventDefault();
@@ -1671,6 +1700,9 @@ document.addEventListener('mousemove', function(e) {
 
     posX = e.clientX - startX;
     posY = e.clientY - startY;
+
+    // Aplica os limites
+    clampPosition();
 
     updateZoom();
 
