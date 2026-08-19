@@ -1567,6 +1567,26 @@ lightboxImg.addEventListener('click', function(e) {
     this.classList.toggle('zoomed');
 });
 
+       // Zoom com o scroll do mouse
+let zoomLevel = 1;
+
+lightboxImg.addEventListener('wheel', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (e.deltaY < 0) {
+        zoomLevel += 0.2;
+    } else {
+        zoomLevel -= 0.2;
+    }
+
+    // Limites do zoom
+    zoomLevel = Math.max(1, Math.min(4, zoomLevel));
+
+    this.style.transform = `scale(${zoomLevel})`;
+    this.style.cursor = zoomLevel > 1 ? 'zoom-out' : 'zoom-in';
+});
+
     function showLightbox(src, items, index) {
         currentGalleryItems = items;
         currentIndex = index;
