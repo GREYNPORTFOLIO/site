@@ -1866,11 +1866,29 @@ lightboxImg.addEventListener('dblclick', function(e) {
         } else {
             // Normal gallery item click
             item.addEventListener('click', function() {
-                const src = img.src;
-                const items = Array.from(document.querySelectorAll('.gallery-item:not([style*="none"])'));
-                const index = items.indexOf(this);
-                showLightbox(src, items, index);
-            });
+
+    const src = img.src;
+
+    if (!src) {
+        console.warn('Esta arte não possui uma imagem:', this);
+        return;
+    }
+
+    const items = Array.from(
+        document.querySelectorAll('.gallery-item:not([style*="none"])')
+    ).filter(item => {
+        const image = item.querySelector('img');
+        return image && image.src;
+    });
+
+    const index = items.indexOf(this);
+
+    if (index === -1) {
+        return;
+    }
+
+    showLightbox(src, items, index);
+});
         }
     });
     
