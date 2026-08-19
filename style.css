@@ -111,7 +111,9 @@ html {
 /* ZOOM DA GALERIA */
 #lightbox-img {
     cursor: zoom-in;
-    transition: transform 0.3s ease;
+    transition: transform 0.15s ease;
+    user-select: none;
+    -webkit-user-drag: none;
 }
 
 #lightbox-img.zoomed {
