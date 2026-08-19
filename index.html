@@ -634,6 +634,52 @@ body.lightbox-open nav {
     transform: translateY(-100%);
     transition: all 0.3s ease;
 }
+
+        /* ========== SETAS DO LIGHTBOX SEMPRE VISÍVEIS ========== */
+#lightbox .absolute {
+    z-index: 60 !important;
+}
+
+#prevButton,
+#nextButton {
+    z-index: 60 !important;
+    background-color: rgba(0, 0, 0, 0.65) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.25s ease;
+}
+
+#prevButton:hover,
+#nextButton:hover {
+    background-color: rgba(255, 42, 109, 0.8) !important;
+    transform: scale(1.1);
+}
+
+/* Deixa as setas um pouco mais para dentro no mobile */
+@media (max-width: 768px) {
+    #lightbox .absolute.left-4 {
+        left: 8px !important;
+    }
+    #lightbox .absolute.right-4 {
+        right: 8px !important;
+    }
+
+    #prevButton,
+    #nextButton {
+        width: 42px;
+        height: 42px;
+    }
+}
+
+/* Garante que o botão de fechar também fique por cima */
+.lightbox-close {
+    z-index: 70 !important;
+}
     </style>
 </head>
 <body>
