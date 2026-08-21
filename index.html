@@ -1941,12 +1941,12 @@ lightboxImg.addEventListener('dblclick', function(e) {
     // ========== CONTADOR ANIMADO ==========
 function animateCounter(el) {
     const target = +el.getAttribute('data-target');
-    const duration = 1900; // tempo total da animação (em ms)
+    const duration = 2000; // tempo total da animação (em ms)
     const startTime = performance.now();
 
     function update(currentTime) {
         const elapsed = currentTime - startTime;
-        const progress = Math.min(elapsed / duration, 10);
+        const progress = Math.min(elapsed / duration, 1);
         
         // Easing suave (easeOutExpo)
         const ease = 1 - Math.pow(1 - progress, 4);
