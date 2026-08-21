@@ -680,6 +680,16 @@ body.lightbox-open nav {
 .lightbox-close {
     z-index: 70 !important;
 }
+
+/* Fade-in das imagens da galeria */
+.gallery-item img {
+    opacity: 0;
+    transition: opacity 0.6s ease, transform 0.5s ease;
+}
+
+.gallery-item img.loaded {
+    opacity: 1;
+}
     </style>
 </head>
 <body>
@@ -758,19 +768,19 @@ body.lightbox-open nav {
                     <p class="text-lg text-gray-300 mb-4">Freelance Digital Illustrator specializing in expressive character design and vibrant environments, with additional expertise in Live2D animation and 3D art.</p>
                     
                     <div class="profile-stats">
-                        <div class="stat-item">
-                            <div class="stat-number">2+</div>
-                            <div class="stat-label">Years of experience</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">45+</div>
-                            <div class="stat-label">Artworks created</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">32+</div>
-                            <div class="stat-label">Satisfied clients</div>
-                        </div>
-                    </div>
+    <div class="stat-item">
+        <div class="stat-number" data-target="2">0</div>
+        <div class="stat-label">Years of experience</div>
+    </div>
+    <div class="stat-item">
+        <div class="stat-number" data-target="45">0</div>
+        <div class="stat-label">Artworks created</div>
+    </div>
+    <div class="stat-item">
+        <div class="stat-number" data-target="32">0</div>
+        <div class="stat-label">Satisfied clients</div>
+    </div>
+</div>
                     
                     <div class="flex space-x-4 mt-6">
                         <a href="#gallery" class="inline-block bg-neonred hover:bg-neonpink text-white font-bold py-3 px-6 rounded-full transition duration-300 neon-border hover:animate-pulse">
@@ -1873,6 +1883,57 @@ lightboxImg.addEventListener('dblclick', function(e) {
         resetZoom();
         lightboxImg.src = src;
     }
+    
+    // ========== CONTADOR ANIMADO ==========
+function animateCounter(el) {
+    const target = +el.getAttribute('data-target');
+    const duration = 1900; // tempo total da animação (em ms)
+    const startTime = performance.now();
+
+    function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 10);
+        
+        // Easing suave (easeOutExpo)
+        const ease = 1 - Math.pow(1 - progress, 4);
+        
+        const current = Math.floor(ease * target);
+        el.textContent = current + '+';
+
+        if (progress < 1) {
+            requestAnimationFrame(update);
+        } else {
+            el.textContent = target + '+'; // garante o valor final
+        }
+    }
+
+    requestAnimationFrame(update);
+}
+
+// Só anima quando a seção aparecer na tela
+const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const counters = entry.target.querySelectorAll('.stat-number');
+            counters.forEach(counter => {
+                if (!counter.classList.contains('animated')) {
+                    counter.classList.add('animated');
+                    animateCounter(counter);
+                }
+            });
+            // Para de observar depois de animar uma vez
+            statsObserver.unobserve(entry.target);
+        }
+    });
+}, {
+    threshold: 0.5 // começa quando 95% da seção estiver visível
+});
+
+// Observa a área dos números
+const statsSection = document.querySelector('.profile-stats');
+if (statsSection) {
+    statsObserver.observe(statsSection);
+}
 
     // Clique nas artes
     document.querySelectorAll('.gallery-item').forEach(item => {
@@ -2032,4 +2093,22 @@ lightboxImg.addEventListener('dblclick', function(e) {
             }
         });
     });
+    
+    // ========== FADE-IN DAS IMAGENS DA GALERIA ==========
+document.querySelectorAll('.gallery-item img').forEach(img => {
+    // Se a imagem já estiver carregada (cache)
+    if (img.complete) {
+        img.classList.add('loaded');
+    } else {
+        img.addEventListener('load', function() {
+            this.classList.add('loaded');
+        });
+        
+        // Caso dê erro no carregamento
+        img.addEventListener('error', function() {
+            this.style.opacity = '0.3';
+            this.alt = 'Imagem não encontrada';
+        });
+    }
+});
 </script>
