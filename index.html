@@ -690,14 +690,19 @@ body.lightbox-open nav {
 .gallery-item img.loaded {
     opacity: 1;
 }
+
+        .commission-status.closed {
+    border-color: #ff003c;
+    box-shadow: 0 0 10px rgba(255, 0, 60, 0.5);
+}
     </style>
 </head>
 <body>
     <!-- Commission Status Indicator -->
-    <div class="commission-status animate__animated animate__fadeInDown animate__delay-1s">
-        <div class="status-dot open"></div>
-        <span>Commissions: open</span>
-    </div>
+<div class="commission-status animate__animated animate__fadeInDown animate__delay-1s" id="commissionStatus">
+    <div class="status-dot" id="statusDot"></div>
+    <span id="statusText">Commissions: ...</span>
+</div>
 
     <!-- Floating background shapes -->
     <div class="floating-shape shape-1"></div>
@@ -1604,6 +1609,35 @@ body.lightbox-open nav {
             }, 300);
         });
     });
+
+       // ==========================================
+//  CONTROLE DE COMISSÕES (só mude esta linha)
+// ==========================================
+const commissionsOpen = true;   // ← true = aberto | false = fechado
+// ==========================================
+
+function updateCommissionStatus() {
+    const statusBox = document.getElementById('commissionStatus');
+    const statusDot = document.getElementById('statusDot');
+    const statusText = document.getElementById('statusText');
+
+    if (commissionsOpen) {
+        statusBox.classList.add('open');
+        statusBox.classList.remove('closed');
+        statusDot.classList.add('open');
+        statusDot.classList.remove('closed');
+        statusText.textContent = 'Commissions: open';
+    } else {
+        statusBox.classList.remove('open');
+        statusBox.classList.add('closed');
+        statusDot.classList.remove('open');
+        statusDot.classList.add('closed');
+        statusText.textContent = 'Commissions: closed';
+    }
+}
+
+// Atualiza assim que a página carrega
+updateCommissionStatus();
 
     // Gallery filter
     const filterButtons = document.querySelectorAll('.gallery-filter');
