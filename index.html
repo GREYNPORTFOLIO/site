@@ -712,6 +712,158 @@ body.lightbox-open nav {
     border-color: #ff003c;
     box-shadow: 0 0 10px rgba(255, 0, 60, 0.5);
 }
+
+/* ========== GALERIA MELHORADA ========== */
+
+#gallery {
+    position: relative;
+}
+
+/* Grid mais bonito e responsivo */
+#gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+}
+
+@media (min-width: 640px) {
+    #gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    #gallery-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.75rem;
+    }
+}
+
+@media (min-width: 1280px) {
+    #gallery-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+/* Item da galeria */
+.gallery-item {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #111;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+.gallery-item:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(255, 42, 109, 0.25);
+    border-color: rgba(255, 42, 109, 0.4);
+}
+
+/* Imagem */
+.gallery-item img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
+    opacity: 0;
+}
+
+.gallery-item img.loaded {
+    opacity: 1;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.12);
+}
+
+/* Overlay escuro no hover */
+.gallery-item::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.gallery-item:hover::after {
+    opacity: 1;
+}
+
+/* Caption melhorada */
+.gallery-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 16px;
+    z-index: 2;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.4s ease;
+}
+
+.gallery-item:hover .gallery-caption {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.gallery-caption p:first-child {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 2px;
+}
+
+.gallery-caption p:last-child {
+    font-size: 0.8rem;
+    color: #ff2a6d;
+}
+
+/* Badge NSFW melhorado */
+.nsfw-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: linear-gradient(135deg, #ff003c, #ff2a6d);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    z-index: 3;
+    box-shadow: 0 4px 12px rgba(255, 0, 60, 0.4);
+}
+
+/* Ícone de zoom no hover */
+.gallery-item::before {
+    content: '\f00e'; /* Font Awesome search-plus */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.5);
+    color: white;
+    font-size: 1.8rem;
+    opacity: 0;
+    z-index: 2;
+    transition: all 0.35s ease;
+    text-shadow: 0 0 20px rgba(0,0,0,0.8);
+    pointer-events: none;
+}
+
+.gallery-item:hover::before {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
     </style>
 </head>
 <body>
@@ -849,19 +1001,32 @@ body.lightbox-open nav {
             </div>
             
             <!-- Gallery Navigation -->
-           <div class="flex flex-wrap justify-center mb-12 gap-2 animate__animated animate__fadeIn">
-                <button class="gallery-filter px-4 py-2 rounded-full bg-neonred text-white font-medium" data-category="all">All</button>
-                <button class="gallery-filter px-4 py-2 rounded-full bg-transparent border border-neonred text-neonred hover:bg-neonred hover:text-white transition font-medium" data-category="fanarts">Fanarts </button>
-                <button class="gallery-filter px-4 py-2 rounded-full bg-transparent border border-neonblue text-neonblue hover:bg-neonblue hover:text-white transition font-medium" data-category="ocs">OCs </button>
-                <button class="gallery-filter px-4 py-2 rounded-full bg-transparent border border-neonpurple text-neonpurple hover:bg-neonpurple hover:text-white transition font-medium" data-category="commissions">Commissions </button>
-                <button class="gallery-filter px-4 py-2 rounded-full bg-transparent border border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-white transition font-medium" data-category="chibi">Chibi </button>
-                <button class="gallery-filter px-4 py-2 rounded-full bg-transparent border border-red-500 text-red-500 hover:bg-red-500 hover:text-white transition font-medium" data-category="nsfw">NSFW </button>
-                <button class="gallery-filter px-4 py-2 rounded-full bg-transparent border border-orange-400 text-orange-400 hover:bg-orange-400 hover:text-white transition font-medium" data-category="illustrations">Illustrations </button>
-                <button class="gallery-filter px-4 py-2 rounded-full bg-transparent border border-green-400 text-green-400 hover:bg-green-400 hover:text-white transition font-medium" data-category="concept">Concept Art </button>
-                <button class="gallery-filter px-4 py-2 rounded-full bg-transparent border border-pink-400 text-pink-400 hover:bg-pink-400 hover:text-white transition font-medium" data-category="sketches">Sketches </button>
-                <button class="gallery-filter px-4 py-2 rounded-full bg-transparent border border-indigo-400 text-indigo-400 hover:bg-indigo-400 hover:text-white transition font-medium" data-category="promo">Promo Art </button>
-                <button class="gallery-filter px-4 py-2 rounded-full bg-transparent border border-amber-400 text-amber-400 hover:bg-amber-400 hover:text-white transition font-medium" data-category="experimental">Experimental </button>
-            </div>
+<div class="flex flex-wrap justify-center gap-2 mb-12" id="galleryFilters">
+    <button class="gallery-filter active px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 bg-neonred text-white" data-category="all">
+        All
+    </button>
+    <button class="gallery-filter px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 bg-white/5 text-gray-300 hover:bg-white/10 border border-white/10" data-category="fanarts">
+        Fanarts
+    </button>
+    <button class="gallery-filter px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 bg-white/5 text-gray-300 hover:bg-white/10 border border-white/10" data-category="ocs">
+        OCs
+    </button>
+    <button class="gallery-filter px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 bg-white/5 text-gray-300 hover:bg-white/10 border border-white/10" data-category="commissions">
+        Commissions
+    </button>
+    <button class="gallery-filter px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 bg-white/5 text-gray-300 hover:bg-white/10 border border-white/10" data-category="nsfw">
+        NSFW
+    </button>
+    <button class="gallery-filter px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 bg-white/5 text-gray-300 hover:bg-white/10 border border-white/10" data-category="illustrations">
+        Illustrations
+    </button>
+    <button class="gallery-filter px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 bg-white/5 text-gray-300 hover:bg-white/10 border border-white/10" data-category="experimental">
+        Experimental
+    </button>
+    <button class="gallery-filter px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 bg-white/5 text-gray-300 hover:bg-white/10 border border-white/10" data-category="concept">
+        Concept Art
+    </button>
+</div>
             
             <!-- Gallery Grid -->
             <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-5 gap-6" id="gallery-grid">
@@ -1659,50 +1824,34 @@ function updateCommissionStatus() {
 // Atualiza assim que a página carrega
 updateCommissionStatus();
 
-    // Gallery filter
-    const filterButtons = document.querySelectorAll('.gallery-filter');
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    
-    filterButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            // Reset all buttons
-            filterButtons.forEach(btn => {
-                btn.classList.remove(
-                    'bg-neonred', 'bg-neonblue', 'bg-neonpurple', 'bg-yellow-400',
-                    'bg-red-500', 'bg-orange-400', 'bg-green-400', 'bg-pink-400',
-                    'bg-indigo-400', 'bg-amber-400', 'text-white'
-                );
-                btn.classList.add('bg-transparent', 'border');
-            });
-            
-            // Activate clicked button
-            this.classList.remove('bg-transparent');
-            this.classList.add('text-white');
-            
-            if (this.classList.contains('border-neonred')) this.classList.add('bg-neonred');
-            else if (this.classList.contains('border-neonblue')) this.classList.add('bg-neonblue');
-            else if (this.classList.contains('border-neonpurple')) this.classList.add('bg-neonpurple');
-            else if (this.classList.contains('border-yellow-400')) this.classList.add('bg-yellow-400');
-            else if (this.classList.contains('border-red-500')) this.classList.add('bg-red-500');
-            else if (this.classList.contains('border-orange-400')) this.classList.add('bg-orange-400');
-            else if (this.classList.contains('border-green-400')) this.classList.add('bg-green-400');
-            else if (this.classList.contains('border-pink-400')) this.classList.add('bg-pink-400');
-            else if (this.classList.contains('border-indigo-400')) this.classList.add('bg-indigo-400');
-            else if (this.classList.contains('border-amber-400')) this.classList.add('bg-amber-400');
-            else this.classList.add('bg-neonred'); // All button
+    // Gallery filter melhorado
+const filterButtons = document.querySelectorAll('.gallery-filter');
+const galleryItems = document.querySelectorAll('.gallery-item');
 
-            // Filter items
-            const category = this.dataset.category;
-            
-            galleryItems.forEach(item => {
-                if (category === 'all' || item.classList.contains(category)) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
+filterButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        // Remove active de todos
+        filterButtons.forEach(btn => {
+            btn.classList.remove('active', 'bg-neonred', 'text-white');
+            btn.classList.add('bg-white/5', 'text-gray-300', 'border', 'border-white/10');
+        });
+
+        // Ativa o botão clicado
+        this.classList.add('active', 'bg-neonred', 'text-white');
+        this.classList.remove('bg-white/5', 'text-gray-300', 'border', 'border-white/10');
+
+        const category = this.dataset.category;
+
+        galleryItems.forEach(item => {
+            if (category === 'all' || item.classList.contains(category)) {
+                item.style.display = 'block';
+                item.style.animation = 'fadeIn 0.4s ease';
+            } else {
+                item.style.display = 'none';
+            }
         });
     });
+});
 
     // ========== LIGHTBOX + NSFW ==========
     let nsfwAccepted = false;
