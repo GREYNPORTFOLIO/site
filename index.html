@@ -956,7 +956,7 @@ body.lightbox-open .progress-container {
     <!-- Hero Section - Redesigned as Social Profile -->
     <section id="home" class="relative overflow-hidden pt-16">
         <div class="profile-header">
-            <img src="https://i.pinimg.com/originals/c3/61/66/c361660a5d67d757f19530ee4730abd4.gif" alt="Profile Banner" class="profile-banner">
+            <img src="https://c.tenor.com/Fy_TnLK0axIAAAAd/tenor.gif" alt="Profile Banner" class="profile-banner">
         </div>
 
         <div class="profile-content container mx-auto px-4">
@@ -1288,6 +1288,85 @@ body.lightbox-open .progress-container {
 
     <hr class="section-divider">
 
+     <!-- Speedpaint Section -->
+<section id="speedpaint" class="py-20 bg-darker/50 backdrop-blur-sm">
+    <div class="container mx-auto px-4">
+
+        <div class="text-center mb-10">
+            <h2 class="text-3xl font-bold mb-4 neon-text">Speedpaint</h2>
+            <p class="text-gray-400 max-w-2xl mx-auto">
+                Watch the artwork come to life.
+            </p>
+        </div>
+
+        <!-- Vídeo principal (grande) -->
+        <div class="max-w-5xl mx-auto">
+            <div class="relative rounded-xl overflow-hidden border border-gray-800 shadow-lg aspect-video">
+                <iframe
+                    class="w-full h-full"
+                    src="https://www.youtube.com/embed/CbJEnFAUu9M"
+                    title="Speedpaint Principal"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+            <!-- Botão Ver Mais -->
+            <div class="text-center mt-8">
+                <button id="openVideoGallery" class="inline-flex items-center gap-2 bg-transparent border border-neonpink text-neonpink hover:bg-neonpink hover:text-white font-bold py-3 px-8 rounded-full transition duration-300">
+                    <i class="fas fa-play-circle"></i>
+                    Ver mais speedpaints
+                </button>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- Modal da Galeria de Vídeos -->
+<div id="videoGalleryModal" class="fixed inset-0 bg-black/95 z-[9999] hidden items-center justify-center p-4 opacity-0 transition-opacity duration-300">
+    <div class="relative w-full max-w-6xl max-h-[90vh] overflow-y-auto">
+        
+        <!-- Botão fechar -->
+        <button id="closeVideoGallery" class="absolute -top-2 right-0 text-white text-4xl hover:text-neonpink transition z-10">
+            &times;
+        </button>
+
+        <h3 class="text-2xl font-bold text-center mb-8 neon-text">Process Videos</h3>
+
+        <!-- Grid de vídeos -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <!-- Vídeo 1 -->
+            <div class="video-card rounded-xl overflow-hidden border border-gray-800 bg-darker">
+                <div class="aspect-video">
+                    <iframe class="w-full h-full" src="https://www.youtube.com/embed/CbJEnFAUu9M" title="Speedpaint 1" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <p class="p-3 text-center text-gray-300 text-sm">Nome da arte 1</p>
+            </div>
+
+            <!-- Vídeo 2 -->
+            <div class="video-card rounded-xl overflow-hidden border border-gray-800 bg-darker">
+                <div class="aspect-video">
+                    <iframe class="w-full h-full" src="https://www.youtube.com/embed/CbJEnFAUu9M" title="Speedpaint 2" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <p class="p-3 text-center text-gray-300 text-sm">Nome da arte 2</p>
+            </div>
+
+            <!-- Vídeo 3 -->
+            <div class="video-card rounded-xl overflow-hidden border border-gray-800 bg-darker">
+                <div class="aspect-video">
+                    <iframe class="w-full h-full" src="https://www.youtube.com/embed/CbJEnFAUu9M" title="Speedpaint 3" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <p class="p-3 text-center text-gray-300 text-sm">Nome da arte 3</p>
+            </div>
+
+            <!-- Adicione mais vídeos copiando o bloco acima -->
+
+        </div>
+    </div>
+</div>       
 
 </section>
 
@@ -2292,6 +2371,47 @@ musicToggle.addEventListener('click', function() {
         isPlaying = false;
         musicIcon.classList.remove('fa-pause');
         musicIcon.classList.add('fa-music');
+    }
+});
+
+       // ========== GALERIA DE VÍDEOS ==========
+const openVideoGallery = document.getElementById('openVideoGallery');
+const closeVideoGallery = document.getElementById('closeVideoGallery');
+const videoGalleryModal = document.getElementById('videoGalleryModal');
+
+openVideoGallery.addEventListener('click', () => {
+    videoGalleryModal.classList.remove('hidden');
+    videoGalleryModal.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+    
+    setTimeout(() => {
+        videoGalleryModal.classList.add('opacity-100');
+        videoGalleryModal.classList.remove('opacity-0');
+    }, 10);
+});
+
+function closeVideoModal() {
+    videoGalleryModal.classList.add('opacity-0');
+    videoGalleryModal.classList.remove('opacity-100');
+    
+    setTimeout(() => {
+        videoGalleryModal.classList.add('hidden');
+        videoGalleryModal.classList.remove('flex');
+        document.body.style.overflow = 'auto';
+    }, 300);
+}
+
+closeVideoGallery.addEventListener('click', closeVideoModal);
+
+// Fecha clicando fora
+videoGalleryModal.addEventListener('click', (e) => {
+    if (e.target === videoGalleryModal) closeVideoModal();
+});
+
+// Fecha com ESC
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !videoGalleryModal.classList.contains('hidden')) {
+        closeVideoModal();
     }
 });
 </script>
