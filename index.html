@@ -868,7 +868,8 @@ body.lightbox-open nav {
         /* Esconde elementos flutuantes quando o lightbox está aberto */
 body.lightbox-open .commission-status,
 body.lightbox-open .back-to-top,
-body.lightbox-open .progress-container {
+body.lightbox-open .progress-container,
+body.lightbox-open #musicToggle {
     opacity: 0 !important;
     visibility: hidden !important;
     pointer-events: none !important;
@@ -878,6 +879,67 @@ body.lightbox-open .progress-container {
 /* Garante que o lightbox fique acima de tudo */
 .lightbox {
     z-index: 9999 !important;
+}
+
+/* Quando a galeria de vídeos estiver aberta */
+body.video-gallery-open nav,
+body.video-gallery-open .commission-status,
+body.video-gallery-open .back-to-top,
+body.video-gallery-open .progress-container,
+body.video-gallery-open #musicToggle {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+/* Modal de vídeos melhorado */
+#videoGalleryModal {
+    z-index: 99999 !important;
+}
+
+#videoGalleryModal .modal-inner {
+    position: relative;
+    width: 100%;
+    max-width: 72rem;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding-top: 3.5rem;
+}
+
+/* Botão fechar fixo e fácil de clicar no mobile */
+#closeVideoGallery {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    width: 48px;
+    height: 48px;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(255, 42, 109, 0.5);
+    border-radius: 50%;
+    color: white;
+    font-size: 28px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100000;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+#closeVideoGallery:hover {
+    background: #ff2a6d;
+    transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+    #closeVideoGallery {
+        top: 12px;
+        right: 12px;
+        width: 44px;
+        height: 44px;
+        font-size: 26px;
+    }
 }
     </style>
 </head>
@@ -1325,18 +1387,17 @@ body.lightbox-open .progress-container {
 </section>
 
 <!-- Modal da Galeria de Vídeos -->
-<div id="videoGalleryModal" class="fixed inset-0 bg-black/95 z-[9999] hidden items-center justify-center p-4 opacity-0 transition-opacity duration-300">
-    <div class="relative w-full max-w-6xl max-h-[90vh] overflow-y-auto">
-        
-        <!-- Botão fechar -->
-        <button id="closeVideoGallery" class="absolute -top-2 right-0 text-white text-4xl hover:text-neonpink transition z-10">
-            &times;
-        </button>
+<div id="videoGalleryModal" class="fixed inset-0 bg-black/95 z-[99999] hidden items-center justify-center p-4 opacity-0 transition-opacity duration-300">
+    
+    <!-- Botão fechar (fixo na tela) -->
+    <button id="closeVideoGallery" aria-label="Fechar">
+        &times;
+    </button>
 
+    <div class="modal-inner w-full max-w-6xl max-h-[90vh] overflow-y-auto">
         <h3 class="text-2xl font-bold text-center mb-8 neon-text">Process Videos</h3>
 
-        <!-- Grid de vídeos -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pb-8">
             
             <!-- Vídeo 1 -->
             <div class="video-card rounded-xl overflow-hidden border border-gray-800 bg-darker">
@@ -1349,7 +1410,7 @@ body.lightbox-open .progress-container {
             <!-- Vídeo 2 -->
             <div class="video-card rounded-xl overflow-hidden border border-gray-800 bg-darker">
                 <div class="aspect-video">
-                    <iframe class="w-full h-full" src="https://www.youtube.com/embed/CbJEnFAUu9M" title="Speedpaint 2" frameborder="0" allowfullscreen></iframe>
+                    <iframe class="w-full h-full" src="https://www.youtube.com/embed/WZwTk1-vU2Y" title="Speedpaint 2" frameborder="0" allowfullscreen></iframe>
                 </div>
                 <p class="p-3 text-center text-gray-300 text-sm">Nome da arte 2</p>
             </div>
@@ -1361,8 +1422,6 @@ body.lightbox-open .progress-container {
                 </div>
                 <p class="p-3 text-center text-gray-300 text-sm">Nome da arte 3</p>
             </div>
-
-            <!-- Adicione mais vídeos copiando o bloco acima -->
 
         </div>
     </div>
@@ -2382,6 +2441,7 @@ const videoGalleryModal = document.getElementById('videoGalleryModal');
 openVideoGallery.addEventListener('click', () => {
     videoGalleryModal.classList.remove('hidden');
     videoGalleryModal.classList.add('flex');
+    document.body.classList.add('video-gallery-open');
     document.body.style.overflow = 'hidden';
     
     setTimeout(() => {
@@ -2397,13 +2457,14 @@ function closeVideoModal() {
     setTimeout(() => {
         videoGalleryModal.classList.add('hidden');
         videoGalleryModal.classList.remove('flex');
+        document.body.classList.remove('video-gallery-open');
         document.body.style.overflow = 'auto';
     }, 300);
 }
 
 closeVideoGallery.addEventListener('click', closeVideoModal);
 
-// Fecha clicando fora
+// Fecha clicando no fundo escuro
 videoGalleryModal.addEventListener('click', (e) => {
     if (e.target === videoGalleryModal) closeVideoModal();
 });
