@@ -431,40 +431,47 @@
             height: 100%;
         }
         
-        .nsfw-badge {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: #ff003c;
-            color: white;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: bold;
-            z-index: 3;
-        }
-        
-        .gallery-item.nsfw img {
-            filter: blur(7px) brightness(0.9);
-            transition: filter 0.3s ease;
-        }
-        
-        .gallery-item.nsfw.active img {
-            filter: none;
-        }
+       /* ========== BADGES DA GALERIA ========== */
+.art-badge {
+    position: absolute !important;
+    top: 12px !important;
+    right: 12px !important;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: white;
+    z-index: 50 !important; /* bem acima da imagem */
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+    filter: none !important; /* nunca recebe blur */
+    transform: translateZ(0); /* força ficar em camada própria */
+}
 
-        .nsfw-badge {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: #ff003c;
-            color: white;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: bold;
-            z-index: 3;
-        }
+.art-badge.badge-nsfw {
+    background: linear-gradient(135deg, #ff003c, #ff2a6d);
+    box-shadow: 0 4px 12px rgba(255, 0, 60, 0.45);
+}
+
+.art-badge.badge-sfw {
+    background: linear-gradient(135deg, #00c853, #39ff14);
+    box-shadow: 0 4px 12px rgba(57, 255, 20, 0.4);
+    color: #0a0a0a;
+}
+
+.art-badge.badge-ecchi {
+    background: linear-gradient(135deg, #ffd600, #ffea00);
+    box-shadow: 0 4px 12px rgba(255, 214, 0, 0.45);
+    color: #0a0a0a;
+}
+
+/* imagem fica embaixo do badge */
+.gallery-item img {
+    position: relative;
+    z-index: 1;
+}
+
 
         .commission-status {
             position: fixed;
@@ -826,22 +833,6 @@ body.lightbox-open nav {
     color: #ff2a6d;
 }
 
-/* Badge NSFW melhorado */
-.nsfw-badge {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    background: linear-gradient(135deg, #ff003c, #ff2a6d);
-    color: white;
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    z-index: 3;
-    box-shadow: 0 4px 12px rgba(255, 0, 60, 0.4);
-}
-
 /* Ícone de zoom no hover */
 .gallery-item::before {
     content: '\f00e'; /* Font Awesome search-plus */
@@ -940,6 +931,128 @@ body.video-gallery-open #musicToggle {
         height: 44px;
         font-size: 26px;
     }
+}
+
+/* Camada escura (sem backdrop-filter) */
+.nsfw-frost {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    border-radius: inherit;
+    pointer-events: none;
+    background: rgba(0, 0, 0, 0.35);
+}
+
+.gallery-item.revealed .nsfw-frost {
+    display: none !important;
+}
+
+/* Badge e legenda sempre nítidos e por cima */
+.art-badge {
+    position: absolute !important;
+    top: 12px !important;
+    right: 12px !important;
+    z-index: 50 !important;
+    filter: none !important;
+}
+
+.gallery-caption {
+    z-index: 50 !important;
+    filter: none !important;
+    background: rgba(5, 5, 5, 0.92) !important;
+}
+
+/* Container que prende o blur */
+.gallery-item .media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    border-radius: inherit;
+}
+
+.gallery-item .media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* ===== BLUR ISOLADO (versão final) ===== */
+.gallery-item {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+}
+
+.gallery-item .media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    border-radius: inherit;
+}
+
+.gallery-item .media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    opacity: 1; /* não some dentro do media */
+}
+
+.gallery-item.blur .media img {
+    filter: blur(14px) !important;
+    transform: scale(1.12);
+}
+
+.gallery-item.blur.revealed .media img {
+    filter: none !important;
+    transform: none !important;
+}
+
+/* overlays de hover abaixo do badge */
+.gallery-item::before,
+.gallery-item::after {
+    z-index: 5 !important;
+}
+
+.art-badge {
+    position: absolute !important;
+    top: 12px !important;
+    right: 12px !important;
+    z-index: 30 !important;
+    filter: none !important;
+    pointer-events: none;
+}
+
+.gallery-caption {
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    z-index: 30 !important;
+    filter: none !important;
+    background: rgba(5, 5, 5, 0.92) !important;
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+.nsfw-frost {
+    display: none !important;
+}
+
+/* itens SEM blur: imagem normal no fluxo */
+.gallery-item:not(.blur) > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Item precisa de altura (imagem está absolute) */
+.gallery-item {
+    aspect-ratio: 1 / 1;
 }
     </style>
 </head>
@@ -1120,6 +1233,7 @@ body.video-gallery-open #musicToggle {
             <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-5 gap-6" id="gallery-grid">
                  <!-- Illustrations  -->
                 <div class="gallery-item illustrations" data-src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/FANART%2C%20BOCCHI%20THE%20ROCK%2C%20HITORI%20GOTOH%206%20.png">
+                    <div class="art-badge badge-sfw">SFW</div>
                     <img src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/FANART%2C%20BOCCHI%20THE%20ROCK%2C%20HITORI%20GOTOH%206%20.png" alt="Illustration " class="w-full h-auto rounded-lg cursor-pointer">
                     <div class="gallery-caption">
                         <p class="text-white font-medium">Illustration</p>
@@ -1129,6 +1243,7 @@ body.video-gallery-open #musicToggle {
 
                  <!-- Illustrations  -->
                 <div class="gallery-item illustrations" data-src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/image.png">
+                    <div class="art-badge badge-sfw">SFW</div>
                     <img src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/image.png" alt="Illustration " class="w-full h-auto rounded-lg cursor-pointer">
                     <div class="gallery-caption">
                         <p class="text-white font-medium">Illustration</p>
@@ -1138,6 +1253,7 @@ body.video-gallery-open #musicToggle {
 
                 <!-- Fanarts -->
                 <div class="gallery-item fanarts" data-src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/GRENINJA%20ART%205%20.png">
+                    <div class="art-badge badge-sfw">SFW</div>
                     <img src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/GRENINJA%20ART%205%20.png" alt="Fanart " class="w-full h-auto rounded-lg cursor-pointer">
                     <div class="gallery-caption">
                         <p class="text-white font-medium">Fanart</p>
@@ -1147,7 +1263,8 @@ body.video-gallery-open #musicToggle {
 
                 <!-- Fanarts -->
                 <div class="gallery-item fanarts" data-src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/tsubasa%20hanekawa%20fanart%20neko%205.png">
-                    <img src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/tsubasa%20hanekawa%20fanart%20neko%205.png" alt="Fanart " class="w-full h-auto rounded-lg cursor-pointer">
+                    <div class="art-badge badge-sfw">SFW</div>
+                    <img src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/tsubasa%20hanekawa%20fanart%20neko%205.png" alt="Fanart" class="w-full h-auto rounded-lg cursor-pointer">
                     <div class="gallery-caption">
                         <p class="text-white font-medium">Fanart</p>
                         <p class="text-gray-300 text-sm">TSUBASA HANEKAWA NEKO</p>
@@ -1156,6 +1273,7 @@ body.video-gallery-open #musicToggle {
                 
                 <!-- Experimental -->
                 <div class="gallery-item experimental" data-src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/Illustration%20tatapyra%20art.jpg">
+                    <div class="art-badge badge-sfw">SFW</div>
                     <img src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/Illustration%20tatapyra%20art.jpg" alt="Experimental" class="w-full h-auto rounded-lg cursor-pointer">
                     <div class="gallery-caption">
                         <p class="text-white font-medium">Experimental</p>
@@ -1164,9 +1282,12 @@ body.video-gallery-open #musicToggle {
                 </div>
                 
                 <!-- NSFW  -->
-                <div class="gallery-item nsfw" data-src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/fase%205%20Miku%20rabbit%20hole%20sex%20NSFW%20final%20qualidade%20alta.jpg">
-                    <div class="nsfw-badge">NSFW</div>
+                <div class="gallery-item nsfw blur" data-src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/fase%205%20Miku%20rabbit%20hole%20sex%20NSFW%20final%20qualidade%20alta.jpg">
+                    <div class="media">
                     <img src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/fase%205%20Miku%20rabbit%20hole%20sex%20NSFW%20final%20qualidade%20alta.jpg" alt="NSFW " class="w-full h-auto rounded-lg cursor-pointer">
+                    </div>
+                    <div class="nsfw-frost"></div>
+                    <div class="art-badge badge-nsfw">NSFW</div>
                     <div class="gallery-caption">
                         <p class="text-white font-medium">NSFW Art</p>
                         <p class="text-gray-300 text-sm">MIKU RABBIT HOLE</p>
@@ -1175,6 +1296,7 @@ body.video-gallery-open #musicToggle {
                 
                 <!-- Fanarts -->
                 <div class="gallery-item fanarts" data-src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/GOLD%20SHIP%20ART%20FANART.png">
+                    <div class="art-badge badge-sfw">SFW</div>
                     <img src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/GOLD%20SHIP%20ART%20FANART.png" alt="Fanart" class="w-full h-auto rounded-lg cursor-pointer">
                     <div class="gallery-caption">
                         <p class="text-white font-medium">Fanart</p>
@@ -1184,6 +1306,7 @@ body.video-gallery-open #musicToggle {
                 
                 <!-- Experimental  -->
                 <div class="gallery-item experimental" data-src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/arte%20de%20teste%20de%20estético%20girl%20hair%20green.png">
+                    <div class="art-badge badge-sfw">SFW</div>
                     <img src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/arte%20de%20teste%20de%20estético%20girl%20hair%20green.png" alt="Experimental " class="w-full h-auto rounded-lg cursor-pointer">
                     <div class="gallery-caption">
                         <p class="text-white font-medium">Experimental</p>
@@ -1193,6 +1316,7 @@ body.video-gallery-open #musicToggle {
                
                <!-- Fanarts   -->
                 <div class="gallery-item fanarts" data-src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/SHAMPOO%20FASE%203%20NORMAL.jpg">
+                    <div class="art-badge badge-ecchi">Ecchi</div>
                     <img src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/SHAMPOO%20FASE%203%20NORMAL.jpg" alt="Fanart " class="w-full h-auto rounded-lg cursor-pointer">
                     <div class="gallery-caption">
                         <p class="text-white font-medium">Fanart</p>
@@ -1202,6 +1326,7 @@ body.video-gallery-open #musicToggle {
                 
                 <!-- Fanarts -->
                 <div class="gallery-item fanarts" data-src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/maid%20panty%20anarchy%20psg.webp">
+                    <div class="art-badge badge-ecchi">Ecchi</div>
                     <img src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/maid%20panty%20anarchy%20psg.webp" alt="Fanart " class="w-full h-auto rounded-lg cursor-pointer">
                     <div class="gallery-caption">
                         <p class="text-white font-medium">Fanart</p>
@@ -1211,6 +1336,7 @@ body.video-gallery-open #musicToggle {
                 
                 <!-- Experimental -->
                 <div class="gallery-item experimental" data-src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/QUEEN%20BEE%20ART%20FANART%20HELLUVABOSS%20PRESENTATION.png">
+                    <div class="art-badge badge-sfw">SFW</div>
                     <img src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/QUEEN%20BEE%20ART%20FANART%20HELLUVABOSS%20PRESENTATION.png" alt="Experimental " class="w-full h-auto rounded-lg cursor-pointer">
                     <div class="gallery-caption">
                         <p class="text-white font-medium">Experimental</p>
@@ -1219,9 +1345,9 @@ body.video-gallery-open #musicToggle {
                 </div>
 
                <!-- NSFW  -->
-                <div class="gallery-item nsfw" data-src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/NSFW%2C%20MIDNIGHT%20IN%20A%20BIKINI%20%233.png">
-                    <div class="nsfw-badge">NSFW</div>
+                <div class="gallery-item nsfw blur" data-src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/NSFW%2C%20MIDNIGHT%20IN%20A%20BIKINI%20%233.png">
                     <img src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/NSFW%2C%20MIDNIGHT%20IN%20A%20BIKINI%20%233.png" alt="NSFW " class="w-full h-auto rounded-lg cursor-pointer">
+                    <div class="art-badge badge-nsfw">NSFW</div>
                     <div class="gallery-caption">
                         <p class="text-white font-medium">NSFW Art</p>
                         <p class="text-gray-300 text-sm">MIDNIGHT PAIZURI</p>
@@ -1230,6 +1356,7 @@ body.video-gallery-open #musicToggle {
 
                 <!-- Fanarts -->
                 <div class="gallery-item fanarts" data-src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/stocking%20de%20natal%207.png">
+                    <div class="art-badge badge-ecchi">Ecchi</div>
                     <img src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/stocking%20de%20natal%207.png" alt="Fanart " class="w-full h-auto rounded-lg cursor-pointer">
                     <div class="gallery-caption">
                         <p class="text-white font-medium">Fanart</p>
@@ -1239,6 +1366,7 @@ body.video-gallery-open #musicToggle {
                
                <!-- Concept Art  -->
                 <div class="gallery-item concept" data-src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/CLARA%20THE%20SUMMONING%20CHARACTER%20SHEET%20CONCEPT.png">
+                    <div class="art-badge badge-sfw">SFW</div>
                     <img src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/CLARA%20THE%20SUMMONING%20CHARACTER%20SHEET%20CONCEPT.png" alt="Concept " class="w-full h-auto rounded-lg cursor-pointer">
                     <div class="gallery-caption">
                         <p class="text-white font-medium">Concept Art</p>
@@ -1248,7 +1376,7 @@ body.video-gallery-open #musicToggle {
 
                 <!-- NSFW  -->
                 <div class="gallery-item nsfw" data-src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/rebeca%20cyberpunk%20ecchi%20fundo%20finalizado%203.jpg">
-                    <div class="nsfw-badge">NSFW</div>
+                    <div class="art-badge badge-nsfw">NSFW</div>
                     <img src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/rebeca%20cyberpunk%20ecchi%20fundo%20finalizado%203.jpg" alt="NSFW " class="w-full h-auto rounded-lg cursor-pointer">
                     <div class="gallery-caption">
                         <p class="text-white font-medium">NSFW Art</p>
@@ -1258,6 +1386,7 @@ body.video-gallery-open #musicToggle {
               
                <!-- OC   -->
                 <div class="gallery-item ocs" data-src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/23%20Sem%20Título2_20250414153155.jpg">
+                    <div class="art-badge badge-sfw">SFW</div>
                     <img src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/23%20Sem%20Título2_20250414153155.jpg" alt="Original Character " class="w-full h-auto rounded-lg cursor-pointer">
                     <div class="gallery-caption">
                         <p class="text-white font-medium">Original Character</p>
@@ -1267,6 +1396,7 @@ body.video-gallery-open #musicToggle {
 
                <!-- Fanarts -->
                 <div class="gallery-item fanarts" data-src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/Ibaraki%20douji%20fate%20grand%20order%20fase%205.jpg">
+                    <div class="art-badge badge-sfw">SFW</div>
                     <img src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/Ibaraki%20douji%20fate%20grand%20order%20fase%205.jpg" alt="Fanart " class="w-full h-auto rounded-lg cursor-pointer">
                     <div class="gallery-caption">
                         <p class="text-white font-medium">Fanart</p>
@@ -1276,6 +1406,7 @@ body.video-gallery-open #musicToggle {
                 
                 <!-- Experimental -->
                 <div class="gallery-item experimental" data-src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/hellverso%20girl%20test%20presentation%200.png">
+                    <div class="art-badge badge-sfw">SFW</div>
                     <img src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/hellverso%20girl%20test%20presentation%200.png" alt="Experimental" class="w-full h-auto rounded-lg cursor-pointer">
                     <div class="gallery-caption">
                         <p class="text-white font-medium">Experimental</p>
@@ -1284,9 +1415,9 @@ body.video-gallery-open #musicToggle {
                 </div>
 
                 <!-- NSFW  -->
-                <div class="gallery-item nsfw" data-src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/imagedragon.png">
-                    <div class="nsfw-badge">NSFW</div>
+                <div class="gallery-item nsfw blur" data-src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/imagedragon.png">
                     <img src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/imagedragon.png" alt="NSFW " class="w-full h-auto rounded-lg cursor-pointer">
+                    <div class="art-badge badge-nsfw">NSFW</div>
                     <div class="gallery-caption">
                         <p class="text-white font-medium">NSFW Art</p>
                         <p class="text-gray-300 text-sm">CRYPTIA-FNAF</p>
@@ -1295,6 +1426,7 @@ body.video-gallery-open #musicToggle {
                 
                 <!-- Fanarts   -->
                 <div class="gallery-item fanarts" data-src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/surge%20the%20tenrec%20fanart%20.png">
+                    <div class="art-badge badge-sfw">SFW</div>
                     <img src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/surge%20the%20tenrec%20fanart%20.png" alt="Fanart" class="w-full h-auto rounded-lg cursor-pointer">
                     <div class="gallery-caption">
                         <p class="text-white font-medium">Fanart</p>
@@ -1304,6 +1436,7 @@ body.video-gallery-open #musicToggle {
                 
                 <!-- Fanarts -->
                 <div class="gallery-item fanarts" data-src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/ISABELLE%20ANIMAL%20CROSSING%20ECCHI.png">
+                    <div class="art-badge badge-ecchi">Ecchi</div>
                     <img src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/ISABELLE%20ANIMAL%20CROSSING%20ECCHI.png" alt="Fanart" class="w-full h-auto rounded-lg cursor-pointer">
                     <div class="gallery-caption">
                         <p class="text-white font-medium">Fanart</p>
@@ -1312,11 +1445,21 @@ body.video-gallery-open #musicToggle {
                 </div>
                 
                 <!-- NSFW  -->
-                <div class="gallery-item nsfw" data-src="">
-                    <div class="nsfw-badge">NSFW</div>
+                <div class="gallery-item nsfw blur" data-src="">
                     <img src="" alt="NSFW " class="w-full h-auto rounded-lg cursor-pointer">
+                    <div class="art-badge badge-nsfw">NSFW</div>
                     <div class="gallery-caption">
                         <p class="text-white font-medium">NSFW Art</p>
+                        <p class="text-gray-300 text-sm"></p>
+                    </div>
+                </div>
+                
+                <!-- Experimental -->
+                <div class="gallery-item experimental blur" data-src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/Illustration%20art%20experimental.jpg">
+                    <img src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/Illustration%20art%20experimental.jpg" alt="Experimental" class="w-full h-auto rounded-lg cursor-pointer">
+                    <div class="art-badge badge-nsfw">NSFW</div>
+                    <div class="gallery-caption">
+                        <p class="text-white font-medium">Experimental</p>
                         <p class="text-gray-300 text-sm"></p>
                     </div>
                 </div>
@@ -2176,7 +2319,7 @@ lightboxImg.addEventListener('dblclick', function(e) {
             return;
         }
         
-        if (item.classList.contains('nsfw') && !nsfwAccepted) {
+        if (item.classList.contains('blur') && !nsfwAccepted) {
             pendingNsfwItem = { src, items: currentGalleryItems, index: currentIndex };
             closeLightbox();
             nsfwWarning.style.display = 'flex';
@@ -2240,71 +2383,58 @@ if (statsSection) {
 }
 
     // Clique nas artes
-    document.querySelectorAll('.gallery-item').forEach(item => {
-        const img = item.querySelector('img');
-        if (!img) return;
-        
-        item.addEventListener('click', function() {
-            const src = img.src || item.dataset.src;
-            
-            if (!src) {
-                console.warn('Esta arte não possui imagem:', this);
-                return;
-            }
+document.querySelectorAll('.gallery-item').forEach(item => {
+    const img = item.querySelector('img');
+    if (!img) return;
 
-            // Pega só os itens visíveis que têm imagem
-            const visibleItems = Array.from(
-                document.querySelectorAll('.gallery-item:not([style*="none"])')
-            ).filter(el => {
-                const i = el.querySelector('img');
-                return i && (i.src || el.dataset.src);
-            });
+    item.addEventListener('click', function() {
+        const src = img.src || item.dataset.src;
 
-            const index = visibleItems.indexOf(this);
-            if (index === -1) return;
+        if (!src) {
+            console.warn('Esta arte não possui imagem:', this);
+            return;
+        }
 
-            // NSFW ainda não aceito
-            if (item.classList.contains('nsfw') && !nsfwAccepted) {
-                pendingNsfwItem = { src, items: visibleItems, index };
-                nsfwWarning.style.display = 'flex';
-                setTimeout(() => nsfwWarning.classList.add('show'), 10);
-                return;
-            }
-
-            showLightbox(src, visibleItems, index);
+        const visibleItems = Array.from(
+            document.querySelectorAll('.gallery-item:not([style*="none"])')
+        ).filter(el => {
+            const i = el.querySelector('img');
+            return i && (i.src || el.dataset.src);
         });
 
-        // Hover leve no NSFW
-        if (item.classList.contains('nsfw')) {
-            item.addEventListener('mouseenter', () => {
-                if (!nsfwAccepted) img.style.filter = 'blur(3px)';
-            });
-            item.addEventListener('mouseleave', () => {
-                if (!nsfwAccepted) img.style.filter = 'blur(7px)';
-            });
+        const index = visibleItems.indexOf(this);
+        if (index === -1) return;
+
+        if (item.classList.contains('blur') && !nsfwAccepted) {
+            pendingNsfwItem = { src, items: visibleItems, index };
+            nsfwWarning.style.display = 'flex';
+            setTimeout(() => nsfwWarning.classList.add('show'), 10);
+            return;
         }
+
+        showLightbox(src, visibleItems, index);
     });
-    
-    // NSFW Continue
-    nsfwContinue.addEventListener('click', function() {
-        nsfwAccepted = true;
-        nsfwWarning.classList.remove('show');
-        
-        setTimeout(() => {
-            nsfwWarning.style.display = 'none';
+});
+
+// NSFW Continue
+nsfwContinue.addEventListener('click', function() {
+    nsfwAccepted = true;
+    nsfwWarning.classList.remove('show');
+
+    setTimeout(() => {
+        nsfwWarning.style.display = 'none';
+
+        document.querySelectorAll('.gallery-item.blur').forEach(el => {
+            el.classList.add('revealed');
+        });
+
+        if (pendingNsfwItem) {
+            showLightbox(pendingNsfwItem.src, pendingNsfwItem.items, pendingNsfwItem.index);
+            pendingNsfwItem = null;
+        }
+    }, 300);
+});
             
-            // Remove blur de todas as NSFW
-            document.querySelectorAll('.gallery-item.nsfw img').forEach(img => {
-                img.style.filter = 'none';
-            });
-            
-            // Abre a arte que o usuário tentou ver
-            if (pendingNsfwItem) {
-                showLightbox(pendingNsfwItem.src, pendingNsfwItem.items, pendingNsfwItem.index);
-                pendingNsfwItem = null;
-            }
-        }, 300);
-    });
 
     // NSFW Cancel
     nsfwCancel.addEventListener('click', function() {
