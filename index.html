@@ -983,6 +983,23 @@ body.video-gallery-open #musicToggle {
     pointer-events: none;
 }
 
+.main-speedpaint-player {
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 0 0 1px rgba(255,42,109,0.15), 0 20px 50px rgba(0,0,0,0.5);
+    transition: box-shadow 0.4s ease, transform 0.4s ease;
+}
+
+.main-speedpaint-player:hover {
+    box-shadow: 0 0 25px rgba(255,42,109,0.35), 0 25px 60px rgba(0,0,0,0.6);
+}
+
+.main-speedpaint-player video {
+    background: #000;
+}
+
+.main-speedpaint-player video::-webkit-media-controls-panel {
+    background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.6));
+}
     </style></head>
 <body>
 
@@ -1401,11 +1418,11 @@ body.video-gallery-open #musicToggle {
      <div class="max-w-5xl mx-auto">
     <div class="main-speedpaint-player relative rounded-xl overflow-hidden aspect-video">
         <video
-            class="w-full h-full object-cover"
+            class="w-full h-full object-cover-contain"
             controls
             preload="metadata"
-            poster="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/Illustration%20concept%20art%20oc.jpg">
-            <source src="https://github.com/user-attachments/assets/702be80e-b60f-463f-bfee-bf47906f773a" type="video/mp4">
+            poster="">
+            <source src="https://github.com/user-attachments/assets/c259df85-131e-4889-948c-650f0adc91f2" type="video/mp4">
             Seu navegador não suporta vídeo HTML5.
         </video>
     </div>
@@ -2429,7 +2446,7 @@ const musicIcon = document.getElementById('musicIcon');
 let isPlaying = false;
 
 // Volume inicial (0.0 até 1.0)
-bgMusic.volume = 0.02;
+bgMusic.volume = 0.01;
 
 musicToggle.addEventListener('click', function() {
     if (!isPlaying) {
