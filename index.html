@@ -2466,19 +2466,6 @@ musicToggle.addEventListener('click', function() {
     }
 });
 
-// Inicia a música no primeiro clique em qualquer lugar da página
-let musicStarted = false;
-document.addEventListener('click', function() {
-    if (!musicStarted) {
-        bgMusic.play().then(() => {
-            isPlaying = true;
-            musicIcon.classList.remove('fa-music');
-            musicIcon.classList.add('fa-pause');
-            musicStarted = true;
-        }).catch(err => console.log('Erro ao tocar música:', err));
-    }
-}, { once: true });
-
 // ========== BEFORE/AFTER SLIDER ==========
 function initBaSlider(id) {
     const slider = document.getElementById(id);
