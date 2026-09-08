@@ -730,7 +730,7 @@ box-shadow: 0 0 10px rgba(255, 0, 60, 0.5);}/* ========== GALERIA MELHORADA ====
 }/* Item da galeria */
 .gallery-item {
     position: relative;
-    border-radius: 12px;
+    border-radius: 1px;
     overflow: hidden;
     background: #111;
     border: 1px solid rgba(255, 255, 255, 0.05);
@@ -960,11 +960,40 @@ body.video-gallery-open #musicToggle {
 
 .ba-label-left { left: 12px; }
 .ba-label-right { right: 12px; }
+
+.site-bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+    pointer-events: none;
+}
+
+.site-bg-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(5, 5, 5, 0.75); /* ajuste esse número (0 a 1) pra deixar mais claro ou mais escuro */
+    z-index: -1;
+    pointer-events: none;
+}
+
     </style></head>
 <body>
-    
+
+<!-- Vídeo de fundo do site -->
+<video id="siteBgVideo" class="site-bg-video" autoplay loop muted playsinline>
+    <source src="https://github.com/user-attachments/assets/9564517f-8ead-4647-b498-4010c55ec3a2" type="video/mp4">
+</video>
+<div class="site-bg-overlay"></div>
+
 <!-- Música de fundo --><audio id="bgMusic" loop autoplay preload="auto">
-    <source src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site/da35fc0031d57e3dd1925db6e0908df01445ef7e/%E3%80%90Ado%E3%80%91%20%E5%94%B1(MP3_160K).mp3" type="audio/mpeg" > 
+    <source src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site/f7a7ff36cf8b774a87815695c99278aa3e5506be/Saga%20of%20Tanya%20the%20Evil%20Season%202%20-%20Ending%20FULL%20_Weiter_%20Weiter__%20by%20Aoi%20Yuuki%20(Lyrics)(MP3_160K).mp3" type="audio/mpeg" > 
 </audio>
 
 <!-- Botão de controle da música -->
@@ -1126,10 +1155,6 @@ body.video-gallery-open #musicToggle {
         Concept Art
     </button>
 </div>
-
-<video autoplay loop muted playsinline>
-    <source src="" type="video/mp4">
-</video>
             
         <!-- Gallery Grid -->
             <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-5 gap-6" id="gallery-grid">
@@ -1142,8 +1167,6 @@ body.video-gallery-open #musicToggle {
                         <p class="text-gray-300 text-sm">BOCCHI THE ROCK</p>
                     </div>
                 </div>
-
-
 
                  <!-- Illustrations  -->
                 <div class="gallery-item illustrations" data-src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/image.png">
@@ -2443,7 +2466,7 @@ const musicIcon = document.getElementById('musicIcon');
 let isPlaying = false;
 
 // Volume inicial (0.0 até 1.0)
-bgMusic.volume = 0.2;
+bgMusic.volume = 0.1;
 
 musicToggle.addEventListener('click', function() {
     if (!isPlaying) {
