@@ -1061,8 +1061,11 @@ body.video-gallery-open #musicToggle {
 <!-- Hero Section - Redesigned as Social Profile -->
 <section id="home" class="relative overflow-hidden pt-16">
     <div class="profile-header">
-        <img src="https://c.tenor.com/Fy_TnLK0axIAAAAd/tenor.gif" alt="Profile Banner" class="profile-banner">
+        <video class="profile-banner" autoplay loop muted playsinline>
+            <source src="https://github.com/user-attachments/assets/47e45a45-af00-4b08-bfe9-07411ee37982" type="video/mp4">
+        </video>
     </div>
+</section>
 
     <div class="profile-content container mx-auto px-4">
         <div class="flex flex-col md:flex-row items-start md:items-end gap-6">
@@ -1409,54 +1412,14 @@ body.video-gallery-open #musicToggle {
 
         <!-- Botão Ver Mais -->
         <div class="text-center mt-8">
-            <button id="openVideoGallery" class="inline-flex items-center gap-2 bg-transparent border border-neonpink text-neonpink hover:bg-neonpink hover:text-white font-bold py-3 px-8 rounded-full transition duration-300">
-                <i class="fas fa-play-circle"></i>
-                Ver mais speedpaints
-            </button>
-        </div>
-    </div>
-
-</div></section>
-
-<!-- Modal da Galeria de Vídeos -->
-<div id="videoGalleryModal" class="fixed inset-0 bg-black/95 z-[99999] hidden items-center justify-center p-4 opacity-0 transition-opacity duration-300">
-    
-<!-- Botão fechar (fixo na tela) -->
-<button id="closeVideoGallery" aria-label="Fechar">
-    &times;
-</button>
-
-<div class="modal-inner w-full max-w-6xl max-h-[90vh] overflow-y-auto">
-    <h3 class="text-2xl font-bold text-center mb-8 neon-text">Process Videos</h3>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pb-8">
-        
-        <!-- Vídeo 1 -->
-        <div class="video-card rounded-xl overflow-hidden border border-gray-800 bg-darker">
-            <div class="aspect-video">
-                <iframe class="w-full h-full" src="https://www.youtube.com/embed/sWN5Io2ks7c" title="Speedpaint 1" frameborder="0" allowfullscreen></iframe>
+            <a href="speedpaints.html" class="inline-flex items-center gap-2 bg-transparent border border-neonpink text-neonpink hover:bg-neonpink hover:text-white font-bold py-3 px-8 rounded-full transition duration-300">
+    <i class="fas fa-play-circle"></i>
+    Ver mais speedpaints
+                    </a>
+                </div>
             </div>
-            <p class="p-3 text-center text-gray-300 text-sm">Nome da arte 1</p>
         </div>
-
-        <!-- Vídeo 2 -->
-        <div class="video-card rounded-xl overflow-hidden border border-gray-800 bg-darker">
-            <div class="aspect-video">
-                <iframe class="w-full h-full" src="https://www.youtube.com/embed/sWN5Io2ks7c" title="Speedpaint 2" frameborder="0" allowfullscreen></iframe>
-            </div>
-            <p class="p-3 text-center text-gray-300 text-sm">Nome da arte 2</p>
-        </div>
-
-        <!-- Vídeo 3 -->
-        <div class="video-card rounded-xl overflow-hidden border border-gray-800 bg-darker">
-            <div class="aspect-video">
-                <iframe class="w-full h-full" src="https://www.youtube.com/embed/sWN5Io2ks7c" title="Speedpaint 3" frameborder="0" allowfullscreen></iframe>
-            </div>
-            <p class="p-3 text-center text-gray-300 text-sm">Nome da arte 3</p>
-        </div>
-
-    </div>
-</div></div>       
+    </section>      
 
 <!-- Art Process Section -->
 <section id="process" class="py-20 bg-darker/50 backdrop-blur-sm">
@@ -2497,49 +2460,6 @@ document.addEventListener('click', function() {
         }).catch(err => console.log('Erro ao tocar música:', err));
     }
 }, { once: true });
-
-       // ========== GALERIA DE VÍDEOS ==========
-const openVideoGallery = document.getElementById('openVideoGallery');
-const closeVideoGallery = document.getElementById('closeVideoGallery');
-const videoGalleryModal = document.getElementById('videoGalleryModal');
-
-openVideoGallery.addEventListener('click', () => {
-    videoGalleryModal.classList.remove('hidden');
-    videoGalleryModal.classList.add('flex');
-    document.body.classList.add('video-gallery-open');
-    document.body.style.overflow = 'hidden';
-    
-    setTimeout(() => {
-        videoGalleryModal.classList.add('opacity-100');
-        videoGalleryModal.classList.remove('opacity-0');
-    }, 10);
-});
-
-function closeVideoModal() {
-    videoGalleryModal.classList.add('opacity-0');
-    videoGalleryModal.classList.remove('opacity-100');
-    
-    setTimeout(() => {
-        videoGalleryModal.classList.add('hidden');
-        videoGalleryModal.classList.remove('flex');
-        document.body.classList.remove('video-gallery-open');
-        document.body.style.overflow = 'auto';
-    }, 300);
-}
-
-closeVideoGallery.addEventListener('click', closeVideoModal);
-
-// Fecha clicando no fundo escuro
-videoGalleryModal.addEventListener('click', (e) => {
-    if (e.target === videoGalleryModal) closeVideoModal();
-});
-
-// Fecha com ESC
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && !videoGalleryModal.classList.contains('hidden')) {
-        closeVideoModal();
-    }
-});
 
 // ========== BEFORE/AFTER SLIDER ==========
 function initBaSlider(id) {
