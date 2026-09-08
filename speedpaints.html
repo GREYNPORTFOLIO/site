@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/icone%20greyn%20chibi%20hyper%20simples.jpg">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speedpaint Gallery | Greyn Art</title>
+    <meta name="description" content="Watch Greyn's digital art speedpaints from sketch to final render.">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#0a0a0a',
+                        darker: '#050505',
+                        darkest: '#010101',
+                        neonpink: '#ff2a6d',
+                        neonred: '#ff003c',
+                        neonblue: '#05d9e8',
+                        neonpurple: '#d300c5',
+                    },
+                    fontFamily: {
+                        sans: ['"Exo 2"', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;700;900&display=swap');
+
+        body {
+            background-color: #0a0a0a;
+            color: #f1f1f1;
+            scroll-behavior: smooth;
+        }
+
+        .neon-text {
+            text-shadow: 0 0 5px #ff2a6d, 0 0 10px #ff2a6d;
+        }
+
+        .neon-text-blue {
+            text-shadow: 0 0 5px #05d9e8, 0 0 10px #05d9e8;
+        }
+
+        .floating-shape {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.25;
+            z-index: -1;
+        }
+
+        .shape-1 {
+            width: 350px;
+            height: 350px;
+            background: #ff2a6d;
+            top: 5%;
+            left: -5%;
+            animation: float 9s ease-in-out infinite;
+        }
+
+        .shape-2 {
+            width: 400px;
+            height: 400px;
+            background: #05d9e8;
+            bottom: 5%;
+            right: -5%;
+            animation: float 11s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-25px); }
+        }
+
+        /* ===== Video Card ===== */
+        .sp-card {
+            position: relative;
+            border-radius: 14px;
+            overflow: hidden;
+            background: #111;
+            border: 1px solid rgba(255,255,255,0.06);
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .sp-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(255, 42, 109, 0.4);
+            box-shadow: 0 18px 35px rgba(255, 42, 109, 0.2);
+        }
+
+        .sp-thumb-wrap {
+            position: relative;
+            aspect-ratio: 16/9;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .sp-thumb-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease, filter 0.4s ease;
+        }
+
+        .sp-card:hover .sp-thumb-wrap img {
+            transform: scale(1.08);
+            filter: brightness(0.55);
+        }
+
+        .sp-play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.85);
+            width: 62px;
+            height: 62px;
+            border-radius: 50%;
+            background: rgba(5,5,5,0.75);
+            border: 2px solid #ff2a6d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ff2a6d;
+            font-size: 1.4rem;
+            opacity: 0.9;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .sp-card:hover .sp-play-btn {
+            transform: translate(-50%, -50%) scale(1);
+            box-shadow: 0 0 20px rgba(255,42,109,0.6);
+            opacity: 1;
+        }
+
+        .sp-card iframe {
+            width: 100%;
+            height: 100%;
+            aspect-ratio: 16/9;
+            display: block;
+        }
+
+        .sp-info {
+            padding: 14px 16px;
+        }
+
+        .sp-info h3 {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #fff;
+        }
+
+        .sp-info p {
+            font-size: 0.8rem;
+            color: #ff2a6d;
+            margin-top: 2px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #05d9e8;
+            transition: all 0.25s ease;
+        }
+
+        .back-link:hover {
+            color: #fff;
+            transform: translateX(-4px);
+        }
+
+        /* Filtro */
+        .sp-filter {
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+
+<div class="floating-shape shape-1"></div>
+<div class="floating-shape shape-2"></div>
+
+<!-- Nav simples -->
+<nav class="w-full bg-darker/90 backdrop-blur-sm border-b border-gray-800 sticky top-0 z-40">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+        <a href="index.html" class="flex items-center gap-3">
+            <img src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site/refs/heads/main/LOGOTIPO%20GREYN%20ART%20SITE.png" alt="greyn_art" class="h-9 w-auto">
+        </a>
+        <a href="index.html" class="back-link text-sm font-medium">
+            <i class="fas fa-arrow-left"></i> Back to Portfolio
+        </a>
+    </div>
+</nav>
+
+<!-- Header da página -->
+<header class="container mx-auto px-4 pt-16 pb-10 text-center">
+    <h1 class="text-4xl md:text-5xl font-bold mb-4 neon-text animate__animated animate__fadeIn">Speedpaint Gallery</h1>
+    <p class="text-gray-400 max-w-xl mx-auto">Watch every artwork come to life, from the first line to the final render.</p>
+</header>
+
+<!-- Filtros (opcional, edite as categorias conforme seus vídeos) -->
+<div class="flex flex-wrap justify-center gap-2 mb-12 px-4" id="spFilters">
+    <button class="sp-filter active px-5 py-2 rounded-full text-sm font-medium bg-neonred text-white" data-category="all">All</button>
+    <button class="sp-filter px-5 py-2 rounded-full text-sm font-medium bg-white/5 text-gray-300 hover:bg-white/10 border border-white/10" data-category="fanart">Fanart</button>
+    <button class="sp-filter px-5 py-2 rounded-full text-sm font-medium bg-white/5 text-gray-300 hover:bg-white/10 border border-white/10" data-category="oc">OCs</button>
+    <button class="sp-filter px-5 py-2 rounded-full text-sm font-medium bg-white/5 text-gray-300 hover:bg-white/10 border border-white/10" data-category="commission">Commissions</button>
+</div>
+
+<!-- Grid dos vídeos -->
+<main class="container mx-auto px-4 pb-24">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="spGrid"></div>
+</main>
+
+<footer class="py-8 border-t border-gray-800 text-center text-gray-500 text-sm">
+    © 2025 Greyn Art. All rights reserved.
+</footer>
+
+<script>
+    // ==========================================
+    // 👇 LISTA DE VÍDEOS — edite/adicione aqui
+    // Pegue o ID do YouTube (a parte depois de "v=" ou "embed/")
+    // category deve ser: fanart, oc ou commission
+    // ==========================================
+    const speedpaints = [
+        { id: 'sWN5Io2ks7c', title: 'Bocchi the Rock - Hitori Gotoh', category: 'fanart' },
+        { id: 'sWN5Io2ks7c', title: 'Clara the Summoning - Concept', category: 'oc' },
+        { id: 'sWN5Io2ks7c', title: 'Queen Bee - Helluva Boss', category: 'fanart' },
+    ];
+    // ==========================================
+
+    const grid = document.getElementById('spGrid');
+
+    function renderVideos(filter = 'all') {
+        grid.innerHTML = '';
+        speedpaints
+            .filter(v => filter === 'all' || v.category === filter)
+            .forEach(video => {
+                const card = document.createElement('div');
+                card.className = 'sp-card';
+                card.innerHTML = `
+                    <div class="sp-thumb-wrap" data-id="${video.id}">
+                        <img src="https://img.youtube.com/vi/${video.id}/hqdefault.jpg" alt="${video.title}" loading="lazy">
+                        <div class="sp-play-btn"><i class="fas fa-play"></i></div>
+                    </div>
+                    <div class="sp-info">
+                        <h3>${video.title}</h3>
+                        <p>${video.category.toUpperCase()}</p>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+
+        // Clique no thumbnail troca pelo iframe (carrega o vídeo só quando clicado)
+        document.querySelectorAll('.sp-thumb-wrap').forEach(wrap => {
+            wrap.addEventListener('click', function() {
+                const videoId = this.dataset.id;
+                this.outerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1" title="Speedpaint" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
+            });
+        });
+    }
+
+    renderVideos();
+
+    // Filtro por categoria
+    document.querySelectorAll('.sp-filter').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.sp-filter').forEach(b => {
+                b.classList.remove('active', 'bg-neonred', 'text-white');
+                b.classList.add('bg-white/5', 'text-gray-300', 'border', 'border-white/10');
+            });
+            this.classList.add('active', 'bg-neonred', 'text-white');
+            this.classList.remove('bg-white/5', 'text-gray-300', 'border', 'border-white/10');
+            renderVideos(this.dataset.category);
+        });
+    });
+</script>
+
+</body>
+</html>
