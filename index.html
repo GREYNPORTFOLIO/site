@@ -879,11 +879,92 @@ body.video-gallery-open #musicToggle {
         font-size: 26px;
     }
 }
+
+.ba-slider {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 2500/1710;
+    overflow: hidden;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.1);
+    cursor: ew-resize;
+    user-select: none;
+}
+
+.ba-img-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.ba-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ba-before {
+    z-index: 1;
+}
+
+.ba-after {
+    z-index: 2;
+    clip-path: inset(0 0 0 50%); /* começa mostrando 50% */
+}
+
+.ba-divider {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(180deg, #ff2a6d, #05d9e8);
+    z-index: 3;
+    transform: translateX(-50%);
+    box-shadow: 0 0 10px rgba(255,42,109,0.6);
+}
+
+.ba-handle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 44px;
+    height: 44px;
+    background: #0a0a0a;
+    border: 2px solid #ff2a6d;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ff2a6d;
+    box-shadow: 0 0 10px rgba(255,42,109,0.6);
+}
+
+.ba-label {
+    position: absolute;
+    top: 12px;
+    z-index: 4;
+    background: rgba(5,5,5,0.75);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: white;
+    pointer-events: none;
+}
+
+.ba-label-left { left: 12px; }
+.ba-label-right { right: 12px; }
     </style></head>
 <body>
     
-<!-- Música de fundo --><audio id="bgMusic" loop preload="auto">
-    <source src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site/da35fc0031d57e3dd1925db6e0908df01445ef7e/%E3%80%90Ado%E3%80%91%20%E5%94%B1(MP3_160K).mp3" type="audio/mpeg"> 
+<!-- Música de fundo --><audio id="bgMusic" loop autoplay preload="auto">
+    <source src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site/da35fc0031d57e3dd1925db6e0908df01445ef7e/%E3%80%90Ado%E3%80%91%20%E5%94%B1(MP3_160K).mp3" type="audio/mpeg" > 
 </audio>
 
 <!-- Botão de controle da música -->
@@ -1045,6 +1126,10 @@ body.video-gallery-open #musicToggle {
         Concept Art
     </button>
 </div>
+
+<video autoplay loop muted playsinline>
+    <source src="" type="video/mp4">
+</video>
             
         <!-- Gallery Grid -->
             <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-5 gap-6" id="gallery-grid">
@@ -1057,6 +1142,8 @@ body.video-gallery-open #musicToggle {
                         <p class="text-gray-300 text-sm">BOCCHI THE ROCK</p>
                     </div>
                 </div>
+
+
 
                  <!-- Illustrations  -->
                 <div class="gallery-item illustrations" data-src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/image.png">
@@ -1348,8 +1435,6 @@ body.video-gallery-open #musicToggle {
     </div>
 </div></div>       
 
-</section>
-
 <!-- Art Process Section -->
 <section id="process" class="py-20 bg-darker/50 backdrop-blur-sm">
     <div class="container mx-auto px-4">
@@ -1360,6 +1445,7 @@ body.video-gallery-open #musicToggle {
         
         <div class="max-w-5xl mx-auto">
             <div class="grid md:grid-cols-4 gap-6 process-steps">
+                
                 <!-- Step 1 -->
                 <div class="process-step">
                     <div class="text-neonpink text-4xl mb-4">1</div>
@@ -1399,6 +1485,27 @@ body.video-gallery-open #musicToggle {
         <img src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/220_Sem_Titulo.2025.07.03-05.03.1_20250728165018.jpg" alt="Final Render" class="w-full h-auto rounded-lg">
     </div>
 </div></div>
+
+<!-- Before/After Slider -->
+<div class="mt-14">
+    <h3 class="text-2xl font-bold mb-6 text-center neon-text-blue">See the Full Transformation</h3>
+    <div class="max-w-4xl mx-auto">
+        <div class="ba-slider" id="baSlider1">
+            <div class="ba-img-container">
+                <!-- 👇 TROQUE ESTAS DUAS IMAGENS QUANDO QUISER -->
+                <img src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/220_Sem_Titulo.2025.07.03-05.03.1_20250714145334.png" alt="Before" class="ba-img ba-before">
+                <img src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/220_Sem_Titulo.2025.07.03-05.03.1_20250728165018.jpg" alt="After" class="ba-img ba-after">
+            </div>
+            <div class="ba-divider">
+                <div class="ba-handle">
+                    <i class="fas fa-arrows-alt-h"></i>
+                </div>
+            </div>
+            <span class="ba-label ba-label-left">BEFORE</span>
+            <span class="ba-label ba-label-right">AFTER</span>
+        </div>
+    </div>
+</div>
 
 <div class="mt-12 bg-gray-900/50 p-6 rounded-lg">
     <h3 class="text-2xl font-bold mb-4 text-neonblue">Techniques & Tools</h3>
@@ -2355,6 +2462,19 @@ musicToggle.addEventListener('click', function() {
     }
 });
 
+// Inicia a música no primeiro clique em qualquer lugar da página
+let musicStarted = false;
+document.addEventListener('click', function() {
+    if (!musicStarted) {
+        bgMusic.play().then(() => {
+            isPlaying = true;
+            musicIcon.classList.remove('fa-music');
+            musicIcon.classList.add('fa-pause');
+            musicStarted = true;
+        }).catch(err => console.log('Erro ao tocar música:', err));
+    }
+}, { once: true });
+
        // ========== GALERIA DE VÍDEOS ==========
 const openVideoGallery = document.getElementById('openVideoGallery');
 const closeVideoGallery = document.getElementById('closeVideoGallery');
@@ -2397,4 +2517,43 @@ document.addEventListener('keydown', (e) => {
         closeVideoModal();
     }
 });
+
+// ========== BEFORE/AFTER SLIDER ==========
+function initBaSlider(id) {
+    const slider = document.getElementById(id);
+    if (!slider) return;
+
+    const afterImg = slider.querySelector('.ba-after');
+    const divider = slider.querySelector('.ba-divider');
+    let isDragging = false;
+
+    function updateSlider(clientX) {
+        const rect = slider.getBoundingClientRect();
+        let percent = ((clientX - rect.left) / rect.width) * 100;
+        percent = Math.max(0, Math.min(100, percent));
+        afterImg.style.clipPath = `inset(0 0 0 ${percent}%)`;
+        divider.style.left = `${percent}%`;
+    }
+
+    slider.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        updateSlider(e.clientX);
+    });
+    document.addEventListener('mousemove', (e) => {
+        if (isDragging) updateSlider(e.clientX);
+    });
+    document.addEventListener('mouseup', () => isDragging = false);
+
+    // Touch (mobile)
+    slider.addEventListener('touchstart', (e) => {
+        isDragging = true;
+        updateSlider(e.touches[0].clientX);
+    });
+    slider.addEventListener('touchmove', (e) => {
+        if (isDragging) updateSlider(e.touches[0].clientX);
+    });
+    slider.addEventListener('touchend', () => isDragging = false);
+}
+
+initBaSlider('baSlider1');
 </script>
