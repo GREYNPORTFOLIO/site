@@ -1000,6 +1000,109 @@ body.video-gallery-open #musicToggle {
 .main-speedpaint-player video::-webkit-media-controls-panel {
     background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.6));
 }
+
+/* Tag estilo Skilltree — faixa / washi tape */
+.hero-tag {
+    display: inline-block;
+    margin: 0 0 14px;
+    padding: 8px 18px;
+    font-family: "Exo 2", sans-serif;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #1a1a1a;
+    background: #13bf9a; /* rosa da faixa */
+    border: none;
+    border-radius: 2px;
+    box-shadow: none;
+    transform: rotate(-2deg); /* leve inclinação da fita */
+    line-height: 1.2;
+}
+
+:root {
+    --text-cream: #f3edd8;
+}
+
+body {
+    color: var(--text-cream) !important;
+}
+
+/* Sobrescreve text-white / cinzas claros do Tailwind */
+.text-white,
+.text-gray-100,
+.text-gray-200,
+.text-gray-300 {
+    color: var(--text-cream) !important;
+}
+
+/* Títulos e textos gerais */
+h1, h2, h3, h4, h5, h6,
+p, span, li, label, a {
+    color: inherit;
+}
+
+/* Captions da galeria */
+.gallery-caption p,
+.gallery-caption .text-white,
+.gallery-caption .text-gray-300 {
+    color: var(--text-cream) !important;
+}
+
+/* Mantém os neons intactos */
+.text-neonpink,
+.text-neonblue,
+.text-neonpurple,
+.text-neonred,
+.neon-text,
+.neon-text-blue,
+.neon-text-purple {
+    /* não força creme aqui — deixa as cores neon */
+}
+
+.neon-text { color: #ff2a6d !important; }
+.neon-text-blue { color: #05d9e8 !important; }
+.neon-text-purple { color: #d300c5 !important; }
+
+.pain-strip {
+    display: block;
+    width: 100%;
+    background: #0a0a0a;
+    color: #f3edd8;
+    padding: 14px 20px;
+    border: 1px solid rgba(255, 42, 109, 0.25);
+    box-shadow: 4px 4px 0 rgba(255, 42, 109, 0.35);
+    clip-path: polygon(
+        0 6%, 2% 0, 98% 2%, 100% 8%,
+        99% 92%, 100% 100%, 2% 98%, 0 94%
+    );
+}
+
+.pain-strip--offset {
+    margin-left: 1.25rem;
+    width: calc(100% - 1.25rem);
+}
+
+@media (max-width: 640px) {
+    .pain-strip--offset {
+        margin-left: 0;
+        width: 100%;
+    }
+}
+
+.pain-strip p {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.35;
+}
+
+.pain-x {
+    text-decoration: line-through;
+    text-decoration-color: #ff003c;
+    text-decoration-thickness: 3px;
+    color: rgba(243, 237, 216, 0.85);
+}
     </style>
   </head>
 <body>
@@ -1091,8 +1194,9 @@ body.video-gallery-open #musicToggle {
             </div>
             
             <div class="flex-grow">
-                <h1 class="text-4xl md:text-5xl font-bold mb-2">Greyn Art</h1>
-                <p class="text-lg text-gray-300 mb-4">Freelance Digital Illustrator specializing in expressive character design and vibrant environments, with additional expertise in Live2D animation and 3D art.</p>
+            <p class="hero-tag">Open for commissions · Digital illustrator · 2026</p>
+              <h1  class="text-4xl md:text-5xl font-bold mb-2">GREYN ART</h1>
+                <p class="text-xl md:text-xl text-gray-300 mb-4 leading-relaxed">Freelance Digital Illustrator specializing in expressive character design and vibrant environments, with additional expertise in Live2D animation and 3D art.</p>
                 
                 <div class="profile-stats">
 <div class="stat-item">
@@ -1142,11 +1246,11 @@ body.video-gallery-open #musicToggle {
 </section>
 
 <!-- Gallery Section -->
-<section id="gallery" class="py-10 sm:py-16 bg-darker/50 backdrop-blur-sm px-2 sm:px-4">
+<section id="gallery" class="py-10 sm:py-16 bg-darker/50 backdrop-blur-sm px- sm:px-4">
     <div class="container mx-auto px-4">
         <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold mb-4 neon-text animate__animated animate__fadeIn">Gallery</h2>
-            <p class="text-gray-400 max-w-2xl mx-auto">Explore my portfolio of digital illustrations, fanarts and commissions</p>
+            <h2 class="text-4xl font-bold mb-5 text-neoink animate__animated animate__fadeIn">GALLERY</h2>
+            <p class="text-gray-400 max-w-2x1 mx-auto">Explore my portfolio of digital illustrations, fanarts and commissions</p>
             <p class="text-gray-400">Browse through my selected works</p>
         </div>
         
@@ -1429,7 +1533,7 @@ body.video-gallery-open #musicToggle {
     <div class="container mx-auto px-4">
 
     <div class="text-center mb-10">
-        <h2 class="text-3xl font-bold mb-4 neon-text">Speedpaint</h2>
+        <h2 class="text-4xl font-bold mb-4 nen-text">SPEEDPAINT</h2>
         <p class="text-gray-400 max-w-2xl mx-auto">
             Watch the artwork come to life.
         </p>
@@ -1463,7 +1567,7 @@ body.video-gallery-open #musicToggle {
 <section id="process" class="py-20 bg-darker/50 backdrop-blur-sm">
     <div class="container mx-auto px-4">
         <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold mb-4 neon-text animate__animated animate__fadeIn">Creative Process</h2>
+            <h2 class="text-4xl font-bold mb-4 nen-text animate__animated animate__fadeIn">CREATIVE PROCESS</h2>
             <p class="text-gray-400 max-w-2xl mx-auto">From initial sketch to finished artwork</p>
         </div>
         
@@ -1512,7 +1616,7 @@ body.video-gallery-open #musicToggle {
 
 <!-- Before/After Slider -->
 <div class="mt-14">
-    <h3 class="text-2xl font-bold mb-6 text-center neon-text-blue">See the Full Transformation</h3>
+    <h3 class="text-4xl font-bold mb-6 text-center non-text-blue">SEE THE FULL TRASFORMATION</h3>
     <div class="max-w-4xl mx-auto">
         <div class="ba-slider" id="baSlider1">
             <div class="ba-img-container">
@@ -1564,7 +1668,7 @@ body.video-gallery-open #musicToggle {
 <section id="about" class="py-20 relative">
     <div class="container mx-auto px-4">
         <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold mb-4 neon-text animate__animated animate__fadeIn">About the Artist</h2>
+            <h2 class="text-4xl font-bold mb-4 non-text animate__animated animate__fadeIn">ABOUT THE ARTIST</h2>
             <p class="text-gray-400 max-w-2xl mx-auto">Learn more about me and my creative process</p>
         </div>
         
@@ -1640,7 +1744,7 @@ body.video-gallery-open #musicToggle {
 <section id="commissions" class="py-20 bg-darker/50 backdrop-blur-sm">
     <div class="container mx-auto px-4">
         <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold mb-4 neon-text animate__animated animate__fadeIn">Commissions</h2>
+            <h2 class="text-4xl font-bold mb-4 nen-text animate__animated animate__fadeIn">COMMISSIONS</h2>
             <p class="text-gray-400 max-w-2xl mx-auto">Order your custom artwork</p>
             <p class="text-gray-500 text-sm mt-2">Prices below are adjustable based on details, complexity or deadline. For an exact quote, please contact me.</p>
         </div>
@@ -1806,85 +1910,84 @@ body.video-gallery-open #musicToggle {
 <section id="contact" class="py-20 relative">
     <div class="container mx-auto px-4">
         <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold mb-4 neon-text animate__animated animate__fadeIn">Contact</h2>
-            <p class="text-gray-400 max-w-2xl mx-auto">Get in touch for commissions or collaborations</p>
+            <h2 class="text-3xl font-bold mb-4">Contact</h2>
+            <p class="text-gray-400 max-w-xl mx-auto">Get in touch for commissions or collaborations</p>
         </div>
-        
-        <div class="max-w-2xl mx-auto">
-            <form id="contactForm" action="https://formspree.io/f/mzzrrylk" method="POST" class="space-y-6 mb-12 animate__animated animate__fadeIn">
-                <div>
-                    <label for="name" class="block text-gray-300 mb-2">Name *</label>
-                    <input type="text" id="name" name="name" required class="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-neonpink">
-                </div>
-                
-                <div>
-                    <label for="email" class="block text-gray-300 mb-2">Email *</label>
-                    <input type="email" id="email" name="email" required class="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-neonpink">
-                </div>
-                
-                <div>
-<label for="subject" class="block text-gray-300 mb-2">Subject</label>
 
-<select id="subject" name="subject"
-    class="w-full px-4 py-3 rounded-lg bg-block text-white border border-gray-700 focus:ring-2 focus:ring-neonpink">
-    
-    <option value="commission" class="bg-black text-white">Commission</option>
-    <option value="collab" class="bg-black text-white">Collaboration</option>
-    <option value="other" class="bg-black text-white">Other</option>
-    
-</select></div>
-                    
-                <div>
-                    <label for="message" class="block text-gray-300 mb-2">Message *</label>
-                    <textarea id="message" name="message" rows="5" required class="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-neonpink"></textarea>
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start max-w-6xl mx-auto">
+
+            <!-- ESQUERDA: formulário -->
+            <div>
+                <form id="contactForm" action="https://formspree.io/f/mzzrrylk" method="POST" class="space-y-6">
+                    <div>
+                        <label for="name" class="block text-gray-300 mb-2">Name *</label>
+                        <input type="text" id="name" name="name" required class="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-neonpink">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-gray-300 mb-2">Email *</label>
+                        <input type="email" id="email" name="email" required class="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-neonpink">
+                    </div>
+                    <div>
+                        <label for="subject" class="block text-gray-300 mb-2">Subject</label>
+                        <select id="subject" name="subject"
+                            class="w-full px-4 py-3 rounded-lg bg-black text-white border border-gray-700 focus:ring-2 focus:ring-neonpink">
+                            <option value="commission">Commission</option>
+                            <option value="collab">Collaboration</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="message" class="block text-gray-300 mb-2">Message *</label>
+                        <textarea id="message" name="message" rows="5" required class="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-neonpink"></textarea>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="agree" name="agree" required class="mr-2 rounded focus:ring-neonpink">
+                        <label for="agree" class="text-gray-300 text-sm">I agree with the Terms of Service and Privacy Policy</label>
+                    </div>
+                    <button type="submit" class="w-full bg-neonred hover:bg-neonpink text-white font-bold py-3 px-6 rounded-full transition duration-300 neon-border flex items-center justify-center">
+                        <span id="submitText">Send Message</span>
+                        <i class="fas fa-paper-plane ml-2" id="submitIcon"></i>
+                        <i class="fas fa-spinner fa-spin ml-2 hidden" id="submitSpinner"></i>
+                    </button>
+                </form>
+
+                <div class="mt-10">
+                    <h3 class="text-xl font-bold mb-4 text-neonpink">Or find me on social media</h3>
+                    <div class="flex flex-wrap gap-5">
+                        <a href="https://instagram.com/greyn_art" target="_blank" class="social-icon text-2xl text-neonpink hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="https://twitter.com/greyn_art" target="_blank" class="social-icon text-2xl text-neonblue hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="https://discord.com/users/565679376646012928" target="_blank" class="social-icon text-2xl text-indigo-400 hover:text-white"><i class="fab fa-discord"></i></a>
+                        <a href="https://www.artstation.com/greynn" target="_blank" class="social-icon text-2xl text-sky-400 hover:text-white"><i class="fab fa-artstation"></i></a>
+                        <a href="https://www.reddit.com/user/Glad-Stress8327/" target="_blank" class="social-icon text-2xl text-orange-400 hover:text-white"><i class="fab fa-reddit-alien"></i></a>
+                    </div>
+                    <p class="mt-4 text-gray-400 text-sm">
+                        Direct email: <a href="mailto:greyenm@gmail.com" class="text-neonblue hover:underline">greyenm@gmail.com</a>
+                    </p>
                 </div>
-                
-                <div class="flex items-center">
-                    <input type="checkbox" id="agree" name="agree" required class="mr-2 rounded focus:ring-neonpink">
-                    <label for="agree" class="text-gray-300 text-sm">I agree with the Terms of Service and Privacy Policy</label>
+            </div>
+
+            <!-- DIREITA: pain strips -->
+            <div class="lg:pt-2">
+                <p class="text-sm uppercase tracking-widest text-neonpink mb-4 font-semibold">Still deciding?</p>
+                <h3 class="text-2xl font-bold mb-6 text-[#f3edd8]">Common doubts before commissioning</h3>
+
+                <div class="space-y-5">
+                    <div class="pain-strip">
+                        <p><span class="pain-x">Don't know</span> which type of commission to order</p>
+                    </div>
+                    <div class="pain-strip pain-strip--offset">
+                        <p>Worried the art <span class="pain-x">won't match</span> your character</p>
+                    </div>
+                    <div class="pain-strip">
+                        <p><span class="pain-x">No clear idea</span> of price or deadline</p>
+                    </div>
                 </div>
-                
-                <button type="submit" class="w-full bg-neonred hover:bg-neonpink text-white font-bold py-3 px-6 rounded-full transition duration-300 neon-border hover:animate-pulse flex items-center justify-center">
-                    <span id="submitText">Send Message</span>
-                    <i class="fas fa-paper-plane ml-2" id="submitIcon"></i>
-                    <i class="fas fa-spinner fa-spin ml-2 hidden" id="submitSpinner"></i>
-                </button>
-            </form>
-            
-            <div class="text-center animate__animated animate__fadeIn animate__delay-1s">
-                <h3 class="text-xl font-bold mb-4 text-neonpink">Or find me on social media</h3>
-                
-                <div class="flex justify-center space-x-6">
-                    <a href="https://instagram.com/greyn_art" target="_blank" class="social-icon text-3xl text-neonpink hover:text-white tooltip">
-                        <i class="fab fa-instagram"></i>
-                        <span class="tooltip-text">Instagram</span>
-                    </a>
-                    <a href="https://twitter.com/greyn_art" target="_blank" class="social-icon text-3xl text-neonblue hover:text-white tooltip">
-                        <i class="fab fa-twitter"></i>
-                        <span class="tooltip-text">Twitter</span>
-                    </a>
-                    <a href="https://discord.com/users/565679376646012928" target="_blank" class="social-icon text-3xl text-indigo-400 hover:text-white tooltip">
-                        <i class="fab fa-discord"></i>
-                        <span class="tooltip-text">Discord</span>
-                    </a>
-                    <a href="" target="_blank" class="social-icon text-3xl text-amber-400 hover:text-white tooltip">
-                        <i class="fab fa-patreon"></i>
-                        <span class="tooltip-text">Patreon</span>
-                    </a>
-                    <a href="https://www.artstation.com/greynn" target="_blank" class="social-icon text-3xl text-sky-400 hover:text-white tooltip">
-                        <i class="fab fa-artstation"></i>
-                        <span class="tooltip-text">ArtStation</span>
-                    </a>
-                     <a href="https://www.reddit.com/user/Glad-Stress8327/" target="_blank" class="social-icon text-3xl text-orange-400 hover:text-white tooltip">
-                    <i class="fab fa-reddit-alien"></i>
-                        <span class="tooltip-text">Reddit</span>
-                     </a>
-                </div>
-                
-                <p class="mt-6 text-gray-400">
-                    Direct email: <a href="mailto:greyenm@gmail.com" class="text-neonblue hover:underline">greyenm@gmail.com</a>
+
+                <p class="mt-8 text-gray-300 text-sm leading-relaxed">
+                    Just send a message — we figure out the package, references and deadline together.
                 </p>
             </div>
+
         </div>
     </div>
 </section>
