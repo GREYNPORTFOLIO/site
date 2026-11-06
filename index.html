@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Familjen+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/icone%20greyn%20chibi%20hyper%20simples.jpg">
     <meta charset="UTF-8">
@@ -36,7 +37,7 @@
                         darkest: '#010101',
                         neonpink: '#ff2a6d',
                         neonred: '#ff003c',
-                        neonblue: '#05d9e8',
+                        neonblue: '#00ffcc',
                         neonpurple: '#d300c5',
                     },
                     fontFamily: {
@@ -74,6 +75,7 @@
     body {
         background-color: #0a0a0a;
         color: #f1f1f1;
+        
         scroll-behavior: smooth;
         overflow-x: hidden;
     }
@@ -83,7 +85,7 @@
     }
     
     .neon-text-blue {
-        text-shadow: 0 0 5px #05d9e8, 0 0 10px #05d9e8;
+        text-shadow: 0 0 5px #00ffcc, 0 0 10px #00ffcc;
     }
     
     .neon-text-purple {
@@ -95,7 +97,7 @@
     }
     
     .neon-border-blue {
-        box-shadow: 0 0 5px #05d9e8, 0 0 10px #05d9e8;
+        box-shadow: 0 0 5px #00ffcc, 0 0 10px #00ffcc;
     }
     
     .neon-hover:hover {
@@ -219,7 +221,7 @@ transition: opacity 0.3s ease;
     .section-divider {
         border: none;
         height: 1px;
-        background: linear-gradient(90deg, transparent, #ff2a6d, #05d9e8, transparent);
+        background: linear-gradient(90deg, transparent, #ff2a6d, #00ffcc, transparent);
         margin: 60px auto;
         width: 80%;
     }
@@ -249,7 +251,7 @@ transition: opacity 0.3s ease;
         height: 2px;
         bottom: -2px;
         left: 0;
-        background: linear-gradient(90deg, #ff2a6d, #05d9e8);
+        background: linear-gradient(90deg, #ff2a6d, #00ffcc);
         transition: width 0.3s ease;
     }
     
@@ -263,13 +265,12 @@ transition: opacity 0.3s ease;
         left: 0;
         width: 100%;
         height: 4px;
-        background: transparent;
         z-index: 100;
     }
     
     .progress-bar {
         height: 4px;
-        background: linear-gradient(90deg, #ff2a6d, #05d9e8);
+        background: linear-gradient(90deg, #ff2a6d, #00ffcc);
         width: 0%;
         transition: width 0.1s ease;
     }
@@ -321,7 +322,7 @@ transition: opacity 0.3s ease;
     .shape-2 {
         width: 400px;
         height: 400px;
-        background: #05d9e8;
+        background: #00ffcc;
         bottom: 10%;
         right: 5%;
         animation: float 10s ease-in-out infinite reverse;
@@ -423,7 +424,7 @@ transition: opacity 0.3s ease;
         left: 0;
         width: 4px;
         height: 0;
-        background: linear-gradient(to bottom, #ff2a6d, #05d9e8);
+        background: linear-gradient(to bottom, #ff2a6d, #00ffcc);
         transition: height 0.5s ease;
     }
     
@@ -498,7 +499,7 @@ transition: opacity 0.3s ease;
     }
     
     .commission-status.open {
-        border-color: #05d9e8;
+        border-color: #00ffcc;
         box-shadow: 0 0 10px rgba(5, 217, 232, 0.5);
     }
     
@@ -510,8 +511,8 @@ transition: opacity 0.3s ease;
     }
     
     .status-dot.open {
-        background-color: #05d9e8;
-        box-shadow: 0 0 10px #05d9e8;
+        background-color: #00ffcc;
+        box-shadow: 0 0 10px #00ffcc;
     }
     
     .status-dot.closed {
@@ -590,7 +591,7 @@ transition: opacity 0.3s ease;
     }
     
     .dos-box {
-        border-left: 4px solid #05d9e8;
+        border-left: 4px solid #00ffcc;
         padding-left: 15px;
     }
     
@@ -599,7 +600,7 @@ transition: opacity 0.3s ease;
     }
     
     .dos-title {
-        color: #05d9e8;
+        color: #00ffcc;
     }
     
     .donts-item::before {
@@ -610,7 +611,7 @@ transition: opacity 0.3s ease;
     
     .dos-item::before {
         content: '✓';
-        color: #05d9e8;
+        color: #00ffcc;
         margin-right: 8px;
     }
     
@@ -921,7 +922,7 @@ body.video-gallery-open #musicToggle {
     left: 50%;
     width: 3px;
     height: 100%;
-    background: linear-gradient(180deg, #ff2a6d, #05d9e8);
+    background: linear-gradient(180deg, #ff2a6d, #00ffcc);
     z-index: 3;
     transform: translateX(-50%);
     box-shadow: 0 0 10px rgba(255,42,109,0.6);
@@ -978,7 +979,7 @@ body.video-gallery-open #musicToggle {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(5, 5, 5, 0.75); /* ajuste esse número (0 a 1) pra deixar mais claro ou mais escuro */
+    background: rgba(2, 2, 2, 0.88); /* ajuste esse número (0 a 1) pra deixar mais claro ou mais escuro */
     z-index: -1;
     pointer-events: none;
 }
@@ -1061,7 +1062,7 @@ p, span, li, label, a {
 }
 
 .neon-text { color: #ff2a6d !important; }
-.neon-text-blue { color: #05d9e8 !important; }
+.neon-text-blue { color: #00ffcc !important; }
 .neon-text-purple { color: #d300c5 !important; }
 
 .pain-strip {
@@ -1102,6 +1103,462 @@ p, span, li, label, a {
     text-decoration-color: #ff003c;
     text-decoration-thickness: 3px;
     color: rgba(243, 237, 216, 0.85);
+}
+
+/* ===== COMMISSION CARDS (versão final) ===== */
+.commission-card {
+    border-radius: 4px;
+    overflow: hidden; /* cantos limpos; badge fica DENTRO */
+    transition: all 0.3s ease;
+    background: linear-gradient(145deg, rgba(10,10,10,0.8) 0%, rgba(5,5,5,0.9) 100%);
+    border: 1px solid rgba(255,255,255,0.05);
+    position: relative;
+}
+
+.commission-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(255,42,109,0.2);
+    border-color: rgba(255,42,109,0.3);
+}
+
+.commission-card.featured {
+    border: 1px solid rgba(255,42,109,0.5);
+}
+
+.commission-card-art {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: #111;
+}
+
+.commission-card-art img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.45s ease;
+}
+
+.commission-card:hover .commission-card-art img {
+    transform: scale(1.06);
+}
+
+/* POPULAR — dentro da arte, sem cortar */
+.popular-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 5;
+    background: #ff2a6d;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 5px 12px;
+    border-radius: 4px;
+    pointer-events: none;
+    box-shadow: 0 2px 8px rgba(255, 42, 109, 0.45);
+}
+
+/* desliga a faixa diagonal antiga */
+.commission-card.featured::before {
+    content: none !important;
+    display: none !important;
+}
+
+/* ===== PROJETOS — igual Skilltree ===== */
+.projects-section {
+    padding: 80px 0;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 10px;
+    align-items: stretch;
+}
+
+@media (max-width: 768px) {
+    .projects-grid {
+        gap: 8px;
+        padding: 0 8px;
+    }
+    .project-torn {
+        padding: 28px 10px 16px;
+        min-height: 0;
+        gap: 9px;
+    }
+    .project-number { font-size: 1.6rem; }
+    .project-title { font-size: 0.75rem; }
+    .project-desc {
+        font-size: 0.65rem;
+        line-height: 1.35;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    .project-date { font-size: 0.55rem; }
+    .project-date strong { font-size: 0.85rem; }
+    .project-live { font-size: 0.5rem; padding: 2px 5px; }
+    .project-footer { font-size: 0.55rem; padding-top: 8px; }
+    .project-footer span { font-size: 0.7rem; }
+    .project-tape {
+        width: 56px;
+        height: 16px;
+        margin-left: -28px;
+        top: -8px;
+    }
+    .project-media {
+        margin: -4px -4px 4px;
+        border-width: 1.5px;
+    }
+    .project-card {
+        transform: none !important;
+    }
+}
+
+.project-card {
+    position: relative;
+    transform: rotate(var(--r, 0deg));
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    filter: drop-shadow(0 8px 0 rgba(0, 0, 0, 0.25));
+}
+
+.project-card:hover {
+    transform: rotate(0deg) translateY(-8px);
+}
+
+/* Fita washi (largura da Skilltree) */
+.project-tape {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    width: 112px;
+    height: 30px;
+    margin-left: -56px;
+    z-index: 5;
+    pointer-events: none;
+    clip-path: polygon(
+        3% 8%, 22% 0, 48% 10%, 72% 2%, 97% 9%,
+        100% 92%, 76% 100%, 50% 91%, 25% 100%, 0 90%
+    );
+    transform: rotate(-3deg);
+}
+
+.project-tape.pink   { background: rgba(247, 170, 224, 0.92); }
+.project-tape.yellow { background: rgba(255, 217, 23, 0.92); transform: rotate(2.5deg); }
+.project-tape.purple { background: rgba(201, 160, 255, 0.92); transform: rotate(-1.5deg); }
+
+/* Papel rasgado — alto como o da Skilltree */
+.project-torn {
+    position: relative;
+    background: #291f24;
+    color: #f3edd8;
+    padding: 38px 26px 30px;
+    min-height: 520px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    /* borda irregular top + bottom */
+    clip-path: polygon(
+        0% 8px, 4% 2px, 8% 10px, 12% 1px, 16% 9px, 20% 3px, 24% 11px, 28% 2px,
+        32% 8px, 36% 1px, 40% 10px, 44% 3px, 48% 9px, 52% 2px, 56% 11px, 60% 1px,
+        64% 8px, 68% 3px, 72% 10px, 76% 2px, 80% 9px, 84% 1px, 88% 11px, 92% 3px,
+        96% 8px, 100% 2px,
+        100% calc(100% - 10px), 96% calc(100% - 2px), 92% calc(100% - 11px),
+        88% calc(100% - 3px), 84% calc(100% - 9px), 80% calc(100% - 1px),
+        76% calc(100% - 10px), 72% calc(100% - 2px), 68% calc(100% - 8px),
+        64% calc(100% - 1px), 60% calc(100% - 11px), 56% calc(100% - 3px),
+        52% calc(100% - 9px), 48% calc(100% - 2px), 44% calc(100% - 10px),
+        40% calc(100% - 1px), 36% calc(100% - 8px), 32% calc(100% - 3px),
+        28% calc(100% - 11px), 24% calc(100% - 2px), 20% calc(100% - 9px),
+        16% calc(100% - 1px), 12% calc(100% - 10px), 8% calc(100% - 3px),
+        4% calc(100% - 8px), 0% calc(100% - 2px)
+    );
+}
+
+/* Imagem com borda preta, como .media da Skilltree */
+.project-media {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border: 2px solid #111;
+    background: #111;
+    margin: -8px -8px 6px;
+}
+
+.project-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.project-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.project-number {
+    font-size: clamp(48px, 4.5vw, 64px);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: #111;
+}
+
+.project-date {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #333;
+    gap: 2px;
+    padding-top: 8px;
+}
+
+.project-date strong {
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: 0.04em;
+}
+
+.project-live {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    align-self: flex-start;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: #ff4f2e;
+    color: #fff;
+    padding: 4px 8px;
+}
+
+.project-live::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #fff;
+}
+
+.project-title {
+    font-size: clamp(24px, 2.2vw, 30px);
+    font-weight: 900;
+    line-height: 1;
+    text-transform: uppercase;
+    margin: 0;
+    color: #111;
+}
+
+.project-desc {
+    font-size: 15px;
+    line-height: 1.5;
+    color: #222;
+    margin: 0;
+    flex-grow: 1;
+}
+
+.project-footer {
+    margin-top: auto;
+    padding-top: 14px;
+    border-top: 1.5px dashed #111;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #444;
+}
+
+.project-footer span {
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: 0;
+    text-transform: none;
+    color: #111;
+}
+
+@media (max-width: 899px) {
+    .project-card {
+        max-width: 420px;
+        margin-inline: auto;
+        transform: none !important;
+    }
+    .project-torn {
+        min-height: 0;
+    }
+}
+
+/* seções totalmente transparentes */
+#gallery,
+#speedpaint,
+#commissions,
+#process,
+#about,
+section#gallery,
+section#speedpaint,
+section#commissions {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+}
+
+#gallery > div,
+#speedpaint > div,
+#commissions > div,
+#gallery .container,
+#speedpaint .container,
+#commissions .container {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+/* ===== SEÇÕES ESTILO PAPEL ===== */
+.paper-sec{
+  background:transparent;
+  color:#f3edd8;
+  font-family:"Familjen Grotesk",sans-serif;
+  padding:clamp(64px,8vw,112px) 0;
+  position:relative;
+}
+.paper-sec *{box-sizing:border-box}
+.paper-wrap{max-width:1240px;margin:0 auto;padding:0 clamp(16px,4vw,56px)}
+.paper-title{
+  font-family:"Anton",Impact,sans-serif;font-weight:400;text-transform:uppercase;
+  line-height:.95;font-size:clamp(36px,4.6vw,66px);color:#f3edd8;margin:0;text-wrap:balance;
+}
+
+/* --- grid de 5 cards --- */
+.who-head{text-align:center;margin-bottom:clamp(36px,5vw,72px)}
+.who-grid{
+  display:grid;grid-template-columns:repeat(6,minmax(0,1fr));
+  gap:clamp(20px,2.4vw,32px);list-style:none;margin:0 auto;padding:0 clamp(16px,4vw,56px);max-width:1240px;
+}
+.who-card{grid-column:span 2;display:flex;flex-direction:column;gap:10px;min-width:0}
+.who-card:nth-child(4){grid-column:2 / span 2}
+.who-card:nth-child(5){grid-column:4 / span 2}
+.who-img{position:relative;display:block;aspect-ratio:16/10;overflow:hidden;border:2px solid #f3edd8;background:#000}
+.who-img img{width:100%;height:100%;object-fit:cover;display:block}
+.img-tag{
+  position:absolute;left:8px;top:8px;z-index:2;background:#000;color:#f3edd8;
+  font-size:13px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+  padding:5px 9px;line-height:1.1;
+}
+.who-n{font-family:"Anton",Impact,sans-serif;font-size:28px;line-height:1;margin-top:6px}
+.who-card p{font-size:18px;font-weight:600;line-height:1.3;max-width:30ch;margin:0}
+@media (max-width:860px){
+  .who-grid{grid-template-columns:1fr 1fr}
+  .who-card,.who-card:nth-child(4),.who-card:nth-child(5){grid-column:auto}
+}
+@media (max-width:520px){.who-grid{grid-template-columns:1fr}}
+
+/* --- papel rasgado + fita --- */
+.torn-wrap{position:relative;filter:drop-shadow(0 6px 0 rgba(0,0,0,.35))}
+.paper-sec .tape{
+  position:absolute;width:112px;height:30px;z-index:3;pointer-events:none;
+  clip-path:polygon(3% 8%,22% 0,48% 10%,72% 2%,97% 9%,100% 92%,76% 100%,50% 91%,25% 100%,0 90%);
+}
+.tape--y{background:rgba(255,217,23,.9)}
+.tape--p{background:rgba(247,170,224,.9)}
+
+/* --- bloco "quem está por trás" --- */
+.about-grid{
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);
+  gap:clamp(36px,6vw,96px);align-items:center;
+}
+.about-paper{transform:rotate(.8deg)}
+.about-paper .torn{
+  background:#EEE7C4;color:#000;padding:clamp(26px,3vw,40px);
+  font-size:clamp(17px,1.4vw,20px);line-height:1.55;font-weight:500;
+}
+.about-paper .torn p{margin:0}
+.about-paper .torn p + p{margin-top:1em}
+.about-paper .tape{top:-14px;left:12%;transform:rotate(-6deg)}
+.grifo{
+  background:linear-gradient(#FFD917,#FFD917) no-repeat 0 78% / 100% 62%;
+  font-weight:700;
+}
+.about-strip{grid-column:1 / -1;transform:rotate(-.6deg);margin:clamp(12px,2vw,24px) 0 0}
+.about-strip .torn{background:#FDFCF6;padding:14px}
+.about-strip img{display:block;width:100%;height:auto}
+.about-strip .tape{top:-12px;right:14%;transform:rotate(4deg)}
+.about-strip figcaption{
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px 16px;margin-top:12px;
+  font-size:14.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#000;
+}
+@media (max-width:860px){.about-grid{grid-template-columns:1fr}}
+
+/* texto creme nos cards de Projects */
+.project-number,
+.project-title,
+.project-desc,
+.project-date,
+.project-date strong,
+.project-footer,
+.project-footer span,
+.project-live {
+    color: #f3edd8 !important;
+}
+
+/* ===== LIGHTBOX COM PROCESSO ===== */
+.lightbox-scroll{
+  width:100%;height:100%;overflow-y:auto;overflow-x:hidden;
+  scroll-behavior:smooth;overscroll-behavior:contain;
+  scrollbar-width:thin;scrollbar-color:#ff2a6d transparent;
+}
+.lb-stage{
+  position:relative;width:100%;height:100vh;height:100dvh;
+  display:flex;align-items:center;justify-content:center;overflow:hidden;
+}
+.lb-hint{
+  position:absolute;left:50%;bottom:22px;transform:translateX(-50%);z-index:5;
+  display:none;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;
+  background:rgba(0,0,0,.75);border:1px solid rgba(255,42,109,.6);color:#f3edd8;
+  font-size:13px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+  cursor:pointer;animation:lbBounce 1.8s ease-in-out infinite;
+}
+.lb-hint:hover{background:rgba(255,42,109,.8)}
+@keyframes lbBounce{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,6px)}}
+
+.lb-process{display:none;max-width:1000px;margin:0 auto;padding:70px 16px 110px}
+.lb-process-title{
+  font-size:clamp(28px,4vw,44px);font-weight:900;text-transform:uppercase;
+  text-align:center;margin:0 0 40px;color:#f3edd8;
+}
+.lb-step{margin:0 0 48px}
+.lb-step figcaption{
+  display:inline-block;margin-bottom:12px;padding:5px 14px;border-radius:999px;
+  background:linear-gradient(135deg,#ff2a6d,#d300c5);color:#fff;
+  font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+}
+.lb-step img{
+  display:block;width:100%;height:auto;border-radius:10px;
+  border:1px solid rgba(255,255,255,.1);
+}
+
+/* selo "Process" nos cards da galeria */
+.process-badge{
+  position:absolute;top:12px;left:12px;z-index:50;display:flex;align-items:center;gap:5px;
+  padding:4px 10px;border-radius:20px;background:rgba(5,5,5,.8);
+  border:1px solid rgba(0,255,204,.5);color:#00ffcc;
+  font-size:11px;font-weight:700;letter-spacing:.5px;pointer-events:none;
 }
     </style>
   </head>
@@ -1204,11 +1661,11 @@ p, span, li, label, a {
     <div class="stat-label">Years of experience</div>
 </div>
 <div class="stat-item">
-    <div class="stat-number" data-target="45">0</div>
+    <div class="stat-number" data-target="72">0</div>
     <div class="stat-label">Artworks created</div>
 </div>
 <div class="stat-item">
-    <div class="stat-number" data-target="32">0</div>
+    <div class="stat-number" data-target="48">0</div>
     <div class="stat-label">Satisfied clients</div>
 </div></div>
                     
@@ -1243,6 +1700,132 @@ p, span, li, label, a {
 <a href="https://www.reddit.com/user/Glad-Stress8327/" target="_blank" class="social-icon text-2xl text-orange-500 hover:text-white tooltip">
     <i class="fab fa-reddit-alien"></i>
 </a></div>
+</section>
+
+<section id="projects" class="projects-section">
+    <div class="container mx-auto px-4 mb-12 text-center">
+        <p class="text-sm uppercase tracking-widest text-neonpink mb-2 font-semibold">▢ SELECTED WORK</p>
+        <h2 class="text-4xl md:text-5xl font-bold mb-3" style="color:#f3edd8;">PROJECTS I WORKED ON</h2>
+        <p class="text-gray-400 max-w-2xl mx-auto">Some collaborations, commissions and personal projects</p>
+    </div>
+
+    <div class="projects-grid">
+
+        <!-- Card 1 — inclinado pra esquerda -->
+        <article class="project-card" style="--r: -1.4deg;">
+            <span class="project-tape pink"></span>
+            <div class="project-torn">
+                <div class="project-media">
+                    <img src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/GRENINJA%20ART%205%20.png" alt="Greninja">
+                </div>
+                <div class="project-top">
+                    <span class="project-number">01</span>
+                    <span class="project-date">fanart<strong>2025</strong></span>
+                </div>
+                <span class="project-live">featured</span>
+                <h3 class="project-title">Pokémon illustration</h3>
+                <p class="project-desc">Full render character illustration focused on lighting, materials and strong silhouette.</p>
+                <p class="project-footer">role · <span>Illustration</span></p>
+            </div>
+        </article>
+
+        <!-- Card 2 — inclinado pra direita -->
+        <article class="project-card" style="--r: 0.9deg;">
+            <span class="project-tape yellow"></span>
+            <div class="project-torn">
+                <div class="project-media">
+                    <img src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/GOLD%20SHIP%20ART%20FANART.png" alt="Gold Ship">
+                </div>
+                <div class="project-top">
+                    <span class="project-number">02</span>
+                    <span class="project-date">commission<strong>2025</strong></span>
+                </div>
+                <span class="project-live">client work</span>
+                <h3 class="project-title">Character design</h3>
+                <p class="project-desc">Commissioned character piece with flat color package, clean lineart and simple background.</p>
+                <p class="project-footer">role · <span>Character art</span></p>
+            </div>
+        </article>
+
+        <!-- Card 3 — leve inclinação -->
+        <article class="project-card" style="--r: -0.6deg;">
+            <span class="project-tape purple"></span>
+            <div class="project-torn">
+                <div class="project-media">
+                    <img src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/FANART%2C%20BOCCHI%20THE%20ROCK%2C%20HITORI%20GOTOH%206%20.png" alt="Bocchi">
+                </div>
+                <div class="project-top">
+                    <span class="project-number">03</span>
+                    <span class="project-date">fanart<strong>2025</strong></span>
+                </div>
+                <span class="project-live">personal</span>
+                <h3 class="project-title">Anime fanart</h3>
+                <p class="project-desc">Expressive portrait study with saturated colors, soft shading and neon atmosphere.</p>
+                <p class="project-footer">role · <span>Illustration</span></p>
+            </div>
+        </article>
+
+    </div>
+</section>
+
+<!-- PARA QUEM -->
+<section class="paper-sec" id="for-who">
+  <div class="paper-wrap who-head">
+    <h2 class="paper-title">Seu título aqui...</h2>
+  </div>
+  <ul class="who-grid">
+    <li class="who-card">
+      <span class="who-img"><img src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/Illustration%20concept%20art%20oc.jpg" alt=""><span class="img-tag">Greyn Art</span></span>
+      <span class="who-n">01</span>
+      <p>Texto do card 1</p>
+    </li>
+    <li class="who-card">
+      <span class="who-img"><img src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/Illustration%20concept%20art%20oc.jpg" alt=""><span class="img-tag">Greyn Art</span></span>
+      <span class="who-n">02</span>
+      <p>Texto do card 2</p>
+    </li>
+    <li class="who-card">
+      <span class="who-img"><img src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/Illustration%20concept%20art%20oc.jpg" alt=""><span class="img-tag">Greyn Art</span></span>
+      <span class="who-n">03</span>
+      <p>Texto do card 3</p>
+    </li>
+    <li class="who-card">
+      <span class="who-img"><img src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/Illustration%20concept%20art%20oc.jpg" alt=""><span class="img-tag">Greyn Art</span></span>
+      <span class="who-n">04</span>
+      <p>Texto do card 4</p>
+    </li>
+    <li class="who-card">
+      <span class="who-img"><img src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/Illustration%20concept%20art%20oc.jpg" alt=""><span class="img-tag">Greyn Art</span></span>
+      <span class="who-n">05</span>
+      <p>Texto do card 5</p>
+    </li>
+  </ul>
+</section>
+
+<!-- QUEM ESTÁ POR TRÁS -->
+<section class="paper-sec" id="behind">
+  <div class="paper-wrap about-grid">
+    <h2 class="paper-title">Quem está por trás da arte</h2>
+
+    <div class="about-paper torn-wrap">
+      <span class="tape tape--y"></span>
+      <div class="torn" data-torn="tb" data-seed="77">
+        <p>Primeiro parágrafo sobre você.</p>
+        <p>Segundo parágrafo com <span class="grifo">um trecho destacado em amarelo.</span></p>
+      </div>
+    </div>
+
+    <figure class="about-strip torn-wrap">
+      <span class="tape tape--p"></span>
+      <div class="torn" data-torn="tb" data-seed="91">
+        <img src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/Illustration%20concept%20art%20oc.jpg" alt="">
+      </div>
+      <figcaption>
+        <span>Nome do personagem · legenda</span>
+        <span>arte: Greyn</span>
+      </figcaption>
+    </figure>
+  </div>
 </section>
 
 <!-- Gallery Section -->
@@ -1283,15 +1866,17 @@ p, span, li, label, a {
             
         <!-- Gallery Grid -->
             <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-5 gap-6" id="gallery-grid">
-                 <!-- Illustrations  -->
-                <div class="gallery-item illustrations" data-src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/FANART%2C%20BOCCHI%20THE%20ROCK%2C%20HITORI%20GOTOH%206%20.png">
-                    <div class="art-badge badge-sfw">SFW</div>
-                    <img src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/FANART%2C%20BOCCHI%20THE%20ROCK%2C%20HITORI%20GOTOH%206%20.png" alt="Illustration" class="w-full h-auto rounded-lg cursor-pointer">
-                    <div class="gallery-caption">
-                        <p class="text-white font-medium">Illustration</p>
-                        <p class="text-gray-300 text-sm">BOCCHI THE ROCK</p>
-                    </div>
-                </div>
+                <!-- Illustrations  -->
+<div class="gallery-item illustrations"
+     data-src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/FANART%2C%20BOCCHI%20THE%20ROCK%2C%20HITORI%20GOTOH%206%20.png"
+     data-process="Sketch|https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/220_Sem_Titulo.2025.07.03-05.03.1_20250714145334.png ;; Lineart|https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/220_Sem_Titulo.2025.07.03-05.03.1_20250714145433.png ;; Base colors|https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/220_Sem_Titulo.2025.07.03-05.03.1_20250715151332.png">
+    <div class="art-badge badge-sfw">SFW</div>
+    <img src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/FANART%2C%20BOCCHI%20THE%20ROCK%2C%20HITORI%20GOTOH%206%20.png" alt="Illustration" class="w-full h-auto rounded-lg cursor-pointer">
+    <div class="gallery-caption">
+        <p class="text-white font-medium">Illustration</p>
+        <p class="text-gray-300 text-sm">BOCCHI THE ROCK</p>
+    </div>
+</div>
 
                  <!-- Illustrations  -->
                 <div class="gallery-item illustrations" data-src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/image.png">
@@ -1508,24 +2093,35 @@ p, span, li, label, a {
     </div>
 </div>
 
-<!-- Lightbox --><div id="lightbox" class="lightbox">
+<!-- Lightbox -->
+<div id="lightbox" class="lightbox">
     <span class="lightbox-close">&times;</span>
 
-<!-- Seta Esquerda -->
-<div class="absolute left-4 top-1/2 -translate-y-1/2 z-60">
-    <button id="prevButton" class="p-3 rounded-full bg-black/60 hover:bg-neonpink/80 transition text-white border border-white/20">
-        <i class="fas fa-chevron-left text-xl"></i>
-    </button>
+    <!-- Seta Esquerda -->
+    <div class="absolute left-4 top-1/2 -translate-y-1/2 z-60">
+        <button id="prevButton" class="p-3 rounded-full bg-black/60 hover:bg-neonpink/80 transition text-white border border-white/20">
+            <i class="fas fa-chevron-left text-xl"></i>
+        </button>
+    </div>
+
+    <!-- Área que rola: arte principal + processo -->
+    <div class="lightbox-scroll" id="lightboxScroll">
+        <div class="lb-stage">
+            <img class="lightbox-content" id="lightbox-img">
+            <button type="button" class="lb-hint" id="lbHint">
+                <i class="fas fa-chevron-down"></i> View process
+            </button>
+        </div>
+        <div class="lb-process" id="lbProcess"></div>
+    </div>
+
+    <!-- Seta Direita -->
+    <div class="absolute right-4 top-1/2 -translate-y-1/2 z-60">
+        <button id="nextButton" class="p-3 rounded-full bg-black/60 hover:bg-neonpink/80 transition text-white border border-white/20">
+            <i class="fas fa-chevron-right text-xl"></i>
+        </button>
+    </div>
 </div>
-
-<img class="lightbox-content" id="lightbox-img">
-
-<!-- Seta Direita -->
-<div class="absolute right-4 top-1/2 -translate-y-1/2 z-60">
-    <button id="nextButton" class="p-3 rounded-full bg-black/60 hover:bg-neonpink/80 transition text-white border border-white/20">
-        <i class="fas fa-chevron-right text-xl"></i>
-    </button>
-</div></div>
 
 <hr class="section-divider">
 
@@ -1751,86 +2347,71 @@ p, span, li, label, a {
         
         <div class="max-w-5xl mx-auto">
             <div class="grid md:grid-cols-3 gap-8 mb-12">
-                <!-- Sketch Commission -->
-                <div class="commission-card p-6 rounded-lg">
-                    <h3 class="text-xl font-bold mb-2 text-neonpink">Sketch</h3>
-                    <p class="text-gray-400 text-sm mb-4">Quick black and white drawing</p>
-                    <p class="text-2xl font-bold mb-4">$15-45</p>
-                    <ul class="space-y-2 text-gray-300 mb-6">
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-neonpink mr-2"></i>
-                            <span>Clean lines</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-neonpink mr-2"></i>
-                            <span>1-2 Character</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-neonpink mr-2"></i>
-                            <span>No background</span>
-                        </li>
-                    </ul>
-                    <a href="#contact" class="inline-block w-full bg-transparent border border-neonpink text-neonpink hover:bg-neonpink hover:text-white text-center font-bold py-2 px-4 rounded transition duration-300">
-                        Order
-                    </a>
-                </div>
-                
-                <!-- Flat Color Commission -->
-                <div class="commission-card featured p-6 rounded-lg">
-                    <h3 class="text-xl font-bold mb-2 text-neonblue">Flat Color</h3>
-                    <p class="text-gray-400 text-sm mb-4">Art with flat colors</p>
-                    <p class="text-2xl font-bold mb-4">$60-80</p>
-                    <ul class="space-y-2 text-gray-300 mb-6">
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-neonblue mr-2"></i>
-                            <span>Clean lines</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-neonblue mr-2"></i>
-                            <span>1-3 Characters</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-neonblue mr-2"></i>
-                            <span>Simple background</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-neonblue mr-2"></i>
-                            <span>1 Revision</span>
-                        </li>
-                    </ul>
-                    <a href="#contact" class="inline-block w-full bg-neonblue hover:bg-neonblue/90 text-white text-center font-bold py-2 px-4 rounded transition duration-300">
-                        Order
-                    </a>
-                </div>
-                
-                <!-- Full Render Commission -->
-                <div class="commission-card p-6 rounded-lg">
-                    <h3 class="text-xl font-bold mb-2 text-neonpurple">Full Render</h3>
-                    <p class="text-gray-400 text-sm mb-4">Fully finished artwork</p>
-                    <p class="text-2xl font-bold mb-4">$80-300</p>
-                    <ul class="space-y-2 text-gray-300 mb-6">
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-neonpurple mr-2"></i>
-                            <span>Complete render</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-neonpurple mr-2"></i>
-                            <span>Up to +3 Characters</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-neonpurple mr-2"></i>
-                            <span>Detailed background</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-neonpurple mr-2"></i>
-                            <span>Up to 3 revisions</span>
-                        </li>
-                    </ul>
-                    <a href="#contact" class="inline-block w-full bg-transparent border border-neonpurple text-neonpurple hover:bg-neonpurple hover:text-white text-center font-bold py-2 px-4 rounded transition duration-300">
-                        Order
-                    </a>
-                </div>
-            </div>
+
+    <!-- Sketch -->
+    <div class="commission-card flex flex-col">
+        <div class="commission-card-art">
+            <img src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/GRENINJA%20ART%205%20.png" alt="Sketch example">
+        </div>
+        <div class="p-6 flex flex-col flex-grow">
+            <h3 class="text-xl font-bold mb-1 text-neonpink">Sketch</h3>
+            <p class="text-gray-400 text-sm mb-3">Quick black and white drawing</p>
+            <p class="text-2xl font-bold mb-4">$15–45</p>
+            <ul class="space-y-2 text-gray-300 mb-6 flex-grow">
+                <li class="flex items-center"><i class="fas fa-check text-neonpink mr-2"></i><span>Clean lines</span></li>
+                <li class="flex items-center"><i class="fas fa-check text-neonpink mr-2"></i><span>1–2 Character</span></li>
+                <li class="flex items-center"><i class="fas fa-check text-neonpink mr-2"></i><span>No background</span></li>
+            </ul>
+            <a href="#contact" class="inline-block w-full text-center bg-transparent border border-neonpink text-neonpink hover:bg-neonpink hover:text-white font-bold py-2.5 px-4 rounded-full transition duration-300">
+                Order
+            </a>
+        </div>
+    </div>
+
+    <!-- Flat Color (featured) -->
+     <div class="commission-card featured flex flex-col">
+    <div class="commission-card-art">
+        <span class="popular-badge">POPULAR</span>
+        <img src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/GOLD%20SHIP%20ART%20FANART.png" alt="Flat Color example">
+        </div>
+        <div class="p-6 flex flex-col flex-grow">
+            <h3 class="text-xl font-bold mb-1 text-neonblue">Flat Color</h3>
+            <p class="text-gray-400 text-sm mb-3">Art with flat colors</p>
+            <p class="text-2xl font-bold mb-4">$60–80</p>
+            <ul class="space-y-2 text-gray-300 mb-6 flex-grow">
+                <li class="flex items-center"><i class="fas fa-check text-neonblue mr-2"></i><span>Clean lines</span></li>
+                <li class="flex items-center"><i class="fas fa-check text-neonblue mr-2"></i><span>1–3 Characters</span></li>
+                <li class="flex items-center"><i class="fas fa-check text-neonblue mr-2"></i><span>Simple background</span></li>
+                <li class="flex items-center"><i class="fas fa-check text-neonblue mr-2"></i><span>1 Revision</span></li>
+            </ul>
+            <a href="#contact" class="inline-block w-full text-center bg-neonblue hover:bg-neonblue/90 text-white font-bold py-2.5 px-4 rounded-full transition duration-300">
+                Order
+            </a>
+        </div>
+    </div>
+
+    <!-- Full Render -->
+    <div class="commission-card flex flex-col">
+        <div class="commission-card-art">
+            <img src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/FANART%2C%20BOCCHI%20THE%20ROCK%2C%20HITORI%20GOTOH%206%20.png" alt="Full Render example">
+        </div>
+        <div class="p-6 flex flex-col flex-grow">
+            <h3 class="text-xl font-bold mb-1 text-neonpurple">Full Render</h3>
+            <p class="text-gray-400 text-sm mb-3">Fully finished artwork</p>
+            <p class="text-2xl font-bold mb-4">$80–300</p>
+            <ul class="space-y-2 text-gray-300 mb-6 flex-grow">
+                <li class="flex items-center"><i class="fas fa-check text-neonpurple mr-2"></i><span>Complete render</span></li>
+                <li class="flex items-center"><i class="fas fa-check text-neonpurple mr-2"></i><span>Up to +3 Characters</span></li>
+                <li class="flex items-center"><i class="fas fa-check text-neonpurple mr-2"></i><span>Detailed background</span></li>
+                <li class="flex items-center"><i class="fas fa-check text-neonpurple mr-2"></i><span>Up to 3 revisions</span></li>
+            </ul>
+            <a href="#contact" class="inline-block w-full text-center bg-transparent border border-neonpurple text-neonpurple hover:bg-neonpurple hover:text-white font-bold py-2.5 px-4 rounded-full transition duration-300">
+                Order
+            </a>
+        </div>
+    </div>
+
+</div>
             
             <div class="bg-gray-900/50 p-6 rounded-lg mb-8">
                 <h3 class="text-2xl font-bold mb-4 text-neonpink">Terms of Service</h3>
@@ -1910,7 +2491,7 @@ p, span, li, label, a {
 <section id="contact" class="py-20 relative">
     <div class="container mx-auto px-4">
         <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold mb-4">Contact</h2>
+            <h2 class="text-4xl font-bold mb-4">CONTACT</h2>
             <p class="text-gray-400 max-w-xl mx-auto">Get in touch for commissions or collaborations</p>
         </div>
 
@@ -2107,6 +2688,72 @@ filterButtons.forEach(button => {
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const lightboxClose = document.querySelector('.lightbox-close');
+    const lightboxScroll = document.getElementById('lightboxScroll');
+const lbProcess = document.getElementById('lbProcess');
+const lbHint = document.getElementById('lbHint');
+
+// "Sketch|URL ;; Lineart|URL" -> lista de etapas
+function parseProcess(item) {
+    const raw = item && item.dataset.process;
+    if (!raw) return [];
+    return raw.split(';;').map(s => s.trim()).filter(Boolean).map(s => {
+        const i = s.indexOf('|');
+        return i > -1
+            ? { label: s.slice(0, i).trim(), src: s.slice(i + 1).trim() }
+            : { label: '', src: s };
+    });
+}
+
+function renderProcess(item) {
+    const steps = parseProcess(item);
+    lbProcess.innerHTML = '';
+    lightboxScroll.scrollTo({ top: 0, behavior: 'instant' });
+
+    if (!steps.length) {
+        lbProcess.style.display = 'none';
+        lbHint.style.display = 'none';
+        return;
+    }
+
+    lbProcess.style.display = 'block';
+    lbHint.style.display = 'flex';
+
+    const title = document.createElement('h3');
+    title.className = 'lb-process-title';
+    title.textContent = 'Creative process';
+    lbProcess.appendChild(title);
+
+    steps.forEach((s, i) => {
+        const fig = document.createElement('figure');
+        fig.className = 'lb-step';
+        const cap = document.createElement('figcaption');
+        cap.textContent = String(i + 1).padStart(2, '0') + (s.label ? ' · ' + s.label : '');
+        const img = document.createElement('img');
+        img.src = s.src;
+        img.alt = s.label || 'Process';
+        img.loading = 'lazy';
+        fig.append(cap, img);
+        lbProcess.appendChild(fig);
+    });
+}
+
+lbHint.addEventListener('click', function(e) {
+    e.stopPropagation();
+    lbProcess.scrollIntoView({ behavior: 'smooth' });
+});
+
+// se estiver com zoom e rolar, volta ao normal
+lightboxScroll.addEventListener('scroll', function() {
+    if (isZoomed) resetZoom();
+});
+
+// selo "Process" nos cards que têm processo
+document.querySelectorAll('.gallery-item[data-process]').forEach(item => {
+    const b = document.createElement('div');
+    b.className = 'process-badge';
+    b.innerHTML = '<i class="fas fa-layer-group"></i> Process';
+    item.appendChild(b);
+});
     const prevButton = document.getElementById('prevButton');
     const nextButton = document.getElementById('nextButton');
     const nsfwWarning = document.getElementById('nsfwWarning');
@@ -2218,41 +2865,7 @@ lightboxImg.addEventListener('mousemove', function(e) {
     updateZoom(false);
 });
 
-// Scroll do mouse ainda funciona (opcional, mas útil)
-lightboxImg.addEventListener('wheel', function(e) {
-    e.preventDefault();
-    e.stopPropagation();
 
-    const oldZoom = zoomLevel;
-
-    if (e.deltaY < 0) {
-        zoomLevel = Math.min(4, zoomLevel + 0.3);
-    } else {
-        zoomLevel = Math.max(1, zoomLevel - 0.3);
-    }
-
-    if (zoomLevel === 1) {
-        resetZoom();
-        return;
-    }
-
-    isZoomed = true;
-
-    // Mantém o ponto sob o mouse
-    const rect = lightboxImg.getBoundingClientRect();
-    const offsetX = e.clientX - rect.left;
-    const offsetY = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-
-    const dx = offsetX - centerX;
-    const dy = offsetY - centerY;
-
-    posX = posX - dx * (zoomLevel - oldZoom);
-    posY = posY - dy * (zoomLevel - oldZoom);
-
-    updateZoom(false);
-});
 
 // Arrastar com o mouse (quando ampliado)
 lightboxImg.addEventListener('mousedown', function(e) {
@@ -2286,54 +2899,56 @@ lightboxImg.addEventListener('dblclick', function(e) {
     resetZoom();
 });
 
-    function showLightbox(src, items, index) {
-        if (!src) return;
-        currentGalleryItems = items;
-        currentIndex = index;
-        resetZoom();
-        lightboxImg.src = src;
-        lightbox.style.display = 'flex';
-        document.body.classList.add('lightbox-open');
-        setTimeout(() => {
-            lightbox.classList.add('show');
-        }, 10);
-        document.body.style.overflow = 'hidden';
+   function showLightbox(src, items, index) {
+    if (!src) return;
+    currentGalleryItems = items;
+    currentIndex = index;
+    resetZoom();
+    lightboxImg.src = src;
+    renderProcess(items[index]);
+    lightbox.style.display = 'flex';
+    document.body.classList.add('lightbox-open');
+    setTimeout(() => {
+        lightbox.classList.add('show');
+    }, 10);
+    document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+    lightbox.classList.remove('show');
+    setTimeout(() => {
+        lightbox.style.display = 'none';
+    }, 300);
+    document.body.classList.remove('lightbox-open');
+    document.body.style.overflow = 'auto';
+    resetZoom();
+}
+
+function navigateGallery(direction) {
+    if (currentGalleryItems.length === 0) return;
+
+    currentIndex = (currentIndex + direction + currentGalleryItems.length) % currentGalleryItems.length;
+    const item = currentGalleryItems[currentIndex];
+    const img = item.querySelector('img');
+    const src = img ? img.src : '';
+
+    if (!src) {
+        navigateGallery(direction);
+        return;
     }
 
-    function closeLightbox() {
-        lightbox.classList.remove('show');
-        setTimeout(() => {
-            lightbox.style.display = 'none';
-        }, 300);
-        document.body.classList.remove('lightbox-open');
-        document.body.style.overflow = 'auto';
-        resetZoom();
+    if (item.classList.contains('nsfw') && !nsfwAccepted) {
+        pendingNsfwItem = { src, items: currentGalleryItems, index: currentIndex };
+        closeLightbox();
+        nsfwWarning.style.display = 'flex';
+        setTimeout(() => nsfwWarning.classList.add('show'), 10);
+        return;
     }
 
-    function navigateGallery(direction) {
-        if (currentGalleryItems.length === 0) return;
-        
-        currentIndex = (currentIndex + direction + currentGalleryItems.length) % currentGalleryItems.length;
-        const item = currentGalleryItems[currentIndex];
-        const img = item.querySelector('img');
-        const src = img ? img.src : '';
-        
-        if (!src) {
-            navigateGallery(direction); // pula itens sem imagem
-            return;
-        }
-        
-        if (item.classList.contains('nsfw') && !nsfwAccepted) {
-            pendingNsfwItem = { src, items: currentGalleryItems, index: currentIndex };
-            closeLightbox();
-            nsfwWarning.style.display = 'flex';
-            setTimeout(() => nsfwWarning.classList.add('show'), 10);
-            return;
-        }
-        
-        resetZoom();
-        lightboxImg.src = src;
-    }
+    resetZoom();
+    renderProcess(item);
+    lightboxImg.src = src;
+}
     
     // ========== CONTADOR ANIMADO ==========
 function animateCounter(el) {
@@ -2481,18 +3096,6 @@ if (statsSection) {
 
     lightboxClose.addEventListener('click', closeLightbox);
 
-    lightbox.addEventListener('click', function(e) {
-        if (e.target === lightbox) closeLightbox();
-    });
-
-    // Teclado
-    document.addEventListener('keydown', function(e) {
-        if (!lightbox.classList.contains('show')) return;
-        
-        if (e.key === 'ArrowRight') navigateGallery(1);
-        if (e.key === 'ArrowLeft') navigateGallery(-1);
-        if (e.key === 'Escape') closeLightbox();
-    });
 
     // Form submission
     document.getElementById('contactForm').addEventListener('submit', function() {
@@ -2627,4 +3230,36 @@ function initBaSlider(id) {
 }
 
 initBaSlider('baSlider1');
+
+// ===== BORDA DE PAPEL RASGADO =====
+function mulberry(a){return function(){a|=0;a=a+1831565813|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+document.querySelectorAll('[data-torn]').forEach(function(el){
+  var r = mulberry(+(el.dataset.seed || 7)), amp = 8, pts = [], x;
+  for (x = 0; x <= 100; x += 2.5) pts.push(x + '% ' + (r()*amp).toFixed(1) + 'px');
+  for (x = 100; x >= 0; x -= 2.5) pts.push(x + '% calc(100% - ' + (r()*amp).toFixed(1) + 'px)');
+  el.style.clipPath = 'polygon(' + pts.join(',') + ')';
+});
+
+lightbox.addEventListener('click', function(e) {
+    if (e.target === lightbox || e.target === lightboxScroll || e.target.classList.contains('lb-stage')) {
+        closeLightbox();
+    }
+});
+
+// Teclado
+document.addEventListener('keydown', function(e) {
+    if (!lightbox.classList.contains('show')) return;
+
+    if (e.key === 'ArrowRight') navigateGallery(1);
+    if (e.key === 'ArrowLeft') navigateGallery(-1);
+    if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        lightboxScroll.scrollBy({ top: window.innerHeight * 0.8, behavior: 'smooth' });
+    }
+    if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        lightboxScroll.scrollBy({ top: -window.innerHeight * 0.8, behavior: 'smooth' });
+    }
+    if (e.key === 'Escape') closeLightbox();
+});
 </script>
