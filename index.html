@@ -707,27 +707,36 @@ transition: opacity 0.3s ease;
     opacity: 1;
 }    .commission-status.closed {
 border-color: #ff003c;
-box-shadow: 0 0 10px rgba(255, 0, 60, 0.5);}/* ========== GALERIA MELHORADA ========== */#gallery {
+box-shadow: 0 0 10px rgba(255, 0, 60, 0.5);}
+
+/* ========== GALERIA MELHORADA ========== */#gallery {
     position: relative;
-}/* Grid mais bonito e responsivo */
+/* Grid da galeria */
 #gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.25rem;
-}@media (min-width: 640px) {
-    #gallery-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.5rem;
-    }
-}@media (min-width: 1024px) {
-    #gallery-grid {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 1.75rem;
-    }
-}@media (min-width: 1280px) {
-    #gallery-grid {
-        grid-template-columns: repeat(5, 1fr);
-    }
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  #gallery-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  #gallery-grid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.75rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  #gallery-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
 }/* Item da galeria */
 .gallery-item {
     position: relative;
@@ -1865,7 +1874,7 @@ section#commissions {
 </div>
             
         <!-- Gallery Grid -->
-            <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-5 gap-6" id="gallery-grid">
+            <div id="gallery-grid">
                 <!-- Illustrations  -->
 <div class="gallery-item illustrations"
      data-src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/FANART%2C%20BOCCHI%20THE%20ROCK%2C%20HITORI%20GOTOH%206%20.png"
