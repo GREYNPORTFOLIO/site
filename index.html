@@ -2207,6 +2207,27 @@ footer .logo-text {
     width: 90px;
   }
 }
+
+/* Esconde o status de commissions quando o menu mobile está aberto */
+body.mobile-menu-open .commission-status {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+/* Garante que o menu fique acima do status */
+.site-header {
+  z-index: 120 !important;
+}
+
+.mobile-nav {
+  z-index: 119 !important;
+}
+
+.commission-status {
+  z-index: 90 !important; /* abaixo do menu */
+}
     </style>
   </head>
 <body>
@@ -2217,7 +2238,7 @@ footer .logo-text {
 </video>
 <div class="site-bg-overlay"></div>
 
-<!-- Música de fundo --><audio id="bgMusic" loop  preload="auto">
+<!-- Música de fundo --><audio id="bgMusic" preload="auto"></audio>
     <source src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site/f7a7ff36cf8b774a87815695c99278aa3e5506be/Saga%20of%20Tanya%20the%20Evil%20Season%202%20-%20Ending%20FULL%20_Weiter_%20Weiter__%20by%20Aoi%20Yuuki%20(Lyrics)(MP3_160K).mp3" type="audio/mpeg" > 
 </audio>
 
@@ -2231,7 +2252,7 @@ footer .logo-text {
     id="musicVolume"
     min="0"
     max="100"
-    value="15"
+    value="5"
     aria-label="Volume da música"
   >
 </div>
@@ -2345,7 +2366,8 @@ footer .logo-text {
 <a href="https://www.reddit.com/user/Glad-Stress8327/" target="_blank" class="social-icon text-2xl text-orange-500 hover:text-white tooltip">
     <i class="fab fa-reddit-alien"></i>
 </a></div>
-</section>
+
+<hr class="section-divider"><hr class="section-divider">
 
 <section id="projects" class="projects-section">
     <div class="container mx-auto px-4 mb-12 text-center">
@@ -2517,16 +2539,16 @@ footer .logo-text {
         <!-- Gallery Grid -->
              <div id="gallery-grid">
                 <!-- Illustrations  -->
-<div class="gallery-item illustrations"
-     data-src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/FANART%2C%20BOCCHI%20THE%20ROCK%2C%20HITORI%20GOTOH%206%20.png"
-     data-process="Sketch| ;; Lineart| ;; Base colors|">
-    <div class="art-badge badge-sfw">SFW</div>
-    <img src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/FANART%2C%20BOCCHI%20THE%20ROCK%2C%20HITORI%20GOTOH%206%20.png" alt="Illustration" class="w-full h-auto rounded-lg cursor-pointer">
-    <div class="gallery-caption">
-        <p class="text-white font-medium">Illustration</p>
-        <p class="text-gray-300 text-sm">BOCCHI THE ROCK</p>
-    </div>
-</div>
+             <div class="gallery-item illustrations"
+               data-src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/FANART%2C%20BOCCHI%20THE%20ROCK%2C%20HITORI%20GOTOH%206%20.png"
+                   data-process="FULL-BODY ILLUSTRATION WITH NO BACKGROUND|https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/FANART%2C%20BOCCHI%20THE%20ROCK%2C%20HITORI%20GOTOH%207-1.png ;; GIF ART|https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/FANART%2C%20BOCCHI%20THE%20ROCK%2C%20HITORI%20GOTOH%20GIF.gif ;; ART PROCESS|https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/FANART%2C%20BOCCHI%20THE%20ROCK%2C%20HITORI%20GOTOH%200.jpg">
+                    <div class="art-badge badge-sfw">SFW</div>
+                    <img src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/FANART%2C%20BOCCHI%20THE%20ROCK%2C%20HITORI%20GOTOH%206%20.png" alt="Illustration" class="w-full h-auto rounded-lg cursor-pointer">
+                    <div class="gallery-caption">
+                        <p class="text-white font-medium">Illustration</p>
+                        <p class="text-gray-300 text-sm">BOCCHI THE ROCK</p>
+                    </div>
+                </div>
 
                  <!-- Illustrations  -->
                 <div class="gallery-item illustrations" data-src="https://raw.githubusercontent.com/GREYNPORTFOLIO/site-2/refs/heads/main/fase%204%20Dragon%20child.png">
@@ -2830,6 +2852,7 @@ footer .logo-text {
             </div>
         </div>
     </section>      
+    <hr class="section-divider">
 
 <!-- Art Process Section -->
 <section id="process" class="py-20 bg-darker/50 backdrop-blur-sm">
@@ -3304,9 +3327,11 @@ if (menuToggle && mobileNav) {
     if (isHidden) {
       mobileNav.removeAttribute('hidden');
       menuToggle.textContent = '×';
+      document.body.classList.add('mobile-menu-open');
     } else {
       mobileNav.setAttribute('hidden', '');
       menuToggle.textContent = '☰';
+      document.body.classList.remove('mobile-menu-open');
     }
   });
 
@@ -3315,19 +3340,10 @@ if (menuToggle && mobileNav) {
     link.addEventListener('click', () => {
       mobileNav.setAttribute('hidden', '');
       menuToggle.textContent = '☰';
+      document.body.classList.remove('mobile-menu-open');
     });
   });
 }
-    
-    // Close mobile menu when clicking on a link
-    document.querySelectorAll('#mobileMenu a').forEach(link => {
-        link.addEventListener('click', function() {
-            mobileMenu.classList.add('translate-x-full');
-            setTimeout(() => {
-                mobileMenu.classList.add('hidden');
-            }, 300);
-        });
-    });
 
        // ==========================================
 //  CONTROLE DE COMISSÕES (só mude esta linha)
@@ -3894,42 +3910,131 @@ document.querySelectorAll('.gallery-item img').forEach(img => {
     }
 });
 
-// ========== MÚSICA DE FUNDO + VOLUME ==========
-const bgMusic = document.getElementById('bgMusic');
-const musicToggle = document.getElementById('musicToggle');
-const musicIcon = document.getElementById('musicIcon');
-const musicVolume = document.getElementById('musicVolume');
-let isPlaying = false;
+// ========== MÚSICA DE FUNDO: PLAYLIST + SHUFFLE + VOLUME ==========
+(function () {
+  const bgMusic = document.getElementById('bgMusic');
+  const musicToggle = document.getElementById('musicToggle');
+  const musicIcon = document.getElementById('musicIcon');
+  const musicVolume = document.getElementById('musicVolume');
 
-// volume inicial (0.0 a 1.0) — 15%
-if (bgMusic) {
-  bgMusic.volume = (musicVolume ? Number(musicVolume.value) : 15) / 100;
-}
+  if (!bgMusic || !musicToggle || !musicIcon) return;
 
-if (musicToggle && bgMusic) {
-  musicToggle.addEventListener('click', function() {
-    if (!isPlaying) {
-      bgMusic.play().then(() => {
-        isPlaying = true;
-        musicIcon.classList.remove('fa-music');
-        musicIcon.classList.add('fa-pause');
-      }).catch(err => {
-        console.log('Erro ao tocar música:', err);
-      });
+  // >>> COLOQUE AQUI AS URLS DAS MÚSICAS <<<
+  const playlist = [
+    'https://raw.githubusercontent.com/GREYNPORTFOLIO/site/f7a7ff36cf8b774a87815695c99278aa3e5506be/Saga%20of%20Tanya%20the%20Evil%20Season%202%20-%20Ending%20FULL%20_Weiter_%20Weiter__%20by%20Aoi%20Yuuki%20(Lyrics)(MP3_160K).mp3',
+    // 'https://SEU-LINK-2.mp3',
+    // 'https://SEU-LINK-3.mp3',
+  ];
+
+  let queue = [];
+  let currentIndex = 0;
+  let isPlaying = false;
+
+  function shuffle(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  function setPlayingUI(playing) {
+    isPlaying = playing;
+    if (playing) {
+      musicIcon.classList.remove('fa-music');
+      musicIcon.classList.add('fa-pause');
     } else {
-      bgMusic.pause();
-      isPlaying = false;
       musicIcon.classList.remove('fa-pause');
       musicIcon.classList.add('fa-music');
     }
-  });
-}
+  }
 
-if (musicVolume && bgMusic) {
-  musicVolume.addEventListener('input', function() {
-    bgMusic.volume = Number(this.value) / 100;
+  function loadTrack(index) {
+    if (!queue.length) return;
+    currentIndex = ((index % queue.length) + queue.length) % queue.length;
+    bgMusic.src = queue[currentIndex];
+    bgMusic.load();
+  }
+
+  function playCurrent() {
+    return bgMusic.play().then(() => {
+      setPlayingUI(true);
+    }).catch(() => {
+      // autoplay bloqueado pelo navegador
+      setPlayingUI(false);
+    });
+  }
+
+  function startPlaylist() {
+    if (!playlist.length) return;
+    queue = shuffle(playlist);
+    currentIndex = 0;
+    loadTrack(0);
+    playCurrent();
+  }
+
+  function nextTrack() {
+    if (!queue.length) {
+      startPlaylist();
+      return;
+    }
+    loadTrack(currentIndex + 1);
+    playCurrent();
+  }
+
+  // volume inicial
+  if (musicVolume) {
+    bgMusic.volume = Number(musicVolume.value) / 100;
+    musicVolume.addEventListener('input', function () {
+      bgMusic.volume = Number(this.value) / 100;
+    });
+  } else {
+    bgMusic.volume = 0.15;
+  }
+
+  // quando a música acaba → próxima
+  bgMusic.addEventListener('ended', nextTrack);
+
+  // sincroniza ícone se o áudio pausar/tocar por outros meios
+  bgMusic.addEventListener('play', () => setPlayingUI(true));
+  bgMusic.addEventListener('pause', () => {
+    // não troca ícone no fim da faixa (antes do next), só se realmente pausou
+    if (bgMusic.ended) return;
+    setPlayingUI(false);
   });
-}
+
+  // botão play/pause
+  musicToggle.addEventListener('click', function () {
+    if (!queue.length) {
+      startPlaylist();
+      return;
+    }
+
+    if (bgMusic.paused) {
+      playCurrent();
+    } else {
+      bgMusic.pause();
+      setPlayingUI(false);
+    }
+  });
+
+  // tenta autoplay ao carregar (pode ser bloqueado)
+  // se o navegador bloquear, o ícone fica de música até o 1º clique
+  window.addEventListener('load', function () {
+    startPlaylist();
+  });
+
+  // fallback: primeiro clique em qualquer lugar destrava o áudio
+  function unlockAudio() {
+    if (!queue.length) startPlaylist();
+    else if (bgMusic.paused) playCurrent();
+    document.removeEventListener('click', unlockAudio);
+    document.removeEventListener('touchstart', unlockAudio);
+  }
+  document.addEventListener('click', unlockAudio, { once: true });
+  document.addEventListener('touchstart', unlockAudio, { once: true });
+})();
 
 // ========== BEFORE/AFTER SLIDER ==========
 function initBaSlider(id) {
