@@ -2067,6 +2067,146 @@ footer .logo-text {
   letter-spacing: 0.5px;
   pointer-events: none;
 }
+
+/* ===== CARROSSEL DE COMMISSIONS (MOBILE) ===== */
+.commissions-dots {
+  display: none;
+}
+
+@media (max-width: 860px) {
+  .commissions-grid {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    gap: 16px !important;
+    padding: 8px 4px 16px !important;
+    margin-inline: -16px !important;
+    padding-inline: 16px !important;
+    scroll-padding-inline: 16px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .commissions-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .commissions-grid > .commission-card {
+    flex: 0 0 84% !important;
+    min-width: 0 !important;
+    scroll-snap-align: start;
+    margin: 0 !important;
+  }
+
+  .commissions-dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin: 4px 0 12px;
+    list-style: none;
+    padding: 0;
+  }
+
+  .commissions-dots button {
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+  }
+
+  .commissions-dots button::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #f3edd8;
+    opacity: 0.35;
+    transition: opacity 0.2s, width 0.2s, border-radius 0.2s;
+  }
+
+  .commissions-dots button[aria-current="true"]::before {
+    opacity: 1;
+    width: 22px;
+    border-radius: 4px;
+  }
+}
+
+/* ===== CONTROLE DE MÚSICA + VOLUME ===== */
+.music-controls {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px 8px 8px;
+  background: rgba(0, 0, 0, 0.75);
+  border: 1px solid rgba(255, 42, 109, 0.55);
+  border-radius: 999px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(8px);
+}
+
+#musicToggle {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 42, 109, 0.7);
+  background: rgba(10, 10, 10, 0.85);
+  color: #ff2a6d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+}
+
+#musicToggle:hover {
+  background: #ff2a6d;
+  color: #fff;
+}
+
+#musicVolume {
+  width: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: width 0.25s ease, opacity 0.25s ease;
+  accent-color: #ff2a6d;
+  height: 6px;
+  cursor: pointer;
+}
+
+/* No hover/focus mostra o slider */
+.music-controls:hover #musicVolume,
+.music-controls:focus-within #musicVolume {
+  width: 110px;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media (max-width: 640px) {
+  .music-controls {
+    bottom: 18px;
+    left: 14px;
+    padding: 6px 10px 6px 6px;
+  }
+  #musicToggle {
+    width: 40px;
+    height: 40px;
+  }
+  .music-controls:hover #musicVolume,
+  .music-controls:focus-within #musicVolume {
+    width: 90px;
+  }
+}
     </style>
   </head>
 <body>
@@ -2082,9 +2222,19 @@ footer .logo-text {
 </audio>
 
 <!-- Botão de controle da música -->
-<button id="musicToggle" class="fixed bottom-6 left-6 z-50 w-12 h-12 rounded-full bg-black/70 border border-neonpink text-neonpink hover:bg-neonpink hover:text-white transition-all duration-300 flex items-center justify-center shadow-lg">
+<div id="musicControls" class="music-controls">
+  <button id="musicToggle" type="button" aria-label="Play/Pause música">
     <i class="fas fa-music text-lg" id="musicIcon"></i>
-</button>
+  </button>
+  <input
+    type="range"
+    id="musicVolume"
+    min="0"
+    max="100"
+    value="15"
+    aria-label="Volume da música"
+  >
+</div>
 
 <!-- Commission Status Indicator --><div class="commission-status animate__animated animate__fadeInDown animate__delay-1s" id="commissionStatus">
     <div class="status-dot" id="statusDot"></div>
@@ -2875,7 +3025,7 @@ footer .logo-text {
         </div>
         
         <div class="max-w-5xl mx-auto">
-            <div class="grid md:grid-cols-3 gap-8 mb-12">
+            <div class="commissions-grid grid md:grid-cols-3 gap-8 mb-12">
 
     <!-- Sketch -->
     <div class="commission-card flex flex-col">
@@ -2940,6 +3090,12 @@ footer .logo-text {
         </div>
     </div>
 
+</div>
+
+<div class="commissions-dots" role="group" aria-label="Navegar pelas commissions">
+  <button type="button" aria-label="Sketch" aria-current="true"></button>
+  <button type="button" aria-label="Flat Color"></button>
+  <button type="button" aria-label="Full Render"></button>
 </div>
             
             <div class="bg-gray-900/50 p-6 rounded-lg mb-8">
@@ -3738,31 +3894,42 @@ document.querySelectorAll('.gallery-item img').forEach(img => {
     }
 });
 
-// ========== MÚSICA DE FUNDO ==========
+// ========== MÚSICA DE FUNDO + VOLUME ==========
 const bgMusic = document.getElementById('bgMusic');
 const musicToggle = document.getElementById('musicToggle');
 const musicIcon = document.getElementById('musicIcon');
+const musicVolume = document.getElementById('musicVolume');
 let isPlaying = false;
 
-// Volume inicial (0.0 até 1.0)
-bgMusic.volume = 0.01;
+// volume inicial (0.0 a 1.0) — 15%
+if (bgMusic) {
+  bgMusic.volume = (musicVolume ? Number(musicVolume.value) : 15) / 100;
+}
 
-musicToggle.addEventListener('click', function() {
+if (musicToggle && bgMusic) {
+  musicToggle.addEventListener('click', function() {
     if (!isPlaying) {
-        bgMusic.play().then(() => {
-            isPlaying = true;
-            musicIcon.classList.remove('fa-music');
-            musicIcon.classList.add('fa-pause');
-        }).catch(err => {
-            console.log('Erro ao tocar música:', err);
-        });
+      bgMusic.play().then(() => {
+        isPlaying = true;
+        musicIcon.classList.remove('fa-music');
+        musicIcon.classList.add('fa-pause');
+      }).catch(err => {
+        console.log('Erro ao tocar música:', err);
+      });
     } else {
-        bgMusic.pause();
-        isPlaying = false;
-        musicIcon.classList.remove('fa-pause');
-        musicIcon.classList.add('fa-music');
+      bgMusic.pause();
+      isPlaying = false;
+      musicIcon.classList.remove('fa-pause');
+      musicIcon.classList.add('fa-music');
     }
-});
+  });
+}
+
+if (musicVolume && bgMusic) {
+  musicVolume.addEventListener('input', function() {
+    bgMusic.volume = Number(this.value) / 100;
+  });
+}
 
 // ========== BEFORE/AFTER SLIDER ==========
 function initBaSlider(id) {
@@ -3950,5 +4117,35 @@ window.addEventListener('scroll', function() {
   bottomBtn.addEventListener('click', () => {
     window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' });
   });
+})();
+
+// ===== CARROSSEL DE COMMISSIONS =====
+(function() {
+  const grid = document.querySelector('.commissions-grid');
+  const dots = document.querySelectorAll('.commissions-dots button');
+  if (!grid || !dots.length) return;
+
+  const cards = grid.querySelectorAll('.commission-card');
+  if (!cards.length) return;
+
+  function updateDots() {
+    const scrollLeft = grid.scrollLeft;
+    const cardWidth = cards[0].offsetWidth + 16;
+    const index = Math.round(scrollLeft / cardWidth);
+    dots.forEach((dot, i) => {
+      dot.setAttribute('aria-current', i === index ? 'true' : 'false');
+    });
+  }
+
+  grid.addEventListener('scroll', () => requestAnimationFrame(updateDots), { passive: true });
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+      const cardWidth = cards[0].offsetWidth + 16;
+      grid.scrollTo({ left: i * cardWidth, behavior: 'smooth' });
+    });
+  });
+
+  updateDots();
 })();
 </script>
